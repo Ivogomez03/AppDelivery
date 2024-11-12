@@ -23,11 +23,6 @@ public class ClienteDAO {
         transaction = session.beginTransaction();
         session.persist(clienteNew);
         transaction.commit();
-    }catch (ConstraintViolationException e){
-        if(transaction != null){
-            transaction.rollback();
-        }
-        throw new RuntimeException("El cliente ya existe",e);
     }catch (PersistenceException e) {
         if(transaction != null){
             transaction.rollback();

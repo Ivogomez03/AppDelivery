@@ -22,11 +22,6 @@ public class VendedorDAO {
           transaction = session.beginTransaction();
           session.persist(vendedorNew);
           transaction.commit();
-      }catch(ConstraintViolationException e){
-          if(transaction != null){
-              transaction.rollback(); //Esto remueve la transaction hecha si se produce un error.
-          }
-          throw new RuntimeException("El Vendedor ya existe",e);
       }catch(PersistenceException e){
           if(transaction != null){
               transaction.rollback();

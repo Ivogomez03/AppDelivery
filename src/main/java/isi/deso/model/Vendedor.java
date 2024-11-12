@@ -29,7 +29,10 @@ public class Vendedor implements Observer{
     @Column(name = "direccion")
     private String direccion;
     
-    @OneToOne
+    @Column(name = "DNI")
+    private String dni;
+    
+    @OneToOne(cascade = CascadeType.PERSIST )
     @JoinColumn(name = "id_coordenadas", referencedColumnName = "id_coordenadas")
     private Coordenada coordenadas;
     
@@ -42,10 +45,11 @@ public class Vendedor implements Observer{
     
     public Vendedor(){}
     
-    public Vendedor(int id, String nombre, String direccion, double lat, double lng,List items){
+    public Vendedor(int id, String nombre, String direccion,String dni, double lat, double lng,List items){
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
+        this.dni = dni;
         this.coordenadas = new Coordenada(lat,lng);
         this.items = items;
         this.pedidosRecibidos = new ArrayList<Pedido>();
