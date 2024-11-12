@@ -9,9 +9,8 @@ package isi.deso.dao;
  * @author ivogo
  */
 public class ItemMenuDAO {
-    public void crearItemMenu();
-    public void listarItemMenu();
-    public void eliminarItemMenu();
-    public void actualizarItemMenu();
-    public void buscarItemMenu();
+    public void crearItemMenu(){};
+    public void eliminarItemMenu(){};
+    public void actualizarItemMenu(){};
+    public void buscarItemMenu(){};
 }
