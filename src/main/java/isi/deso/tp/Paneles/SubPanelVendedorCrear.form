@@ -25,15 +25,17 @@
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="CoordenadasVendedor" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="Latitud" min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="NombreVendedor" min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="DireccionVendedor" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="IdentificacionVendedor" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="DNIVendedor" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="Longitud" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="479" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
@@ -51,7 +53,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="IdentificacionVendedor" alignment="3" max="32767" attributes="0"/>
+                  <Component id="DNIVendedor" alignment="3" max="32767" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -66,10 +68,15 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CoordenadasVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Latitud" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Longitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="313" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="CrearVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Cerrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -80,20 +87,20 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="IdentificacionVendedor">
+    <Component class="javax.swing.JTextField" name="DNIVendedor">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IdentificacionVendedorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DNIVendedorActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="NombreVendedor">
     </Component>
     <Component class="javax.swing.JTextField" name="DireccionVendedor">
     </Component>
-    <Component class="javax.swing.JTextField" name="CoordenadasVendedor">
+    <Component class="javax.swing.JTextField" name="Latitud">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Identificacion Vendedor"/>
+        <Property name="text" type="java.lang.String" value="DNI"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -103,7 +110,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Coordenadas"/>
+        <Property name="text" type="java.lang.String" value="Latitud"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -123,6 +130,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CerrarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="Longitud">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Longitud"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

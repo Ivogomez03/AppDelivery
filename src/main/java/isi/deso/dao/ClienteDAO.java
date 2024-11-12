@@ -17,25 +17,17 @@ import util.HibernateUtil;
  */
 public class ClienteDAO {
     
-    public void crearCliente(Cliente clienteNew){ 
+    public void crearCliente(Cliente cliente){ 
         Transaction transaction = null;
     try (Session session = HibernateUtil.getSessionFactory().openSession()) {
         transaction = session.beginTransaction();
-        session.persist(clienteNew);
+        session.persist(cliente);
         transaction.commit();
-    }catch (ConstraintViolationException e){
-        if(transaction != null){
-            transaction.rollback();
-        }
-        throw new RuntimeException("El cliente ya existe",e);
     }catch (PersistenceException e) {
-        if(transaction != null){
-            transaction.rollback();
-        }
         e.printStackTrace();
         throw new PersistenceException("Error al agregar el Cliente", e);
         }    
-};
+}
     public void eliminarCliente(){};
     public void actualizarCliente(){};
     public void buscarCliente(){};

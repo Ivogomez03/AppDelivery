@@ -26,28 +26,30 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        IdentificacionVendedor = new javax.swing.JTextField();
+        DNIVendedor = new javax.swing.JTextField();
         NombreVendedor = new javax.swing.JTextField();
         DireccionVendedor = new javax.swing.JTextField();
-        CoordenadasVendedor = new javax.swing.JTextField();
+        Latitud = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         CrearVendedor = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
+        Longitud = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
-        IdentificacionVendedor.addActionListener(new java.awt.event.ActionListener() {
+        DNIVendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdentificacionVendedorActionPerformed(evt);
+                DNIVendedorActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Identificacion Vendedor");
+        jLabel1.setText("DNI");
 
         jLabel2.setText("Nombre del vendedor");
 
-        jLabel3.setText("Coordenadas");
+        jLabel3.setText("Latitud");
 
         jLabel4.setText("Direccion");
 
@@ -59,6 +61,8 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
                 CerrarActionPerformed(evt);
             }
         });
+
+        jLabel5.setText("Longitud");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,14 +76,16 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CoordenadasVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Latitud, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DireccionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(IdentificacionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 479, Short.MAX_VALUE))
+                            .addComponent(DNIVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Longitud, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 489, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(Cerrar)
@@ -92,7 +98,7 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IdentificacionVendedor)
+                    .addComponent(DNIVendedor)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -104,9 +110,13 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CoordenadasVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Latitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(347, 347, 347)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Longitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(313, 313, 313)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CrearVendedor)
                     .addComponent(Cerrar))
@@ -114,9 +124,9 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IdentificacionVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdentificacionVendedorActionPerformed
+    private void DNIVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIVendedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IdentificacionVendedorActionPerformed
+    }//GEN-LAST:event_DNIVendedorActionPerformed
 
     private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
       this.removeAll();
@@ -127,14 +137,16 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cerrar;
-    private javax.swing.JTextField CoordenadasVendedor;
     private javax.swing.JButton CrearVendedor;
+    private javax.swing.JTextField DNIVendedor;
     private javax.swing.JTextField DireccionVendedor;
-    private javax.swing.JTextField IdentificacionVendedor;
+    private javax.swing.JTextField Latitud;
+    private javax.swing.JTextField Longitud;
     private javax.swing.JTextField NombreVendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

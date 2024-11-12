@@ -24,7 +24,7 @@
         
         <!-- Ejecución automática del archivo import.sql -->
         <!-- create-drop, update, validate o create -->
-        <property name="hibernate.hbm2ddl.auto">create</property> 
+        <property name="hibernate.hbm2ddl.auto">update</property> 
 
         <!-- Configuración de las clases mapeadas -->
         

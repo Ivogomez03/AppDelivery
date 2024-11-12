@@ -4,12 +4,15 @@
  */
 package isi.deso.tp.Paneles;
 
+import isi.deso.controller.ClienteController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Francisco
  */
 public class SubPanelClienteCrear extends javax.swing.JPanel {
-
+    ClienteController clienteController = new ClienteController();
     /**
      * Creates new form SubPanelVendedor
      */
@@ -27,22 +30,29 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        NombreVendedor = new javax.swing.JTextField();
-        DireccionVendedor = new javax.swing.JTextField();
+        Email = new javax.swing.JTextField();
+        CUIT = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        CrearVendedor = new javax.swing.JButton();
+        CrearCliente = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        DireccionVendedor1 = new javax.swing.JTextField();
+        DireccionCliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        DireccionVendedor2 = new javax.swing.JTextField();
+        Latitud = new javax.swing.JTextField();
+        Longitud = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel2.setText("Email");
 
         jLabel4.setText("Direccion");
 
-        CrearVendedor.setText("Crear");
+        CrearCliente.setText("Crear");
+        CrearCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearClienteActionPerformed(evt);
+            }
+        });
 
         Cerrar.setText("Cerrar");
         Cerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +63,15 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
 
         jLabel3.setText("Cuit");
 
-        jLabel5.setText("Coordenadas");
+        jLabel5.setText("Latitud");
+
+        Longitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LongitudActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Longitud");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,7 +83,7 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Cerrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)
-                        .addComponent(CrearVendedor))
+                        .addComponent(CrearCliente))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -75,13 +93,17 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
                                     .addComponent(jLabel4))
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(NombreVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .addComponent(DireccionVendedor)
-                                    .addComponent(DireccionVendedor1)))
+                                    .addComponent(Email, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addComponent(CUIT)
+                                    .addComponent(DireccionCliente)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DireccionVendedor2)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Latitud)
+                                    .addComponent(Longitud))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -89,24 +111,29 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(NombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CUIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Latitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6))
+                    .addComponent(Longitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(311, 311, 311)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DireccionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DireccionVendedor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DireccionVendedor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(348, 348, 348)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CrearVendedor)
+                    .addComponent(CrearCliente)
                     .addComponent(Cerrar))
                 .addGap(23, 23, 23))
         );
@@ -118,18 +145,73 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
       this.repaint();
     }//GEN-LAST:event_CerrarActionPerformed
 
+    private void LongitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LongitudActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LongitudActionPerformed
 
+    private void CrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearClienteActionPerformed
+        
+        String direccion = getDireccionCliente();
+        String email = getEmail();
+        double latitud = getLatitud();  
+        double longitud = getLongitud();
+        String CUIT = getCuit();
+        
+        if (direccion.isEmpty() || email.isEmpty() || CUIT.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.");
+            return;
+        }
+
+        if (latitud == 0.0 || longitud == 0.0) {
+            JOptionPane.showMessageDialog(null, "Latitud y Longitud deben ser válidos.");
+            return;
+        }
+        
+        clienteController.crearCliente(direccion, email, latitud, longitud, CUIT);
+    }//GEN-LAST:event_CrearClienteActionPerformed
+
+    public String getCuit(){
+        return CUIT.getText();
+    }
+    
+    public String getDireccionCliente() {
+        return DireccionCliente.getText();
+    }
+    
+    public String getEmail(){
+        return Email.getText();
+    }
+    
+    public double getLatitud(){
+        try{
+            return Double.parseDouble(Latitud.getText());
+        } catch (NumberFormatException e){
+            return 0.0;
+        }
+        
+    }
+    
+    public double getLongitud(){
+        try{
+            return Double.parseDouble(Longitud.getText());
+        } catch (NumberFormatException e){
+            return 0.0;
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CUIT;
     private javax.swing.JButton Cerrar;
-    private javax.swing.JButton CrearVendedor;
-    private javax.swing.JTextField DireccionVendedor;
-    private javax.swing.JTextField DireccionVendedor1;
-    private javax.swing.JTextField DireccionVendedor2;
-    private javax.swing.JTextField NombreVendedor;
+    private javax.swing.JButton CrearCliente;
+    private javax.swing.JTextField DireccionCliente;
+    private javax.swing.JTextField Email;
+    private javax.swing.JTextField Latitud;
+    private javax.swing.JTextField Longitud;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,6 +17,8 @@ public class ClienteDTO {
     private String direccion;
     private double longitud;
     private double latitud;
+   
+    public ClienteDTO(){};
     
     public String getEmail(){
         return this.email;
@@ -33,5 +35,21 @@ public class ClienteDTO {
     public double getLongitud(){
         return this.longitud;
     }
-
+    public String setEmail(String email){
+        return this.email = email;
+    }
+    public String setCUIT(String CUIT){
+        return this.cuit = CUIT;
+    }
+    public String setDireccion(String direccion){
+        return this.direccion = direccion;
+    }
+    public double setLatitud(double latitud){
+        return this.latitud = latitud;
+    }
+    public double setLongitud(double longitud){
+        return this.longitud = longitud;
+    }
+    
+    
 }

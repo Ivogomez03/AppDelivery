@@ -30,7 +30,7 @@ public class Cliente {
     @Column(name = "direccion", nullable = false)
     private String direccion;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_coordenadas", referencedColumnName = "id_coordenadas")
     private Coordenada coordenadas;
     
@@ -43,7 +43,6 @@ public class Cliente {
         this.cuit=cuit;
         this.direccion=direccion;
         this.coordenadas = new Coordenada(lat,lng);
-        this.pedidos = new ArrayList();
     } 
     
     public int getId(){
@@ -89,7 +88,7 @@ public class Cliente {
         this.pedidos.add(ped);
     }
     public void println(){
-        System.out.println(this.getId() + " " + this.getDireccion() + " {" + this.coordenadas.getLat() + "," + this.coordenadas.getLng()+ "}" );
+        System.out.println(this.getEmail() + " " + this.getDireccion() + " " + this.getCuit() + " {" + this.coordenadas.getLat() + "," + this.coordenadas.getLng()+ "}" );
     }
     public void notificarPedido(Estado e){
         System.out.println("(Notificacion para cliente con id " + this.id + ") Su pedido esta en estado de " + e);

@@ -22,6 +22,7 @@ public class ClienteMemory{
     public void agregarCliente(ClienteDTO clienteDTO){
         Cliente cliente = new Cliente(clienteDTO.getEmail(), clienteDTO.getCuit(), clienteDTO.getDireccion(), clienteDTO.getLatitud(), clienteDTO.getLongitud());
         
+        
         try{
             clienteDAO.crearCliente(cliente);
             System.out.println("Se agrego de forma exitosa");

@@ -26,7 +26,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="Cerrar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="609" max="32767" attributes="0"/>
-                      <Component id="CrearVendedor" min="-2" max="-2" attributes="0"/>
+                      <Component id="CrearCliente" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -38,15 +38,21 @@
                               </Group>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="NombreVendedor" pref="190" max="32767" attributes="0"/>
-                                  <Component id="DireccionVendedor" max="32767" attributes="0"/>
-                                  <Component id="DireccionVendedor1" max="32767" attributes="0"/>
+                                  <Component id="Email" pref="190" max="32767" attributes="0"/>
+                                  <Component id="CUIT" max="32767" attributes="0"/>
+                                  <Component id="DireccionCliente" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="DireccionVendedor2" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Latitud" max="32767" attributes="0"/>
+                                  <Component id="Longitud" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -60,28 +66,35 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="NombreVendedor" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="Email" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CUIT" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="DireccionCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Latitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="Longitud" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="311" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="DireccionVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="DireccionVendedor1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="DireccionVendedor2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CrearVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CrearCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Cerrar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -90,9 +103,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="NombreVendedor">
+    <Component class="javax.swing.JTextField" name="Email">
     </Component>
-    <Component class="javax.swing.JTextField" name="DireccionVendedor">
+    <Component class="javax.swing.JTextField" name="CUIT">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -104,10 +117,13 @@
         <Property name="text" type="java.lang.String" value="Direccion"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="CrearVendedor">
+    <Component class="javax.swing.JButton" name="CrearCliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CrearClienteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Cerrar">
       <Properties>
@@ -122,14 +138,24 @@
         <Property name="text" type="java.lang.String" value="Cuit"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="DireccionVendedor1">
+    <Component class="javax.swing.JTextField" name="DireccionCliente">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Coordenadas"/>
+        <Property name="text" type="java.lang.String" value="Latitud"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="DireccionVendedor2">
+    <Component class="javax.swing.JTextField" name="Latitud">
+    </Component>
+    <Component class="javax.swing.JTextField" name="Longitud">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LongitudActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Longitud"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
