@@ -11,7 +11,7 @@ import isi.deso.dao.VendedorDAO;
  *
  * @author ivogo
  */
-public class VendedorMemory implements VendedorDAO{
+public class VendedorMemory {
     public void crearVendedor(){
         
     };

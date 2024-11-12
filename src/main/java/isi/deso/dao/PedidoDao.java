@@ -8,11 +8,10 @@ package isi.deso.dao;
  *
  * @author ivogo
  */
-public interface PedidoDAO {
-    public void crearPedido();
-    public void listarPedido();
-    public void eliminarPedido();
-    public void actualizarPedido();
-    public void buscarPedido();
+public class PedidoDAO {
+    public void crearPedido(){};
+    public void eliminarPedido(){};
+    public void actualizarPedido(){};
+    public void buscarPedido(){};
     
 }
