@@ -8,7 +8,7 @@ package isi.deso.dao;
  *
  * @author ivogo
  */
-public interface VendedorDao {
+public interface VendedorDAO {
     public void crearVendedor();
     public void listarVendedor();
     public void eliminarVendedor();

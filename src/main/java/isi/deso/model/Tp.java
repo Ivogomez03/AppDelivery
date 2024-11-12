@@ -260,7 +260,7 @@ public class Tp {
         ArrayList<Pedido> pedidosCliente = new ArrayList<>();
         pedidosCliente.add(pedido1);
         pedidosCliente.add(pedido2);
-        Cliente cliente = new Cliente(1, "email@ejemplo.com", "123456789", "Direccion Ejemplo", 40.7128, -74.0060);
+        Cliente cliente = new Cliente("email@ejemplo.com", "123456789", "Direccion Ejemplo", 40.7128, -74.0060);
         
         // Creación del Vendedor con Items
         ArrayList<ItemMenu> itemsVendedor = new ArrayList<>();
@@ -322,8 +322,8 @@ public class Tp {
         */
         
         //Etapa 5
-        Cliente clienteApedir1 = new Cliente(2, "email@ejemplo.com", "123456789", "Direccion Ejemplo", 40.7128, -74.0060);
-        Cliente clienteApedir2 = new Cliente(3, "email@ejemplo2.com", "987654321", "Direccion Ejemplo2",40.5012, -74.2);
+        Cliente clienteApedir1 = new Cliente("email@ejemplo.com", "123456789", "Direccion Ejemplo", 40.7128, -74.0060);
+        Cliente clienteApedir2 = new Cliente("email@ejemplo2.com", "987654321", "Direccion Ejemplo2",40.5012, -74.2);
         Pedido pedidoNuevo1 = new Pedido();
         pedidoNuevo1.crearPedido(vendedor,clienteApedir1);
         Pedido pedidoNuevo2 = new Pedido();

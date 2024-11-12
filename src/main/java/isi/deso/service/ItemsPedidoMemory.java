@@ -4,7 +4,6 @@
  */
 package isi.deso.service;
 
-import isi.deso.dao.ItemsPedidoDao;
 import isi.deso.exception.ItemNoEncontradoException;
 import isi.deso.model.Cliente;
 import isi.deso.model.ItemMenu;
@@ -16,12 +15,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.Comparator;
+import isi.deso.dao.ItemsPedidoDAO;
 /**
  *
  * @author ivogo
  */
 
-public class ItemsPedidoMemory implements ItemsPedidoDao {
+public class ItemsPedidoMemory implements ItemsPedidoDAO {
     private List<ItemsPedido> itemsPedidos;
     
     public void addItemsPedidos(ItemsPedido item){

@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author ivogo
  */
-public interface ItemsPedidoDao {
+public interface ItemsPedidoDAO {
     public abstract List buscarPorVendedor(Vendedor v) throws ItemNoEncontradoException;
     public abstract List buscarPorCliente(Cliente c) throws ItemNoEncontradoException;
     public abstract List buscarPorRangodePrecio(int min, int max) throws ItemNoEncontradoException;

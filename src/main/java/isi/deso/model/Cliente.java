@@ -3,7 +3,6 @@ package isi.deso.model;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,8 +38,7 @@ public class Cliente {
     private ArrayList<Pedido> pedidos;
     
     
-    public Cliente(int id, String email, String cuit, String direccion, double lat, double lng){
-        this.id=id;
+    public Cliente(String email, String cuit, String direccion, double lat, double lng){
         this.email=email;
         this.cuit=cuit;
         this.direccion=direccion;

@@ -8,7 +8,7 @@ package isi.deso.dao;
  *
  * @author ivogo
  */
-public interface ItemMenuDao {
+public interface ItemMenuDAO {
     public void crearItemMenu();
     public void listarItemMenu();
     public void eliminarItemMenu();

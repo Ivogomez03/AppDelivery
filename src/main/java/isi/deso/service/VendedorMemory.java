@@ -1,6 +1,6 @@
 package isi.deso.service;
 
-import isi.deso.dao.VendedorDao;
+import isi.deso.dao.VendedorDAO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -11,7 +11,7 @@ import isi.deso.dao.VendedorDao;
  *
  * @author ivogo
  */
-public class VendedorMemory implements VendedorDao{
+public class VendedorMemory implements VendedorDAO{
     public void crearVendedor(){
         
     };
