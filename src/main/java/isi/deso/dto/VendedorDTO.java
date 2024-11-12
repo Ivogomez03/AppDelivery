@@ -10,6 +10,7 @@ package isi.deso.dto;
  */
 
 import isi.deso.model.Coordenada;
+import isi.deso.model.ItemMenu;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class VendedorDTO {
     private String direccion;   
     private double longitud;
     private double latitud;
+    private List<ItemMenu> items;
     
     public int getId(){
         return this.id;
@@ -35,5 +37,9 @@ public class VendedorDTO {
     }
     public double getLongitud(){
         return this.longitud;
+    }
+    
+    public List<ItemMenu> getItems(){
+        return this.items;
     }
 }

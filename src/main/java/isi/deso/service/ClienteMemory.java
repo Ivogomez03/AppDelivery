@@ -12,16 +12,28 @@ import isi.deso.model.Cliente;
  *
  * @author ivogo
  */
-public class ClienteMemory {
+public class ClienteMemory{
     private final ClienteDAO clienteDAO;
     
     public ClienteMemory(){
         this.clienteDAO = new ClienteDAO();
     }
     
-    void agregarCliente(ClienteDTO clienteDTO){
+    public void agregarCliente(ClienteDTO clienteDTO){
         Cliente cliente = new Cliente(clienteDTO.getEmail(), clienteDTO.getCuit(), clienteDTO.getDireccion(), clienteDTO.getLatitud(), clienteDTO.getLongitud());
         
-        clienteDAO.crearCliente(cliente);
+        try{
+            clienteDAO.crearCliente(cliente);
+            System.out.println("Se agrego de forma exitosa");
+        }
+        catch(RuntimeException e){
+            if(e.getMessage().contains("El cliente ya existe")){
+                System.out.println("No se pudo agregar: El cliente ya existe");
+            }else{
+                System.out.println("Ocurrio un error al intentar agregar el cliente");
+            }
+            e.printStackTrace();
+        }
+            
     }
 }
