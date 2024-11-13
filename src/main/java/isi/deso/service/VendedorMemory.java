@@ -15,23 +15,22 @@ import isi.deso.model.Vendedor;
  */
 public class VendedorMemory {
     private final VendedorDAO vendedorDAO;
+    private final ValidatorMemory validator;
     
     public VendedorMemory(){
         this.vendedorDAO = new VendedorDAO();
+        this.validator = new ValidatorMemory();
     }
     
     public void crearVendedor(VendedorDTO vendedorDTO){
-        Vendedor vendedorNew = new Vendedor(vendedorDTO.getId(),vendedorDTO.getNombre(),vendedorDTO.getDireccion(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(),vendedorDTO.getItems());
+        Vendedor vendedorNew = new Vendedor(vendedorDTO.getId(),vendedorDTO.getNombre(),vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(),vendedorDTO.getItems());
+        this.validator.uniquenessValidationVendedor(vendedorDTO);
         
         try{
             vendedorDAO.crearVendedor(vendedorNew);
             System.out.println("Se agrego de forma exitosa");
         }catch(RuntimeException e){
-            if(e.getMessage().contains("El vendedor ya existe")){
-                System.out.println("No se pudo agregar: El vendedor ya existe");
-            }else{
-                System.out.println("Ocurrio un error al intentar agregar el vededor");
-            }
+            System.out.println("Ocurrio un error al intentar agregar el vededor");
             e.printStackTrace();
         }
     };
