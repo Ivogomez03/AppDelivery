@@ -4,7 +4,9 @@
  */
 package isi.deso.tp.Paneles;
 
+import isi.deso.controller.ItemMenuController;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -12,7 +14,10 @@ import javax.swing.JPanel;
  * @author Francisco
  */
 public class SubPanelItemMenuCrear extends javax.swing.JPanel {
-
+    private SubPanelItemMenuCaracteristicas1 PanelBebida;
+    private SubPanelItemMenuCaracteristicas2 PanelComida;
+    private String TipoItem;
+    private ItemMenuController controllerItem = new ItemMenuController();
     /**
      * Creates new form SubPanelVendedor
      */
@@ -30,30 +35,31 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     private void initComponents() {
 
         Tipo_ItemMenu = new javax.swing.ButtonGroup();
-        NombreVendedor = new javax.swing.JTextField();
-        DireccionVendedor = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        NombreItem = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        CrearVendedor = new javax.swing.JButton();
+        CrearItem = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        DireccionVendedor1 = new javax.swing.JTextField();
+        descripcionCategoria = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        DireccionVendedor2 = new javax.swing.JTextField();
+        precioItem = new javax.swing.JTextField();
         botonPlato = new javax.swing.JRadioButton();
         botonBebida = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descripcionItem = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         contenidoCaracteristicas = new javax.swing.JPanel();
-        Vegetariano = new javax.swing.JCheckBox();
-
-        jLabel2.setText("Id");
+        esVegano = new javax.swing.JCheckBox();
 
         jLabel4.setText("Categoria");
 
-        CrearVendedor.setText("Crear");
+        CrearItem.setText("Crear");
+        CrearItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearItemActionPerformed(evt);
+            }
+        });
 
         Cerrar.setText("Cerrar");
         Cerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +71,12 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         jLabel3.setText("Nombre");
 
         jLabel5.setText("Precio");
+
+        precioItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioItemActionPerformed(evt);
+            }
+        });
 
         Tipo_ItemMenu.add(botonPlato);
         botonPlato.setText("Plato");
@@ -84,11 +96,11 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
 
         jLabel1.setText("Descripcion");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setSelectionColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTextArea1);
+        descripcionItem.setColumns(20);
+        descripcionItem.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        descripcionItem.setRows(5);
+        descripcionItem.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(descripcionItem);
 
         jLabel6.setText("Tipo");
 
@@ -105,7 +117,12 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
             .addGap(0, 96, Short.MAX_VALUE)
         );
 
-        Vegetariano.setText("Vegetariano");
+        esVegano.setText("Vegano");
+        esVegano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                esVeganoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -114,30 +131,30 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Cerrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CrearItem)
+                        .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(NombreVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                            .addComponent(DireccionVendedor)))))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NombreItem, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DireccionVendedor1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(DireccionVendedor2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(precioItem, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(descripcionCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
@@ -150,13 +167,8 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
                                 .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(91, 91, 91)
-                                .addComponent(Vegetariano)))
-                        .addContainerGap(116, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Cerrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CrearVendedor)
-                        .addGap(22, 22, 22))))
+                                .addComponent(esVegano)))
+                        .addContainerGap(116, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,45 +178,39 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabel2)
-                                                .addComponent(NombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel6)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(DireccionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(botonPlato)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(botonBebida)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(DireccionVendedor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonPlato)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(botonBebida))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(103, 103, 103)
-                                .addComponent(Vegetariano)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DireccionVendedor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(esVegano))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(NombreItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(descripcionCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(precioItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(218, 218, 218))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CrearVendedor)
+                    .addComponent(CrearItem)
                     .addComponent(Cerrar))
                 .addGap(21, 21, 21))
         );
@@ -227,35 +233,139 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     }//GEN-LAST:event_CerrarActionPerformed
 
     private void botonBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBebidaActionPerformed
-       SubPanelItemMenuCaracteristicas1 p = new SubPanelItemMenuCaracteristicas1();
-       MostrarPanel(p);
+       PanelBebida = new SubPanelItemMenuCaracteristicas1();
+       MostrarPanel(PanelBebida);
+       TipoItem = "Bebida";
     }//GEN-LAST:event_botonBebidaActionPerformed
 
     private void botonPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPlatoActionPerformed
-       SubPanelItemMenuCaracteristicas2 p = new SubPanelItemMenuCaracteristicas2();
-       MostrarPanel(p);
+       PanelComida = new SubPanelItemMenuCaracteristicas2();
+       MostrarPanel(PanelComida);
+       TipoItem = "Comida";
     }//GEN-LAST:event_botonPlatoActionPerformed
 
+    private void precioItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioItemActionPerformed
 
+    private void esVeganoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esVeganoActionPerformed
+    
+    }//GEN-LAST:event_esVeganoActionPerformed
+
+    private void CrearItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearItemActionPerformed
+        String nombreItem = getNombreItem();
+        String descCategoria = getDescripcionCategoria();
+        String descItem = getDescripcionItem();
+        double precio = getPrecio();
+        boolean esVegano = getVegano();
+        String TipoItem = getTipo();
+        double gradAlcohol;
+        double tamanioBebida;
+        boolean aptoVegetariano;
+        boolean aptoCeliaco;
+        double Calorias;
+        
+        if (nombreItem.isEmpty() || descCategoria.isEmpty() || descItem.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.");
+            return;
+        }
+
+        if (precio == 0.0) {
+            JOptionPane.showMessageDialog(null, "Precio debe ser valido.");
+            return;
+        }
+        
+        if(TipoItem.equals("Bebida")){
+            if(PanelBebida.getAlcoholica()){
+                gradAlcohol = PanelBebida.getGraduacion();
+                tamanioBebida = PanelBebida.getTamanio();
+                if (gradAlcohol == 0.0) {
+                JOptionPane.showMessageDialog(null, "Inserte la graduación de alcohol.");
+                return;
+                }
+            }
+            else{
+                gradAlcohol = 0;
+                tamanioBebida = PanelBebida.getTamanio();
+            }
+            aptoVegetariano = false;
+            aptoCeliaco = false;
+            Calorias = 0;
+        }
+        else{
+            aptoVegetariano = PanelComida.getAptoVegetariano();
+            aptoCeliaco = PanelComida.getCeliaco();
+            Calorias = PanelComida.getCalorias();
+            gradAlcohol = 0;
+            tamanioBebida = 0;
+        }
+        
+        if(!botonBebida.isSelected() && !botonPlato.isSelected()){
+            JOptionPane.showMessageDialog(null, "Seleccione un tipo de Item.");
+            return;
+        }
+        else if(botonBebida.isSelected()){
+            if (tamanioBebida == 0.0) {
+            JOptionPane.showMessageDialog(null, "El tamanio debe ser valido.");
+            return;
+            }   
+        }
+        else if(botonPlato.isSelected()){
+            if(Calorias == 0.0) {
+            JOptionPane.showMessageDialog(null, "Inserte las Calorias.");
+            return;    
+            }
+        }
+     
+        controllerItem.CrearItem(nombreItem, descCategoria, precio, descItem, TipoItem, esVegano, gradAlcohol, tamanioBebida, aptoVegetariano, aptoCeliaco, Calorias);
+    }//GEN-LAST:event_CrearItemActionPerformed
+
+    public String getNombreItem(){
+        return this.NombreItem.getText();
+    }
+    public String getDescripcionCategoria(){
+        return this.descripcionCategoria.getText();
+    }
+    public String getDescripcionItem(){
+        return this.descripcionItem.getText();
+    }
+    public double getPrecio(){
+        try{
+            return Double.parseDouble(precioItem.getText());
+        } catch (NumberFormatException e){
+            return 0.0;
+        }
+    }
+    public boolean getVegano(){
+        return esVegano.isSelected();
+    }
+    public String getTipo(){
+        if(botonBebida.isSelected()){
+            return TipoItem = "Bebida";
+        }
+        else{
+            return TipoItem = "Comida";
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cerrar;
-    private javax.swing.JButton CrearVendedor;
-    private javax.swing.JTextField DireccionVendedor;
-    private javax.swing.JTextField DireccionVendedor1;
-    private javax.swing.JTextField DireccionVendedor2;
-    private javax.swing.JTextField NombreVendedor;
+    private javax.swing.JButton CrearItem;
+    private javax.swing.JTextField NombreItem;
     private javax.swing.ButtonGroup Tipo_ItemMenu;
-    private javax.swing.JCheckBox Vegetariano;
     private javax.swing.JRadioButton botonBebida;
     private javax.swing.JRadioButton botonPlato;
     private javax.swing.JPanel contenidoCaracteristicas;
+    private javax.swing.JTextField descripcionCategoria;
+    private javax.swing.JTextArea descripcionItem;
+    private javax.swing.JCheckBox esVegano;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField precioItem;
     // End of variables declaration//GEN-END:variables
 }

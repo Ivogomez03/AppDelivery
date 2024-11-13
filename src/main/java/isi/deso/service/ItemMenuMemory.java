@@ -4,10 +4,21 @@
  */
 package isi.deso.service;
 
+import isi.deso.dao.ItemMenuDAO;
+import isi.deso.dto.ItemMenuDTO;
+
 /**
  *
  * @author ivogo
  */
 public class ItemMenuMemory {
+    private final ItemMenuDAO ItemDAO;
     
+    public ItemMenuMemory(){
+    this.ItemDAO = new ItemMenuDAO();
+    }
+    
+    public void agregarItem(ItemMenuDTO ItemDTO){
+        //Logica de si es Plato o Bebida
+    }
 }

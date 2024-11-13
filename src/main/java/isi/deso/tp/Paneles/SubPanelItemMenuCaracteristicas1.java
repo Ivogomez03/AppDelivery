@@ -107,7 +107,24 @@ public class SubPanelItemMenuCaracteristicas1 extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_GraduacionActionPerformed
 
-
+    public double getGraduacion(){
+        try{
+            return Double.parseDouble(Graduacion.getText());
+        } catch (NumberFormatException e){
+            return 0.0;
+        }
+    }
+    public double getTamanio(){
+        try{
+            return Double.parseDouble(Tamanio.getText());
+        } catch (NumberFormatException e){
+            return 0.0;
+        }
+    }
+    public boolean getAlcoholica(){
+        return bebidaAlcoholica.isSelected();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Graduacion;
     private javax.swing.JTextField Tamanio;

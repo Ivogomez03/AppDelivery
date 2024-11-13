@@ -34,7 +34,7 @@ public abstract class ItemMenu {
     @Column(name = "aptoVegano")
     protected boolean aptoVegano;
     
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     protected Categoria categoria;
     
@@ -46,8 +46,7 @@ public abstract class ItemMenu {
         
     }
     
-    public ItemMenu(int id, String nombre, String descripcion, Categoria categoria, double precio, boolean aptoVegano){
-        this.id = id;
+    public ItemMenu(String nombre, String descripcion, Categoria categoria, double precio, boolean aptoVegano){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.categoria = categoria;

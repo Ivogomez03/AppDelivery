@@ -18,14 +18,13 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "descripcion")
     private String descripcion;
     
     @Enumerated(EnumType.STRING)
     private TipoDeItem tipo;
     
-    public Categoria(int id, String descripcion, TipoDeItem tipo){
-        this.id = id;
+    public Categoria(String descripcion, TipoDeItem tipo){
         this.descripcion = descripcion;
         this.tipo = tipo;
     }

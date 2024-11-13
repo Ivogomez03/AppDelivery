@@ -26,6 +26,9 @@ public class Vendedor implements Observer{
     @Column(name = "nombre")
     private String nombre;
     
+    @Column(name = "apellido")
+    private String apellido;
+    
     @Column(name = "direccion")
     private String direccion;
     
@@ -45,14 +48,14 @@ public class Vendedor implements Observer{
     
     public Vendedor(){}
     
-    public Vendedor(int id, String nombre, String direccion,String dni, double lat, double lng,List items){
+    public Vendedor(int id, String nombre, String apellido, String direccion,String dni, double lat, double lng, List items){
         this.id = id;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.direccion = direccion;
         this.dni = dni;
         this.coordenadas = new Coordenada(lat,lng);
         this.items = items;
-        this.pedidosRecibidos = new ArrayList<Pedido>();
     } 
 
     @Override

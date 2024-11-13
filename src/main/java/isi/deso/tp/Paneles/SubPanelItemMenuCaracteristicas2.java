@@ -27,19 +27,19 @@ public class SubPanelItemMenuCaracteristicas2 extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jTextField1 = new javax.swing.JTextField();
+        AptoCeliaco = new javax.swing.JCheckBox();
+        AptoVegetariano = new javax.swing.JCheckBox();
+        Calorias = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        jCheckBox1.setText("Apto Celiaco");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        AptoCeliaco.setText("Apto Celiaco");
+        AptoCeliaco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                AptoCeliacoActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText("Apto Vegetariano");
+        AptoVegetariano.setText("Apto Vegetariano");
 
         jLabel1.setText("Calorias");
 
@@ -53,22 +53,22 @@ public class SubPanelItemMenuCaracteristicas2 extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(Calorias))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jCheckBox1)
-                        .addComponent(jCheckBox2)))
+                        .addComponent(AptoCeliaco)
+                        .addComponent(AptoVegetariano)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCheckBox1)
+                .addComponent(AptoCeliaco)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(AptoVegetariano)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Calorias, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap())
         );
@@ -85,16 +85,29 @@ public class SubPanelItemMenuCaracteristicas2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void AptoCeliacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AptoCeliacoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_AptoCeliacoActionPerformed
 
-
+    public boolean getCeliaco(){
+        return AptoCeliaco.isSelected();
+    }
+    public boolean getAptoVegetariano(){
+        return AptoVegetariano.isSelected();
+    }
+    public double getCalorias(){
+        try{
+            return Double.parseDouble(Calorias.getText());
+        } catch (NumberFormatException e){
+            return 0.0;
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox AptoCeliaco;
+    private javax.swing.JCheckBox AptoVegetariano;
+    private javax.swing.JTextField Calorias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,23 +12,27 @@ import isi.deso.model.TipoDeItem;
  * @author ivogo
  */
 public class ItemMenuDTO {
-    private int id;
+    
     private String nombre;
-    private Categoria categoria;
+    private String descripcionCategoria;
     private double precio;
     private String desc;
-    private TipoDeItem tipo;
+    private String tipo;
+    private boolean esVegano;
+    private double gradAlcohol;
+    private double tamanioBebida;
+    private boolean aptoVegetariano;
+    private boolean aptoCeliaco;
+    double Calorias;
     
-    public int getId(){
-        return this.id;
-    }
+    public ItemMenuDTO(){};
     
     public String getNombre(){
         return this.nombre;
     }
     
-    public Categoria getCategoria(){
-        return this.categoria;
+    public String getCategoria(){
+        return this.descripcionCategoria;
     }
     
     public double getPrecio(){
@@ -39,7 +43,51 @@ public class ItemMenuDTO {
         return this.desc;
     }
     
-    public TipoDeItem getTipo(){
+    public String getTipo(){
         return this.tipo;
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcionCategoria(String descripcionCategoria) {
+        this.descripcionCategoria = descripcionCategoria;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setEsVegano(boolean esVegano) {
+        this.esVegano = esVegano;
+    }
+
+    public void setGradAlcohol(double gradAlcohol) {
+        this.gradAlcohol = gradAlcohol;
+    }
+
+    public void setTamanioBebida(double tamanioBebida) {
+        this.tamanioBebida = tamanioBebida;
+    }
+
+    public void setAptoVegetariano(boolean aptoVegetariano) {
+        this.aptoVegetariano = aptoVegetariano;
+    }
+
+    public void setAptoCeliaco(boolean aptoCeliaco) {
+        this.aptoCeliaco = aptoCeliaco;
+    }
+    
+    public void setCalorias(double calorias){
+        this.Calorias = calorias;
     }
 }

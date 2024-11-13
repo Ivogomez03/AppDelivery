@@ -18,6 +18,7 @@ import java.util.List;
 public class VendedorDTO {
     private int id;
     private String nombre;
+    private String apellido;
     private String direccion;  
     private String dni;
     private double longitud;
@@ -29,6 +30,9 @@ public class VendedorDTO {
     }
     public String getNombre(){
         return this.nombre;
+    }
+    public String getApellido(){
+        return this.apellido;
     }
     public String getDireccion(){
         return this.direccion;
