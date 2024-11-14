@@ -305,7 +305,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
             return;
         }
         else if(botonBebida.isSelected()){
-            if (tamanioBebida == 0.0) {
+            if (tamanioBebida == 0.0 || tamanioBebida < 0) {
             JOptionPane.showMessageDialog(null, "El tamanio debe ser valido.");
             return;
             }   
