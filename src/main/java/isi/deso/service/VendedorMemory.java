@@ -22,7 +22,7 @@ public class VendedorMemory {
         this.validator = new ValidationMemory();
     }
     
-    public void crearVendedor(VendedorDTO vendedorDTO){
+    public void agregarVendedor(VendedorDTO vendedorDTO){
         Vendedor vendedorNew = new Vendedor(vendedorDTO.getId(),vendedorDTO.getNombre(),vendedorDTO.getApellido(), vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(),vendedorDTO.getItems());
         this.validator.uniquenessValidationVendedor(vendedorDTO);
         

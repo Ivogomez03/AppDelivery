@@ -4,11 +4,17 @@
  */
 package isi.deso.tp.Paneles;
 
+import isi.deso.controller.VendedorController;
+import isi.deso.service.ValidationMemory;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Francisco
  */
 public class SubPanelVendedorCrear extends javax.swing.JPanel {
+    VendedorController vendedorController = new VendedorController();
+    private final ValidationMemory validation = new ValidationMemory();
 
     /**
      * Creates new form SubPanelVendedor
@@ -161,7 +167,27 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
     }//GEN-LAST:event_ApellidoActionPerformed
 
     private void CrearVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearVendedorActionPerformed
-        // TODO add your handling code here:
+        String nombre = getNombre();
+        String apellido = getApellido();
+        String dni = getDni();
+        String direccion = getDireccionVendedor();
+        double latitud = getLatitud();
+        double longitud = getLongitud();
+        
+        if(nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || direccion.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.");
+            return;
+        }
+        if (latitud == 0.0 || longitud == 0.0) {
+            JOptionPane.showMessageDialog(null, "Latitud y Longitud deben ser válidos.");
+            return;
+        }
+        if(!validation.ValidationSingleNumbers(dni)){
+            JOptionPane.showMessageDialog(null, "El dni debe contener solo digitos");
+            return;
+        }
+        
+        vendedorController.crearVendedor(nombre, apellido, dni, direccion, latitud, longitud);
     }//GEN-LAST:event_CrearVendedorActionPerformed
     
     public String getNombre(){
