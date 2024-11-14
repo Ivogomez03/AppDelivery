@@ -5,7 +5,9 @@
 package isi.deso.tp.Paneles;
 
 import isi.deso.controller.ClienteController;
+import isi.deso.service.ValidationMemory;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -13,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class SubPanelClienteCrear extends javax.swing.JPanel {
     ClienteController clienteController = new ClienteController();
+    private final ValidationMemory validation = new ValidationMemory();
+    
     /**
      * Creates new form SubPanelVendedor
      */
@@ -167,6 +171,10 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
             return;
         }
         
+        if(!validation.ValidationSingleNumbers(CUIT)){
+            JOptionPane.showMessageDialog(null, "El cuit debe contener solo digitos");
+            return;
+        }
         clienteController.crearCliente(direccion, email, latitud, longitud, CUIT);
     }//GEN-LAST:event_CrearClienteActionPerformed
 
@@ -214,4 +222,6 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
+
+    
 }

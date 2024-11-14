@@ -7,7 +7,7 @@ import jakarta.persistence.EntityExistsException;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
-public class ValidatorMemory {
+public class ValidationMemory {
 
     public boolean uniquenessValidationVendedor(VendedorDTO vendedorDTO) { 
         String hql = "SELECT CASE WHEN EXISTS (FROM Vendedor v WHERE v.dni = :dni) THEN true ELSE false END";
@@ -65,5 +65,16 @@ public class ValidatorMemory {
             throw new RuntimeException("Se a producido algun error en la validacion",e);
         }
         
+    }
+    
+    public boolean ValidationSingleNumbers(String string){
+        int i = 0;
+        while(string.length() >i){
+            if(!Character.isDigit(string.charAt(i))){
+                return false; 
+            }
+            i++;
+        }
+        return true;
     }
 }

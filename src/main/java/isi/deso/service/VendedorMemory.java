@@ -15,11 +15,11 @@ import isi.deso.model.Vendedor;
  */
 public class VendedorMemory {
     private final VendedorDAO vendedorDAO;
-    private final ValidatorMemory validator;
+    private final ValidationMemory validator;
     
     public VendedorMemory(){
         this.vendedorDAO = new VendedorDAO();
-        this.validator = new ValidatorMemory();
+        this.validator = new ValidationMemory();
     }
     
     public void crearVendedor(VendedorDTO vendedorDTO){
