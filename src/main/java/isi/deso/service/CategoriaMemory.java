@@ -8,6 +8,7 @@ import isi.deso.dao.CategoriaDAO;
 import isi.deso.dto.CategoriaDTO;
 import isi.deso.model.Categoria;
 import isi.deso.model.TipoDeItem;
+import java.util.List;
 
 /**
  *
@@ -38,5 +39,22 @@ public class CategoriaMemory {
             }
             e.printStackTrace();
         }
+    }
+
+    public List<String> obtenerListaCategoria(String tipoItem) {
+        List<String> lista;
+        try{
+            if(tipoItem.equals("PLATO")){
+                lista = categoriaDAO.obtenerCategorias(TipoDeItem.PLATO);
+            }else{
+                lista = categoriaDAO.obtenerCategorias(TipoDeItem.BEBIDA);
+            }
+            System.out.println("Se a actualizado la lista de categorias con exito");
+            return lista; 
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Se a producido algun error al actuaizar la lista");
+        }
+        return null;
     }
 }

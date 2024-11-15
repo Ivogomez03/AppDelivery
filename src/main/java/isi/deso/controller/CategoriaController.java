@@ -6,6 +6,7 @@ package isi.deso.controller;
 
 import isi.deso.dto.CategoriaDTO;
 import isi.deso.service.CategoriaMemory;
+import java.util.List;
 
 /**
  *
@@ -24,5 +25,10 @@ public class CategoriaController {
         categoriaDTO.setTipoItem(TipoItem);
         
         cmemory.agregarCategoria(categoriaDTO);
+    }
+    
+    public List<String> obtenerListaCategoria(String tipoItem){
+        CategoriaMemory cmemory = new CategoriaMemory();
+        return cmemory.obtenerListaCategoria(tipoItem);
     }
 }
