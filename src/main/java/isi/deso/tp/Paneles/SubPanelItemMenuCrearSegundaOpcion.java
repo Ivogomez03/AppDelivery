@@ -386,6 +386,10 @@ public class SubPanelItemMenuCrearSegundaOpcion extends javax.swing.JPanel {
         return this.NombreItem.getText();
     }
 
+    public String getDescripcionCategoria(){
+        return this.DescripcionCategoriaNueva.getText();
+    }
+    
     public String getDescripcionItem(){
         return this.descripcionItem.getText();
     }

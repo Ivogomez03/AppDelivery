@@ -178,11 +178,11 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.");
             return;
         }
-        if (latitud == 0.0 || longitud == 0.0) {
+        if (latitud <= 0.0 || longitud <= 0.0) {
             JOptionPane.showMessageDialog(null, "Latitud y Longitud deben ser válidos.");
             return;
         }
-        if(!validation.ValidationSingleNumbers(dni)){
+        if(!validation.ValidarSoloNumeros(dni)){
             JOptionPane.showMessageDialog(null, "El dni debe contener solo digitos");
             return;
         }

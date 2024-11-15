@@ -4,11 +4,14 @@ import isi.deso.dto.VendedorDTO;
 import isi.deso.dto.ClienteDTO;
 import isi.deso.dto.ItemMenuDTO;
 import jakarta.persistence.EntityExistsException;
+import java.util.logging.Logger;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
 public class ValidationMemory {
 
+    private static final Logger logger = Logger.getLogger(ValidationMemory.class.getName());
+    
     public boolean uniquenessValidationVendedor(String dni) { 
         String hql = "SELECT CASE WHEN EXISTS (FROM Vendedor v WHERE v.dni = :dni) THEN true ELSE false END";
 
@@ -28,9 +31,10 @@ public class ValidationMemory {
         }
         
     }
-    public boolean uniquenessValidationCliente(String CUIT) { 
+    public boolean ValidarCliente(String CUIT) { 
+        
         String hql = "SELECT CASE WHEN EXISTS (FROM Cliente c WHERE c.cuit = :cuit) THEN true ELSE false END";
-
+        
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Ejecuta la consulta y busca un registro con el DNI
             Boolean exists = session.createQuery(hql, Boolean.class)
@@ -67,7 +71,7 @@ public class ValidationMemory {
         
     }
     
-    public boolean ValidationSingleNumbers(String string){
+    public boolean ValidarSoloNumeros(String string){
         int i = 0;
         while(string.length() >i){
             if(!Character.isDigit(string.charAt(i))){
@@ -77,4 +81,5 @@ public class ValidationMemory {
         }
         return true;
     }
+
 }

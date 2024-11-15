@@ -166,17 +166,17 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
             return;
         }
 
-        if (latitud == 0.0 || longitud == 0.0) {
+        if (latitud <= 0.0 || longitud <= 0.0 ) {
             JOptionPane.showMessageDialog(null, "Latitud y Longitud deben ser válidos.");
             return;
         }
         
-        if(!validation.ValidationSingleNumbers(CUIT)){
-            JOptionPane.showMessageDialog(null, "El cuit debe contener solo digitos");
+        if(!validation.ValidarSoloNumeros(CUIT)){
+            JOptionPane.showMessageDialog(null, "El CUIT debe contener solo digitos");
             return;
         }
-        if(!validation.uniquenessValidationCliente(CUIT)){
-            JOptionPane.showMessageDialog(null, "Ya existe um cliente con el cuit: "+ CUIT);
+        if(!validation.ValidarCliente(CUIT)){
+            JOptionPane.showMessageDialog(null, "Ya existe un cliente con el cuit: "+ CUIT);
             return;
         }
         
