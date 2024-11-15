@@ -187,7 +187,13 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
             return;
         }
         
+        if(!validation.uniquenessValidationVendedor(dni)){
+            JOptionPane.showMessageDialog(null, "Ya existe un vendedor con el dni "+dni);
+            return;
+        }
+        
         vendedorController.crearVendedor(nombre, apellido, dni, direccion, latitud, longitud);
+        JOptionPane.showMessageDialog(null, "El vendedor se a creado con exito");
     }//GEN-LAST:event_CrearVendedorActionPerformed
     
     public String getNombre(){

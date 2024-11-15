@@ -175,7 +175,13 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El cuit debe contener solo digitos");
             return;
         }
+        if(!validation.uniquenessValidationCliente(CUIT)){
+            JOptionPane.showMessageDialog(null, "Ya existe um cliente con el cuit: "+ CUIT);
+            return;
+        }
+        
         clienteController.crearCliente(direccion, email, latitud, longitud, CUIT);
+        JOptionPane.showMessageDialog(null, "El cliente se a creado con exito");
     }//GEN-LAST:event_CrearClienteActionPerformed
 
     public String getCuit(){

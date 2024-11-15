@@ -15,16 +15,13 @@ import isi.deso.model.Vendedor;
  */
 public class VendedorMemory {
     private final VendedorDAO vendedorDAO;
-    private final ValidationMemory validator;
     
     public VendedorMemory(){
         this.vendedorDAO = new VendedorDAO();
-        this.validator = new ValidationMemory();
     }
     
     public void agregarVendedor(VendedorDTO vendedorDTO){
         Vendedor vendedorNew = new Vendedor(vendedorDTO.getId(),vendedorDTO.getNombre(),vendedorDTO.getApellido(), vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(),vendedorDTO.getItems());
-        this.validator.uniquenessValidationVendedor(vendedorDTO);
         
         try{
             vendedorDAO.crearVendedor(vendedorNew);

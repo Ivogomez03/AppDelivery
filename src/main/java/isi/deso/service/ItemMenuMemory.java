@@ -12,13 +12,16 @@ import isi.deso.dto.ItemMenuDTO;
  * @author ivogo
  */
 public class ItemMenuMemory {
-    private final ItemMenuDAO ItemDAO;
+    private final ItemMenuDAO itemDAO;
     
     public ItemMenuMemory(){
-    this.ItemDAO = new ItemMenuDAO();
+    this.itemDAO = new ItemMenuDAO();
     }
     
-    public void agregarItem(ItemMenuDTO ItemDTO){
-        //Logica de si es Plato o Bebida
+    public void agregarItem(ItemMenuDTO itemDTO){
+        if(itemDTO.getTipo() == "Plato"){
+        }else{
+            
+        }
     }
 }

@@ -9,13 +9,13 @@ import util.HibernateUtil;
 
 public class ValidationMemory {
 
-    public boolean uniquenessValidationVendedor(VendedorDTO vendedorDTO) { 
+    public boolean uniquenessValidationVendedor(String dni) { 
         String hql = "SELECT CASE WHEN EXISTS (FROM Vendedor v WHERE v.dni = :dni) THEN true ELSE false END";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Ejecuta la consulta y busca un registro con el DNI
             Boolean exists = session.createQuery(hql, Boolean.class)
-                        .setParameter("dni", vendedorDTO.getDni())
+                        .setParameter("dni", dni)
                         .uniqueResult();
 
             // Retorna true si no se encontró el vendedor (es decir, si `result` es null)
@@ -28,13 +28,13 @@ public class ValidationMemory {
         }
         
     }
-    public boolean uniquenessValidationCliente(ClienteDTO clienteDTO) { 
+    public boolean uniquenessValidationCliente(String CUIT) { 
         String hql = "SELECT CASE WHEN EXISTS (FROM Cliente c WHERE c.cuit = :cuit) THEN true ELSE false END";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Ejecuta la consulta y busca un registro con el DNI
             Boolean exists = session.createQuery(hql, Boolean.class)
-                        .setParameter("cuit", clienteDTO.getCuit())
+                        .setParameter("cuit", CUIT)
                         .uniqueResult();
 
             // Retorna true si no se encontró el vendedor (es decir, si `result` es null)
@@ -47,13 +47,13 @@ public class ValidationMemory {
         }
         
     }
-    public boolean uniquenessValidationItemMenu(ItemMenuDTO itemMenuDTO) { 
+    public boolean uniquenessValidationItemMenu(String nombre) { 
         String hql = "SELECT CASE WHEN EXISTS (FROM ItemMenu i WHERE i.nombre = :nombre) THEN true ELSE false END";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Ejecuta la consulta y busca un registro con el DNI
             Boolean exists = session.createQuery(hql, Boolean.class)
-                        .setParameter("nombre", itemMenuDTO.getNombre())
+                        .setParameter("nombre", nombre)
                         .uniqueResult();
 
             // Retorna true si no se encontró el vendedor (es decir, si `result` es null)
