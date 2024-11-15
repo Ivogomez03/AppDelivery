@@ -9,6 +9,6 @@ package isi.deso.model;
  * @author franc
  */
 public enum TipoDeItem {
-    COMIDA,
+    PLATO,
     BEBIDA
 }
