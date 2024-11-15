@@ -3,6 +3,7 @@ package isi.deso.model;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -34,11 +35,12 @@ public class Cliente {
     @JoinColumn(name = "id_coordenadas", referencedColumnName = "id_coordenadas")
     private Coordenada coordenadas;
     
-    @Transient //Temporal
-    @OneToMany(mappedBy = "cliente")
-    private ArrayList<Pedido> pedidos;
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
     
-    public Cliente(){};
+    public Cliente(){
+        this.pedidos = new ArrayList<>();
+    }
     
     public Cliente(String email, String cuit, String direccion, double lat, double lng){
         this.email=email;
@@ -62,7 +64,7 @@ public class Cliente {
     public Coordenada getCoordenada(){
         return this.coordenadas;
     }
-    public ArrayList<Pedido> getPedidos(){
+    public List<Pedido> getPedidos(){
         return this.pedidos;
     }
     
@@ -81,7 +83,7 @@ public class Cliente {
     public void setCoordenada(Coordenada coordenada){
        this.coordenadas = coordenada;
     }
-    public void setPedidos(ArrayList<Pedido> items){
+    public void setPedidos(List<Pedido> items){
         this.pedidos = items;
     }
     
