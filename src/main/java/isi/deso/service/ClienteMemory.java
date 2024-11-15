@@ -28,13 +28,23 @@ public class ClienteMemory{
             System.out.println("Se agrego de forma exitosa");
         }
         catch(RuntimeException e){
-            if(e.getMessage().contains("El cliente ya existe")){
-                System.out.println("No se pudo agregar: El cliente ya existe");
-            }else{
-                System.out.println("Ocurrio un error al intentar agregar el cliente");
-            }
+            System.out.println("Ocurrio un error al intentar agregar el cliente");
             e.printStackTrace();
         }
             
+    }
+    
+    public Cliente buscarCliente(String cuit) {
+        
+            Cliente cliente = clienteDAO.buscarCliente(cuit);
+            
+            if(cliente != null){
+                System.out.println("Cliente con CUIT " + cliente.getCuit() + " encontrado");
+                return cliente;
+            } else {
+                System.out.println("No se encontró el cliente.");
+                return null;
+            }
+        
     }
 }

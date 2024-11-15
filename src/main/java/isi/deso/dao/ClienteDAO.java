@@ -5,10 +5,12 @@
 package isi.deso.dao;
 
 import isi.deso.model.Cliente;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.query.Query;
 import util.HibernateUtil;
 
 /**
@@ -28,7 +30,20 @@ public class ClienteDAO {
         throw new PersistenceException("Error al agregar el Cliente", e);
         }    
 }
-    public void eliminarCliente(){};
-    public void actualizarCliente(){};
-    public void buscarCliente(){};
+    public void eliminarCliente(){}
+    public void actualizarCliente(){}
+    
+    public Cliente buscarCliente(String cuit){
+    
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        String jpql = "FROM Cliente c WHERE c.cuit = :cuit";
+        Query<Cliente> query = session.createQuery(jpql, Cliente.class);
+        query.setParameter("cuit", cuit);
+        return query.uniqueResult();
+    } catch (NoResultException e) {
+        System.out.println("No se encontró ningún cliente con el CUIT: " + cuit);
+        return null; // Devuelve null si no se encuentra el cliente
+        }
+        
+    }
 }

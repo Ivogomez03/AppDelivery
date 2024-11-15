@@ -34,9 +34,11 @@ public class Cliente {
     @JoinColumn(name = "id_coordenadas", referencedColumnName = "id_coordenadas")
     private Coordenada coordenadas;
     
+    @Transient //Temporal
     @OneToMany(mappedBy = "cliente")
     private ArrayList<Pedido> pedidos;
     
+    public Cliente(){};
     
     public Cliente(String email, String cuit, String direccion, double lat, double lng){
         this.email=email;
@@ -76,9 +78,8 @@ public class Cliente {
     public void setDireccion(String direccion){
         this.direccion = direccion;
     } 
-    public void setCoordenada(double lat, double lng){
-       this.coordenadas.setLat(lat);
-       this.coordenadas.setLng(lng);
+    public void setCoordenada(Coordenada coordenada){
+       this.coordenadas = coordenada;
     }
     public void setPedidos(ArrayList<Pedido> items){
         this.pedidos = items;
