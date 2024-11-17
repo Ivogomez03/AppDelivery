@@ -8,6 +8,7 @@ import isi.deso.controller.CategoriaController;
 import isi.deso.controller.ItemMenuController;
 import javax.swing.DefaultListModel;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -23,11 +24,14 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     private String TipoItem;
     private ItemMenuController controllerItem = new ItemMenuController();
     private CategoriaController controllerCategoria = new CategoriaController();
+    DefaultListModel modeloLista = new DefaultListModel(); //El modelo maneja el almacenamiento de la lista.
+    
     /**
      * Creates new form SubPanelVendedor
      */
     public SubPanelItemMenuCrear() {
         initComponents();
+        ListaCategoria.setModel(modeloLista);//Se setea el modelo definido en la JLista
     }
 
     /**
@@ -238,7 +242,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(DescripcionCategoriaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BotonAgregarCategoria))
-                        .addContainerGap(250, Short.MAX_VALUE))
+                        .addContainerGap(259, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -251,7 +255,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CrearItem)
                             .addComponent(Cerrar))
@@ -287,7 +291,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     private void botonPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPlatoActionPerformed
        PanelComida = new SubPanelItemMenuCaracteristicas2();
        MostrarPanel(PanelComida);
-       TipoItem = "Comida";
+       TipoItem = "Plato";
        
        cargarLista(TipoItem);
        
@@ -379,6 +383,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         }
         
         controllerCategoria.crearCategoria(descCategoria, TipoItem);
+        cargarLista(TipoItem);
     }//GEN-LAST:event_BotonAgregarCategoriaActionPerformed
 
     public String getNombreItem(){
@@ -412,11 +417,13 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     }
     
     public void cargarLista(String tipoItem){
-        DefaultListModel modeloLista = new DefaultListModel();//El modelo maneja el almacenamiento de la lista.
-        
         List<String> lista = controllerCategoria.obtenerListaCategoria(tipoItem);//Se recupera de la base de datos las categorias ya cargadas con el tipo de item pasado por parametro.
-        ListaCategoria.setModel(modeloLista);//Se setea el modelo definido en la JLista
+        modeloLista.removeAllElements(); //Se limpia los datos guardados en el modelo de lista.
         
+        if(lista.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No hay ninguna categoria registrada de "+ tipoItem);
+            return;
+        }
         for(String categoria : lista){
            modeloLista.addElement(categoria);//Cada vez que se va a gregando un elemento la lista se va a actualizar automaticamente.
         }

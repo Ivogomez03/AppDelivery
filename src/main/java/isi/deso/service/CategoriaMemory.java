@@ -44,7 +44,7 @@ public class CategoriaMemory {
     public List<String> obtenerListaCategoria(String tipoItem) {
         List<String> lista;
         try{
-            if(tipoItem.equals("PLATO")){
+            if(tipoItem.equals("Plato")){
                 lista = categoriaDAO.obtenerCategorias(TipoDeItem.PLATO);
             }else{
                 lista = categoriaDAO.obtenerCategorias(TipoDeItem.BEBIDA);

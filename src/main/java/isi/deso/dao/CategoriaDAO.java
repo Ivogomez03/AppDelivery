@@ -36,16 +36,36 @@ public class CategoriaDAO {
        }       
    }
    public List<String> obtenerCategorias(TipoDeItem tipoItem){
+       if(tipoItem.equals(TipoDeItem.PLATO)){
+           return obtenerPlatos();
+       }
+       else 
+           return obtenerBebidas();
+   }
+   
+   private List<String> obtenerPlatos(){
        List<String> lista = new ArrayList<String>();
        
        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-           String hql = "SELECT descripcion FROM Categoria WHERE tipo = :tipo";
-           lista = session.createQuery(hql, String.class).setParameter("tipo",tipoItem).getResultList();
+           String hql = "SELECT descripcion FROM Categoria WHERE tipo = 'PLATO'";
+           lista = session.createQuery(hql, String.class).getResultList();
        }catch(Exception e){
            e.printStackTrace();
-           throw new RuntimeException("Se ha producido un error al obtener las categorias", e);
+           throw new RuntimeException("Se ha producido un error al obtener los Platos", e);
        }
+       return lista;
+   }
+   
+    private List<String> obtenerBebidas(){
+       List<String> lista = new ArrayList<String>();
        
+       try(Session session = HibernateUtil.getSessionFactory().openSession()){
+           String hql = "SELECT descripcion FROM Categoria WHERE tipo = 'BEBIDA'";
+           lista = session.createQuery(hql, String.class).getResultList();
+       }catch(Exception e){
+           e.printStackTrace();
+           throw new RuntimeException("Se ha producido un error al obtener las Bebidas", e);
+       }
        return lista;
    }
 }
