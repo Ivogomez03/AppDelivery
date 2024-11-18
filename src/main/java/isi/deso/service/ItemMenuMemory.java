@@ -6,7 +6,11 @@ package isi.deso.service;
 
 import isi.deso.dao.ItemMenuDAO;
 import isi.deso.dto.ItemMenuDTO;
-
+import isi.deso.model.Bebida;
+import isi.deso.model.ItemMenu;
+import isi.deso.model.Plato;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author ivogo
@@ -20,8 +24,15 @@ public class ItemMenuMemory {
     
     public void agregarItem(ItemMenuDTO itemDTO){
         if(itemDTO.getTipo() == "Plato"){
+            Plato plato;
+            //persistir
         }else{
-            
+            Bebida bebida;
+            //persistir
         }
+    }
+    public List<ItemMenu> devolverListaItems(){
+        List<ItemMenu> lista = itemDAO.obtenerItems();
+        return lista;
     }
 }

@@ -24,6 +24,10 @@ public class Categoria {
     @Enumerated(EnumType.STRING)
     private TipoDeItem tipo;
     
+    public Categoria(){
+    
+    }
+    
     public Categoria(String descripcion, TipoDeItem tipo){
         this.descripcion = descripcion;
         this.tipo = tipo;

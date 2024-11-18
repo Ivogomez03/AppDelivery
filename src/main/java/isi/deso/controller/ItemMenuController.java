@@ -5,7 +5,9 @@
 package isi.deso.controller;
 
 import isi.deso.dto.ItemMenuDTO;
+import isi.deso.model.ItemMenu;
 import isi.deso.service.ItemMenuMemory;
+import java.util.List;
 
 /**
  *
@@ -35,5 +37,11 @@ public class ItemMenuController {
         itemMenuDTO.setAptoVegetariano(aptoVegetariano);
         
         imemory.agregarItem(itemMenuDTO);
+    }
+    
+    public List<ItemMenu> obtenerItemsMenu(){
+        List<ItemMenu> lista = imemory.devolverListaItems();
+        return lista;
+        
     }
 }

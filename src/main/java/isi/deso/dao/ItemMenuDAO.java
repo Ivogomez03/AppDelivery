@@ -4,11 +4,15 @@
  */
 package isi.deso.dao;
 
+import isi.deso.model.Bebida;
 import isi.deso.model.ItemMenu;
+import isi.deso.model.Plato;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,4 +33,24 @@ public class ItemMenuDAO {
     public void eliminarItemMenu(){};
     public void actualizarItemMenu(){};
     public void buscarItemMenu(){};
+    
+    public List<ItemMenu> obtenerItems(){
+       List<Object> lista1 = new ArrayList<>();
+       List<Object> lista2 = new ArrayList<>();
+    
+       
+       try(Session session = HibernateUtil.getSessionFactory().openSession()){
+           
+           String hql = "FROM Bebida";
+           String hql1 = "FROM Plato";
+           
+           lista1 = session.createQuery(hql, Bebida.class).getResultList();
+           lista2 = session.createQuery(hql1, Plato.class).getResultList();
+           lista1.addAll(lista2);
+       }catch(Exception e){
+           e.printStackTrace();
+           throw new RuntimeException("Se ha producido un error al obtener los ItemsMenu", e);
+       }
+       return ;
+   }
 }
