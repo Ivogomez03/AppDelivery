@@ -22,6 +22,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     private SubPanelItemMenuCaracteristicas1 PanelBebida;
     private SubPanelItemMenuCaracteristicas2 PanelComida;
     private String TipoItem;
+    private String DesCategoria;
     private ItemMenuController controllerItem = new ItemMenuController();
     private CategoriaController controllerCategoria = new CategoriaController();
     DefaultListModel modeloLista = new DefaultListModel(); //El modelo maneja el almacenamiento de la lista.
@@ -65,6 +66,8 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         BotonAgregarCategoria = new javax.swing.JButton();
         DescripcionCategoriaNueva = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        labelCategoriaSeleccionada = new javax.swing.JLabel();
+        botonSeleccionarCategoria = new javax.swing.JButton();
 
         contenidoCaracteristicas1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -79,7 +82,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
             .addGap(0, 96, Short.MAX_VALUE)
         );
 
-        jLabel4.setText("Categorias");
+        jLabel4.setText("Categorias:");
 
         CrearItem.setText("Crear");
         CrearItem.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +155,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         });
 
         ListaCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ListaCategoria.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(ListaCategoria);
 
         BotonAgregarCategoria.setText("Agregar Categoria");
@@ -163,86 +167,84 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
 
         jLabel2.setText(" Categoria nueva");
 
+        labelCategoriaSeleccionada.setText("Ninguna seleccionada");
+
+        botonSeleccionarCategoria.setText("Seleccionar Categoria");
+        botonSeleccionarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSeleccionarCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Cerrar)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(NombreItem))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                            .addComponent(precioItem))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(280, 280, 280))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Cerrar)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(55, 55, 55)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(botonBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(botonPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(esVegano))))
+                            .addGap(23, 23, 23))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(NombreItem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(13, 13, 13)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1)
+                                        .addComponent(precioItem))))
+                            .addGap(18, 18, 18))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(botonBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(DescripcionCategoriaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BotonAgregarCategoria)))))
-                        .addGap(81, 81, 81)
-                        .addComponent(CrearItem))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                                .addComponent(labelCategoriaSeleccionada)
+                                .addGap(0, 53, Short.MAX_VALUE))
+                            .addComponent(botonSeleccionarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(esVegano))))
-                .addGap(22, 22, 22))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DescripcionCategoriaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(BotonAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel2))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CrearItem)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(botonPlato)
-                                    .addComponent(botonBebida))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(esVegano)
-                                .addGap(7, 7, 7)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DescripcionCategoriaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BotonAgregarCategoria))
-                        .addContainerGap(259, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -255,11 +257,34 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CrearItem)
-                            .addComponent(Cerrar))
-                        .addGap(21, 21, 21))))
+                            .addComponent(botonPlato)
+                            .addComponent(botonBebida)
+                            .addComponent(jLabel6))
+                        .addGap(13, 13, 13)
+                        .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(labelCategoriaSeleccionada)
+                            .addComponent(jLabel2))
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(DescripcionCategoriaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BotonAgregarCategoria)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(esVegano)
+                    .addComponent(botonSeleccionarCategoria))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CrearItem)
+                    .addComponent(Cerrar))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
       
@@ -283,7 +308,8 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
        PanelBebida = new SubPanelItemMenuCaracteristicas1();
        MostrarPanel(PanelBebida);
        TipoItem = "Bebida";
-       
+       DesCategoria = null;
+       labelCategoriaSeleccionada.setText("Ninguna seleccionada");
        cargarLista(TipoItem);
        
     }//GEN-LAST:event_botonBebidaActionPerformed
@@ -292,7 +318,8 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
        PanelComida = new SubPanelItemMenuCaracteristicas2();
        MostrarPanel(PanelComida);
        TipoItem = "Plato";
-       
+       DesCategoria = null;
+       labelCategoriaSeleccionada.setText("Ninguna seleccionada");
        cargarLista(TipoItem);
        
     }//GEN-LAST:event_botonPlatoActionPerformed
@@ -317,7 +344,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         boolean aptoCeliaco;
         double Calorias;
         
-        if (nombreItem.isEmpty() || descItem.isEmpty() ) {
+        if (nombreItem.isEmpty() || descItem.isEmpty() || DesCategoria == null ) {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.");
             return;
         }
@@ -369,8 +396,9 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
             }
         }
         
-        
         //controllerItem.CrearItem(nombreItem, descCategoria, precio, descItem, TipoItem, esVegano, gradAlcohol, tamanioBebida, aptoVegetariano, aptoCeliaco, Calorias);
+        JOptionPane.showMessageDialog(null, "Se a cargado con exito el item.");
+        return;
     }//GEN-LAST:event_CrearItemActionPerformed
 
     private void BotonAgregarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarCategoriaActionPerformed
@@ -385,6 +413,18 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         controllerCategoria.crearCategoria(descCategoria, TipoItem);
         cargarLista(TipoItem);
     }//GEN-LAST:event_BotonAgregarCategoriaActionPerformed
+
+    private void botonSeleccionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarCategoriaActionPerformed
+       String seleccion = ListaCategoria.getSelectedValue();
+       if(seleccion == null){
+           JOptionPane.showMessageDialog(null, "Debes seleccionar al menos una categoria para realizar la accion");
+           return;
+       }else{
+           DesCategoria = seleccion;
+           labelCategoriaSeleccionada.setText("se a seleccionado "+DesCategoria);
+           JOptionPane.showMessageDialog(null, "Se a seleccionado la categoria "+ DesCategoria);
+       }
+    }//GEN-LAST:event_botonSeleccionarCategoriaActionPerformed
 
     public String getNombreItem(){
         return this.NombreItem.getText();
@@ -439,6 +479,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     private javax.swing.ButtonGroup Tipo_ItemMenu;
     private javax.swing.JRadioButton botonBebida;
     private javax.swing.JRadioButton botonPlato;
+    private javax.swing.JButton botonSeleccionarCategoria;
     private javax.swing.JPanel contenidoCaracteristicas;
     private javax.swing.JPanel contenidoCaracteristicas1;
     private javax.swing.JTextArea descripcionItem;
@@ -451,6 +492,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelCategoriaSeleccionada;
     private javax.swing.JTextField precioItem;
     // End of variables declaration//GEN-END:variables
 }
