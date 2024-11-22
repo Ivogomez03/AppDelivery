@@ -39,8 +39,7 @@ public class Vendedor implements Observer{
     @JoinColumn(name = "id_coordenadas", referencedColumnName = "id_coordenadas")
     private Coordenada coordenadas;
     
-    @ManyToMany
-    @JoinTable(name = "vendedor_item", joinColumns = @JoinColumn(name = "id_vendedor"), inverseJoinColumns = @JoinColumn(name = "id_item_menu"))
+    @OneToMany(mappedBy = "vendedor")
     private List<ItemMenu> items; // todos los items que vende
     
     @OneToMany(mappedBy = "vendedor")
@@ -48,8 +47,8 @@ public class Vendedor implements Observer{
     
     public Vendedor(){}
     
-    public Vendedor(int id, String nombre, String apellido, String direccion,String dni, double lat, double lng, List items){
-        this.id = id;
+    public Vendedor(String nombre, String apellido, String direccion,String dni, double lat, double lng, List items){
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -186,6 +185,9 @@ public class Vendedor implements Observer{
     }    
     public  String getDireccion(){
         return this.direccion;
+    }
+    public String getDni(){
+        return this.dni;
     }
     public  Coordenada getCoordenada(){
         return this.coordenadas;

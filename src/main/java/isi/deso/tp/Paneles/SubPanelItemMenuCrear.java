@@ -25,14 +25,17 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     private String DesCategoria;
     private ItemMenuController controllerItem = new ItemMenuController();
     private CategoriaController controllerCategoria = new CategoriaController();
+    private String dniVendedor;
     DefaultListModel modeloLista = new DefaultListModel(); //El modelo maneja el almacenamiento de la lista.
     
     /**
      * Creates new form SubPanelVendedor
      */
-    public SubPanelItemMenuCrear() {
+    public SubPanelItemMenuCrear(String dni) {
         initComponents();
         ListaCategoria.setModel(modeloLista);//Se setea el modelo definido en la JLista
+        
+        this.dniVendedor = dni;
     }
 
     /**
@@ -235,9 +238,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
                                 .addComponent(jLabel2))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CrearItem)))
+                    .addComponent(CrearItem, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -265,10 +266,11 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
                         .addGap(13, 13, 13)
                         .addComponent(contenidoCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(labelCategoriaSeleccionada)
-                            .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(labelCategoriaSeleccionada)))
                         .addGap(4, 4, 4)
                         .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
@@ -467,6 +469,9 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         for(String categoria : lista){
            modeloLista.addElement(categoria);//Cada vez que se va a gregando un elemento la lista se va a actualizar automaticamente.
         }
+    }
+    public void setDniVendedor(String dniVend){
+        this.dniVendedor = dniVend;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

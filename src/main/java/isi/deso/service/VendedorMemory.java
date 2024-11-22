@@ -21,7 +21,7 @@ public class VendedorMemory {
     }
     
     public void agregarVendedor(VendedorDTO vendedorDTO){
-        Vendedor vendedorNew = new Vendedor(vendedorDTO.getId(),vendedorDTO.getNombre(),vendedorDTO.getApellido(), vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(),vendedorDTO.getItems());
+        Vendedor vendedorNew = new Vendedor(vendedorDTO.getNombre(),vendedorDTO.getApellido(), vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(),vendedorDTO.getItems());
         
         try{
             vendedorDAO.crearVendedor(vendedorNew);
@@ -34,5 +34,16 @@ public class VendedorMemory {
     public void listarVendedor(){};
     public void eliminarVendedor(){};
     public void actualizarVendedor(){};
-    public void buscarVendedor(){};
+    public Vendedor buscarVendedor(String dni){
+        Vendedor vendedor = vendedorDAO.buscarVendedor(dni);
+            
+            if(vendedor != null){
+                System.out.println("Vendedor con dni " + vendedor.getDni() + " encontrado");
+                return vendedor;
+            } else {
+                System.out.println("No se encontró el vendedor.");
+                return null;
+            }
+    
+    };
 }

@@ -38,6 +38,9 @@ public abstract class ItemMenu {
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     protected Categoria categoria;
     
+    @ManyToOne
+    protected Vendedor vendedor;
+    
     public abstract double peso(double p);
     public abstract boolean esComida();
     public abstract boolean esBebida();
@@ -46,12 +49,13 @@ public abstract class ItemMenu {
         
     }
     
-    public ItemMenu(String nombre, String descripcion, Categoria categoria, double precio, boolean aptoVegano){
+    public ItemMenu(String nombre, String descripcion, Categoria categoria, double precio, boolean aptoVegano,Vendedor vendedor){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.precio = precio;
         this.aptoVegano = aptoVegano;
+        this.vendedor = vendedor;
     }
 
     @Override
@@ -80,6 +84,9 @@ public abstract class ItemMenu {
     public boolean getAptoVegano(){
         return this.aptoVegano;
     }
+    public Vendedor getVendedor(){
+        return this.vendedor;
+    }
     public void setId(int id){
         this.id = id;
     }
@@ -96,5 +103,8 @@ public abstract class ItemMenu {
     
     public void setAptoVegano(boolean apto){
         this.aptoVegano = apto;
+    }
+    public void setVendedor(Vendedor vendedor){
+        this.vendedor = vendedor;
     }
 }

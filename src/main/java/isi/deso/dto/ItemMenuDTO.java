@@ -6,6 +6,7 @@ package isi.deso.dto;
 
 import isi.deso.model.Categoria;
 import isi.deso.model.TipoDeItem;
+import isi.deso.model.Vendedor;
 
 /**
  *
@@ -14,16 +15,17 @@ import isi.deso.model.TipoDeItem;
 public class ItemMenuDTO {
     
     private String nombre;
-    private String descripcionCategoria;
+    private Categoria categoria;
     private double precio;
     private String desc;
     private String tipo;
     private boolean esVegano;
     private double gradAlcohol;
-    private double tamanioBebida;
+    private int tamanioBebida;
     private boolean aptoVegetariano;
     private boolean aptoCeliaco;
-    double Calorias;
+    private int Calorias;
+    private Vendedor vendedor;
     
     public ItemMenuDTO(){};
     
@@ -31,8 +33,8 @@ public class ItemMenuDTO {
         return this.nombre;
     }
     
-    public String getCategoria(){
-        return this.descripcionCategoria;
+    public Categoria getCategoria(){
+        return this.categoria;
     }
     
     public double getPrecio(){
@@ -46,13 +48,41 @@ public class ItemMenuDTO {
     public String getTipo(){
         return this.tipo;
     }
+    public Vendedor getVendedor(){
+        return this.vendedor;
+    }
     
+    public boolean getEsVegano() {
+        return this.esVegano;
+    }
+
+    public double getGradAlcohol() {
+        return this.gradAlcohol;
+    }
+
+    public int getTamanioBebida() {
+        return this.tamanioBebida;
+    }
+
+    public boolean getAptoVegetariano() {
+        return this.aptoVegetariano;
+    }
+
+    public boolean getAptoCeliaco() {
+        return this.aptoCeliaco;
+    }
+    
+    public int getCalorias(){
+       return this.Calorias;
+    }
+    
+ 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setDescripcionCategoria(String descripcionCategoria) {
-        this.descripcionCategoria = descripcionCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public void setPrecio(double precio) {
@@ -75,7 +105,7 @@ public class ItemMenuDTO {
         this.gradAlcohol = gradAlcohol;
     }
 
-    public void setTamanioBebida(double tamanioBebida) {
+    public void setTamanioBebida(int tamanioBebida) {
         this.tamanioBebida = tamanioBebida;
     }
 
@@ -87,7 +117,10 @@ public class ItemMenuDTO {
         this.aptoCeliaco = aptoCeliaco;
     }
     
-    public void setCalorias(double calorias){
+    public void setCalorias(int calorias){
         this.Calorias = calorias;
+    }
+    public void setVendedor(Vendedor v){
+        this.vendedor = v;
     }
 }

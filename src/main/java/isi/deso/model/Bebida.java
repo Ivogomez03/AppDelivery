@@ -25,9 +25,9 @@ public class Bebida extends ItemMenu {
     super();
     }
     
-    public Bebida(String nombre, String descripcion, Categoria categoria, double precio, int tamanio, double graduacionAlcohol, boolean aptoVegano){
+    public Bebida(String nombre, String descripcion, Categoria categoria, double precio, int tamanio, double graduacionAlcohol, boolean aptoVegano,Vendedor vendedor){
        
-        super(nombre, descripcion, categoria, precio, aptoVegano);
+        super(nombre, descripcion, categoria, precio, aptoVegano,vendedor);
         this.tamanio = tamanio;
         this.graduacionAlcohol = graduacionAlcohol;
     }

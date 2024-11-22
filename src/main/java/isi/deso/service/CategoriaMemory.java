@@ -57,4 +57,17 @@ public class CategoriaMemory {
         }
         return null;
     }
+    
+    public Categoria buscarCategoria(String desc){
+        Categoria categoria = categoriaDAO.buscarCategoria(desc);
+            
+            if(categoria != null){
+                System.out.println("Categoria con " + categoria.getDesc() + " encontrado");
+                return categoria;
+            } else {
+                System.out.println("No se encontró la categoria.");
+                return null;
+            }
+    
+    };
 }

@@ -5,7 +5,6 @@
 package isi.deso.dao;
 
 import isi.deso.model.Categoria;
-import isi.deso.model.Cliente;
 import isi.deso.model.TipoDeItem;
 import jakarta.persistence.PersistenceException;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
-
+import jakarta.persistence.NoResultException;
 /**
  *
  * @author Fran Balsamo
@@ -35,6 +34,19 @@ public class CategoriaDAO {
            throw new PersistenceException("Error al agregar la categoria");
        }       
    }
+   public Categoria buscarCategoria(String descripcion){
+       try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String jpql = "FROM Categoria c WHERE c.descripcion = :descripcion";
+            Query<Categoria> query = session.createQuery(jpql, Categoria.class);
+            query.setParameter("descripcion", descripcion);
+            return query.uniqueResult();
+        } catch (NoResultException e) {
+            System.out.println("No se encontró ninguna categoria con la descripcion: " + descripcion);
+            return null; // Devuelve null si no se encuentra el categoria
+            }
+
+    }
+   
    public List<String> obtenerCategorias(TipoDeItem tipoItem){
        if(tipoItem.equals(TipoDeItem.PLATO)){
            return obtenerPlatos();

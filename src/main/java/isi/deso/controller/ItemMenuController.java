@@ -5,9 +5,13 @@
 package isi.deso.controller;
 
 import isi.deso.dto.ItemMenuDTO;
+import isi.deso.model.Categoria;
 import isi.deso.model.ItemMenu;
+import isi.deso.service.CategoriaMemory;
 import isi.deso.service.ItemMenuMemory;
+import isi.deso.service.VendedorMemory;
 import java.util.List;
+
 
 /**
  *
@@ -16,16 +20,17 @@ import java.util.List;
 public class ItemMenuController {
     private ItemMenuDTO itemMenuDTO;
     private ItemMenuMemory imemory = new ItemMenuMemory();
-    
+    private VendedorMemory vmemory = new VendedorMemory();
+    private CategoriaMemory cmemory = new CategoriaMemory();
     public ItemMenuController(){
         itemMenuDTO = new ItemMenuDTO();
     }
     
-    public void CrearItem(String nombre, String descripcionCategoria, double precio, String desc, String tipo, boolean esVegano, double gradAlcohol, double tamanioBebida, boolean aptoVegetariano, boolean aptoCeliaco, double Calorias){
-        
+    public void CrearItem(String nombre, String descripcionCategoria, double precio, String desc, String tipo, boolean esVegano, double gradAlcohol, int tamanioBebida, boolean aptoVegetariano, boolean aptoCeliaco, int Calorias,String dniVendedor){
+        Categoria categoria = cmemory.buscarCategoria(descripcionCategoria);
         
         itemMenuDTO.setNombre(nombre);
-        itemMenuDTO.setDescripcionCategoria(descripcionCategoria);
+        itemMenuDTO.setCategoria(categoria);
         itemMenuDTO.setPrecio(precio);
         itemMenuDTO.setDesc(desc);
         itemMenuDTO.setTipo(tipo);
@@ -35,6 +40,7 @@ public class ItemMenuController {
         itemMenuDTO.setEsVegano(esVegano);
         itemMenuDTO.setAptoCeliaco(aptoCeliaco);
         itemMenuDTO.setAptoVegetariano(aptoVegetariano);
+        itemMenuDTO.setVendedor(vmemory.buscarVendedor(dniVendedor));
         
         imemory.agregarItem(itemMenuDTO);
     }

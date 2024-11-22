@@ -4,12 +4,14 @@ package isi.deso.dao;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
+
 import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
 import util.HibernateUtil;
 import isi.deso.model.Vendedor;
+import jakarta.persistence.NoResultException;
 import org.hibernate.Transaction;
-import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -32,5 +34,18 @@ public class VendedorDAO {
     };
     public  void eliminarVendedor(){};
     public  void actualizarVendedor(){};
-    public  void buscarVendedor(){};
-}
+    public  Vendedor buscarVendedor(String dni){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String jpql = "FROM Vendedor v WHERE v.dni = :dni";
+            Query<Vendedor> query = session.createQuery(jpql, Vendedor.class);
+            query.setParameter("dni", dni);
+            return query.uniqueResult();
+        } catch (NoResultException e) {
+            System.out.println("No se encontró ningún vendedor con el dni: " + dni);
+            return null; // Devuelve null si no se encuentra el vendedor
+            }
+
+        }
+    
+    };
+

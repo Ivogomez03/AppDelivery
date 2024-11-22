@@ -122,7 +122,7 @@ public class PanelItemMenu extends javax.swing.JPanel {
     }
     
     private void BCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCrearActionPerformed
-        SubPanelItemMenuCrear p = new SubPanelItemMenuCrear();
+        SubPanelItemMenuCrear p = new SubPanelItemMenuCrear(null);
         MostrarPanel(p);
     }//GEN-LAST:event_BCrearActionPerformed
 

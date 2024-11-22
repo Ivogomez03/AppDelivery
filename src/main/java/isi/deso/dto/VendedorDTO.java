@@ -16,7 +16,6 @@ import java.util.List;
 
 
 public class VendedorDTO {
-    private int id;
     private String nombre;
     private String apellido;
     private String direccion;  
@@ -25,9 +24,7 @@ public class VendedorDTO {
     private double latitud;
     private List<ItemMenu> items;
     
-    public int getId(){
-        return this.id;
-    }
+
     public String getNombre(){
         return this.nombre;
     }

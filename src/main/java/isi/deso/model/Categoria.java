@@ -36,4 +36,8 @@ public class Categoria {
     public String toString(){
         return this.id + " " + this.descripcion + " " + this.tipo;
     }
+    
+    public String getDesc(){
+        return this.descripcion;
+    }
 }

@@ -8,8 +8,10 @@ import isi.deso.controller.ItemMenuController;
 import isi.deso.controller.VendedorController;
 import isi.deso.model.ItemMenu;
 import isi.deso.service.ValidationMemory;
+import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -215,7 +217,10 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
     private void ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ApellidoActionPerformed
-
+    private void MostrarPanel(JPanel p){
+        p.setSize(765,527);
+        p.setLocation(0,0);
+    }
     private void CrearVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearVendedorActionPerformed
         String nombre = getNombre();
         String apellido = getApellido();
@@ -249,7 +254,13 @@ public class SubPanelVendedorCrear extends javax.swing.JPanel {
         jTable2.setVisible(true);
         
         vendedorController.crearVendedor(nombre, apellido, dni, direccion, latitud, longitud);
+                                            
+        
+    
         JOptionPane.showMessageDialog(null, "El vendedor se a creado con exito");
+        
+        SubPanelItemMenuCrear p = new SubPanelItemMenuCrear(dni);
+        MostrarPanel(p);
     }//GEN-LAST:event_CrearVendedorActionPerformed
     private void mostrarItems(List<ItemMenu> listaItems) {
         // Obtener el modelo de la tabla

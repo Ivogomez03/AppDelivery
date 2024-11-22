@@ -35,22 +35,21 @@ public class ItemMenuDAO {
     public void buscarItemMenu(){};
     
     public List<ItemMenu> obtenerItems(){
-       List<Object> lista1 = new ArrayList<>();
-       List<Object> lista2 = new ArrayList<>();
+       List<ItemMenu> lista = new ArrayList<>();
+
     
        
        try(Session session = HibernateUtil.getSessionFactory().openSession()){
            
-           String hql = "FROM Bebida";
-           String hql1 = "FROM Plato";
+           String hql = "FROM ItemMenu";
+ 
            
-           lista1 = session.createQuery(hql, Bebida.class).getResultList();
-           lista2 = session.createQuery(hql1, Plato.class).getResultList();
-           lista1.addAll(lista2);
+           lista = session.createQuery(hql, ItemMenu.class).getResultList();
+
        }catch(Exception e){
            e.printStackTrace();
            throw new RuntimeException("Se ha producido un error al obtener los ItemsMenu", e);
        }
-       return ;
+       return lista;
    }
 }
