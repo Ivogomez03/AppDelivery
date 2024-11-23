@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 import isi.deso.model.Vendedor;
 import jakarta.persistence.NoResultException;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -34,6 +36,7 @@ public class VendedorDAO {
     };
     public  void eliminarVendedor(){};
     public  void actualizarVendedor(){};
+    
     public  Vendedor buscarVendedor(String dni){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String jpql = "FROM Vendedor v WHERE v.dni = :dni";
@@ -47,5 +50,18 @@ public class VendedorDAO {
 
         }
     
-    };
+    public List<Vendedor> mostrarTodosVendedores(){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Realiza la consulta HQL para obtener todos los vendedores
+            String hql = "FROM Vendedor";
+            Query<Vendedor> query = session.createQuery(hql, Vendedor.class);
+
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+            } // Devuelve una lista vacía en caso de error
+        }
+    }
+    
 

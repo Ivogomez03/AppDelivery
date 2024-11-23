@@ -4,12 +4,19 @@
  */
 package isi.deso.tp.Paneles;
 
+import isi.deso.controller.ClienteController;
+import isi.deso.model.Cliente;
+import isi.deso.model.Coordenada;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Francisco
  */
 public class SubPanelClienteBuscar extends javax.swing.JPanel {
-
+    ClienteController ccontroller = new ClienteController();
     /**
      * Creates new form SubPanelVendedor
      */
@@ -26,15 +33,16 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        IdentificacionVendedor = new javax.swing.JTextField();
+        IdentificadorCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        MostrarTodosClientes = new javax.swing.JButton();
+        BuscarCliente = new javax.swing.JButton();
 
-        IdentificacionVendedor.addActionListener(new java.awt.event.ActionListener() {
+        IdentificadorCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdentificacionVendedorActionPerformed(evt);
+                IdentificadorClienteActionPerformed(evt);
             }
         });
 
@@ -45,14 +53,14 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Identificacion", "Email", "Direccion", "Cooredenadas"
+                "Identificacion", "CUIT", "Email", "Direccion", "Coordenadas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -69,9 +77,22 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton1.setText("Mostrar todos");
+        MostrarTodosClientes.setText("Mostrar todos");
+        MostrarTodosClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarTodosClientesActionPerformed(evt);
+            }
+        });
+
+        BuscarCliente.setText("Buscar");
+        BuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -84,9 +105,11 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(IdentificacionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(IdentificadorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BuscarCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(MostrarTodosClientes)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -95,22 +118,66 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(IdentificacionVendedor)
-                    .addComponent(jButton1))
+                    .addComponent(IdentificadorCliente)
+                    .addComponent(MostrarTodosClientes)
+                    .addComponent(BuscarCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IdentificacionVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdentificacionVendedorActionPerformed
+    private void IdentificadorClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdentificadorClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IdentificacionVendedorActionPerformed
+    }//GEN-LAST:event_IdentificadorClienteActionPerformed
+
+    private void BuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarClienteActionPerformed
+        String cuitCliente = IdentificadorCliente.getText();
+            Cliente cliente = ccontroller.buscarCliente(cuitCliente);
+            
+            if(cliente == null){
+              JOptionPane.showMessageDialog(null, "No existe cliente con el CUIT introducido");
+            } else {
+                DefaultTableModel model = new DefaultTableModel(new Object[]{"Identificacion", "CUIT", "Email", "Direccion", "Coordenadas"}, 0);
+                int id = cliente.getId();
+                String CUIT = cliente.getCuit();
+                String direccion = cliente.getDireccion();
+                String email = cliente.getEmail();
+                Coordenada coordenadas = cliente.getCoordenada();
+                String coordtext = "(" + coordenadas.getLat() + ", " + coordenadas.getLng() + ")";
+                model.addRow(new Object[]{id, CUIT, email, direccion, coordtext});
+                
+                jTable1.setModel(model);
+            }
+    }//GEN-LAST:event_BuscarClienteActionPerformed
+
+    private void MostrarTodosClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarTodosClientesActionPerformed
+        List<Cliente> LCliente = ccontroller.mostrarTodosClientes();
+        
+        if(LCliente == null) {
+           JOptionPane.showMessageDialog(null, "No existen vendedores cargados en la BD");
+        } else {
+            DefaultTableModel model = new DefaultTableModel(new Object[]{"Identificacion", "CUIT", "Email", "Direccion", "Coordenadas"}, 0);
+            
+            for(Cliente cliente : LCliente) {
+                int id = cliente.getId();
+                String CUIT = cliente.getCuit();
+                String direccion = cliente.getDireccion();
+                String email = cliente.getEmail();
+                Coordenada coordenadas = cliente.getCoordenada();
+                String coordtext = "(" + coordenadas.getLat() + ", " + coordenadas.getLng() + ")";
+                model.addRow(new Object[]{id, CUIT, email, direccion, coordtext});
+            }
+            
+            jTable1.setModel(model);
+        }
+    }//GEN-LAST:event_MostrarTodosClientesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField IdentificacionVendedor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BuscarCliente;
+    private javax.swing.JTextField IdentificadorCliente;
+    private javax.swing.JButton MostrarTodosClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

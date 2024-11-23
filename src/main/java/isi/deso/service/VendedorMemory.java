@@ -4,6 +4,7 @@ package isi.deso.service;
 import isi.deso.dao.VendedorDAO;
 import isi.deso.dto.VendedorDTO;
 import isi.deso.model.Vendedor;
+import java.util.List;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -34,6 +35,7 @@ public class VendedorMemory {
     public void listarVendedor(){};
     public void eliminarVendedor(){};
     public void actualizarVendedor(){};
+    
     public Vendedor buscarVendedor(String dni){
         Vendedor vendedor = vendedorDAO.buscarVendedor(dni);
             
@@ -45,5 +47,15 @@ public class VendedorMemory {
                 return null;
             }
     
-    };
+    }
+    
+    public List<Vendedor> buscarTodosVendedores(){
+        List<Vendedor> LVendedor = vendedorDAO.mostrarTodosVendedores();
+        
+        if(!LVendedor.isEmpty()){
+            return LVendedor;
+        } else {
+            return null;
+        }
+    }
 }

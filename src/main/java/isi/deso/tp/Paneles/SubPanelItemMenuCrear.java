@@ -35,7 +35,11 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         initComponents();
         ListaCategoria.setModel(modeloLista);//Se setea el modelo definido en la JLista
         
-        this.dniVendedor = dni;
+        if(dni.equals("null")){
+            this.dniVendedor = null;
+        } else{
+         this.dniVendedor = dni;   
+        }
     }
 
     /**
@@ -341,10 +345,12 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
         boolean esVegano = getVegano();
         String TipoItem = getTipo();
         double gradAlcohol;
-        double tamanioBebida;
+        int tamanioBebida;
         boolean aptoVegetariano;
         boolean aptoCeliaco;
-        double Calorias;
+        int Calorias;
+        String descCategoria = ListaCategoria.getSelectedValue();
+        String dniVendedor = getDniVendedor();
         
         if (nombreItem.isEmpty() || descItem.isEmpty() || DesCategoria == null ) {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.");
@@ -386,7 +392,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
             return;
         }
         else if(botonBebida.isSelected()){
-            if (tamanioBebida == 0.0 || tamanioBebida < 0) {
+            if (tamanioBebida <= 0) {
             JOptionPane.showMessageDialog(null, "El tamanio debe ser valido.");
             return;
             }   
@@ -398,7 +404,7 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
             }
         }
         
-        //controllerItem.CrearItem(nombreItem, descCategoria, precio, descItem, TipoItem, esVegano, gradAlcohol, tamanioBebida, aptoVegetariano, aptoCeliaco, Calorias);
+        controllerItem.CrearItem(nombreItem, descCategoria, precio, descItem, TipoItem, esVegano, gradAlcohol, tamanioBebida, aptoVegetariano, aptoCeliaco, Calorias, dniVendedor);
         JOptionPane.showMessageDialog(null, "Se a cargado con exito el item.");
         return;
     }//GEN-LAST:event_CrearItemActionPerformed
@@ -472,6 +478,10 @@ public class SubPanelItemMenuCrear extends javax.swing.JPanel {
     }
     public void setDniVendedor(String dniVend){
         this.dniVendedor = dniVend;
+    }
+    
+    public String getDniVendedor(){
+        return dniVendedor;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

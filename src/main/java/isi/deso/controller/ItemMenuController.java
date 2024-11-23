@@ -26,7 +26,7 @@ public class ItemMenuController {
         itemMenuDTO = new ItemMenuDTO();
     }
     
-    public void CrearItem(String nombre, String descripcionCategoria, double precio, String desc, String tipo, boolean esVegano, double gradAlcohol, int tamanioBebida, boolean aptoVegetariano, boolean aptoCeliaco, int Calorias,String dniVendedor){
+    public void CrearItem(String nombre, String descripcionCategoria, double precio, String desc, String tipo, boolean esVegano, double gradAlcohol, int tamanioBebida, boolean aptoVegetariano, boolean aptoCeliaco, int Calorias, String dniVendedor){
         Categoria categoria = cmemory.buscarCategoria(descripcionCategoria);
         
         itemMenuDTO.setNombre(nombre);

@@ -34,11 +34,12 @@ public abstract class ItemMenu {
     @Column(name = "aptoVegano")
     protected boolean aptoVegano;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     protected Categoria categoria;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_vendedor", referencedColumnName = "id_vendedor")
     protected Vendedor vendedor;
     
     public abstract double peso(double p);

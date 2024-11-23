@@ -181,7 +181,7 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
         }
         
         clienteController.crearCliente(direccion, email, latitud, longitud, CUIT);
-        JOptionPane.showMessageDialog(null, "El cliente se a creado con exito");
+        JOptionPane.showMessageDialog(null, "El cliente se ha creado con exito");
     }//GEN-LAST:event_CrearClienteActionPerformed
 
     public String getCuit(){

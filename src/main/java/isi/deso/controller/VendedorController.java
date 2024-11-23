@@ -5,40 +5,32 @@
 package isi.deso.controller;
 
 import isi.deso.dto.VendedorDTO;
+import isi.deso.model.Vendedor;
 import isi.deso.service.VendedorMemory;
 import isi.deso.tp.Paneles.PanelVendedor;
 import isi.deso.tp.Paneles.SubPanelVendedorBuscar;
 import isi.deso.tp.Paneles.SubPanelVendedorCrear;
+import java.util.List;
 
 /**
  *
  * @author ivogo
  */
 public class VendedorController {
-    private PanelVendedor panelVendedor;
-    private SubPanelVendedorBuscar buscarPanel;
-    private SubPanelVendedorCrear crearPanel;
+   
     private VendedorDTO vendedorDTO;
+    private VendedorMemory vmemory;
     
     public VendedorController(){
         this.vendedorDTO = new VendedorDTO();
+        this.vmemory = new VendedorMemory();
     }
     
     public VendedorController(PanelVendedor panelVendedor, SubPanelVendedorBuscar buscarPanel, SubPanelVendedorCrear crearPanel){
-        this.panelVendedor = panelVendedor;
-        this.buscarPanel = buscarPanel;
-        this.crearPanel = crearPanel;
         this.vendedorDTO = new VendedorDTO();
-        
-        initListeners();
-    }
-
-    private void initListeners() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     public void crearVendedor(String nombre, String apellido, String dni, String direccion, double latitud, double longitud){
-        VendedorMemory vmemory = new VendedorMemory();
         
         vendedorDTO.setNombre(nombre);
         vendedorDTO.setApellido(apellido);
@@ -48,5 +40,13 @@ public class VendedorController {
         vendedorDTO.setLongitud(longitud);
         
         vmemory.agregarVendedor(vendedorDTO);
+    }
+    
+    public Vendedor buscarVendedor(String dni){
+        return vmemory.buscarVendedor(dni);
+    }
+    
+    public List<Vendedor> mostrarTodosVendedores(){
+        return vmemory.buscarTodosVendedores();
     }
 }

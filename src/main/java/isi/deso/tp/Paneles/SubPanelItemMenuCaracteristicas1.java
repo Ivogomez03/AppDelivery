@@ -32,6 +32,7 @@ public class SubPanelItemMenuCaracteristicas1 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         Tamanio = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         bebidaAlcoholica.setText("Bebida Alcoholica");
         bebidaAlcoholica.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +51,8 @@ public class SubPanelItemMenuCaracteristicas1 extends javax.swing.JPanel {
         jLabel1.setText("Graduacion");
 
         jLabel2.setText("Tamanio");
+
+        jLabel3.setText("ml");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -70,7 +73,9 @@ public class SubPanelItemMenuCaracteristicas1 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Graduacion, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(Tamanio))
-                .addGap(50, 50, 50))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(7, 7, 7))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,7 +88,8 @@ public class SubPanelItemMenuCaracteristicas1 extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Tamanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -114,11 +120,11 @@ public class SubPanelItemMenuCaracteristicas1 extends javax.swing.JPanel {
             return 0.0;
         }
     }
-    public double getTamanio(){
+    public int getTamanio(){
         try{
-            return Double.parseDouble(Tamanio.getText());
+            return Integer.parseInt(Tamanio.getText());
         } catch (NumberFormatException e){
-            return 0.0;
+            return 0;
         }
     }
     public boolean getAlcoholica(){
@@ -131,6 +137,7 @@ public class SubPanelItemMenuCaracteristicas1 extends javax.swing.JPanel {
     private javax.swing.JCheckBox bebidaAlcoholica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

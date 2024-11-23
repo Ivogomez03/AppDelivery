@@ -5,10 +5,12 @@
 package isi.deso.controller;
 
 import isi.deso.dto.ClienteDTO;
+import isi.deso.model.Cliente;
 import isi.deso.service.ClienteMemory;
 import isi.deso.tp.Paneles.PanelCliente;
 import isi.deso.tp.Paneles.SubPanelClienteBuscar;
 import isi.deso.tp.Paneles.SubPanelClienteCrear;
+import java.util.List;
 
 /**
  *
@@ -19,9 +21,11 @@ public class ClienteController {
     private SubPanelClienteBuscar buscarPanel;
     private SubPanelClienteCrear crearPanel;
     private ClienteDTO clienteDTO;
+    private ClienteMemory cmemory;
     
     public ClienteController(){
         this.clienteDTO = new ClienteDTO();
+        this.cmemory = new ClienteMemory();
         }
     
     public ClienteController(PanelCliente panelCliente, SubPanelClienteBuscar buscarPanel, SubPanelClienteCrear crearPanel){
@@ -39,7 +43,6 @@ public class ClienteController {
     }
     
     public void crearCliente(String direccion, String email, double latitud, double longitud, String CUIT){
-        ClienteMemory cmemory = new ClienteMemory();
         
         clienteDTO.setDireccion(direccion);
         clienteDTO.setEmail(email);
@@ -49,5 +52,13 @@ public class ClienteController {
         
         cmemory.agregarCliente(clienteDTO);
         
+    }
+    
+    public Cliente buscarCliente(String CUIT){
+        return cmemory.buscarCliente(CUIT);
+    }
+    
+    public List<Cliente> mostrarTodosClientes(){
+        return cmemory.buscarTodosClientes();
     }
 }

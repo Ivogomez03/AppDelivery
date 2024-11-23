@@ -7,6 +7,7 @@ package isi.deso.service;
 import isi.deso.dao.ClienteDAO;
 import isi.deso.dto.ClienteDTO;
 import isi.deso.model.Cliente;
+import java.util.List;
 
 /**
  *
@@ -46,5 +47,15 @@ public class ClienteMemory{
                 return null;
             }
         
+    }
+    
+    public List<Cliente> buscarTodosClientes(){
+        List<Cliente> LCliente = clienteDAO.mostrarTodosClientes();
+        
+        if(!LCliente.isEmpty()){
+            return LCliente;
+        } else {
+            return null;
+        }
     }
 }

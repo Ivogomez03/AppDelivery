@@ -7,6 +7,8 @@ package isi.deso.dao;
 import isi.deso.model.Cliente;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
@@ -46,4 +48,17 @@ public class ClienteDAO {
         }
         
     }
+    
+    public List<Cliente> mostrarTodosClientes(){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Realiza la consulta HQL para obtener todos los vendedores
+            String hql = "FROM Cliente";
+            Query<Cliente> query = session.createQuery(hql, Cliente.class);
+
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+            } // Devuelve una lista vacía en caso de error
+        }
 }

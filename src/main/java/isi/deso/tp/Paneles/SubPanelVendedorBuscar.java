@@ -4,12 +4,21 @@
  */
 package isi.deso.tp.Paneles;
 
+import isi.deso.controller.VendedorController;
+import isi.deso.model.Coordenada;
+import isi.deso.model.Vendedor;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Francisco
  */
 public class SubPanelVendedorBuscar extends javax.swing.JPanel {
 
+    VendedorController vcontroller = new VendedorController();
+    Vendedor vendedor = new Vendedor();
     /**
      * Creates new form SubPanelVendedor
      */
@@ -30,7 +39,8 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        MostrarTodosVendedores = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
 
         IdentificacionVendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +81,19 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jButton1.setText("Mostrar todos");
+        MostrarTodosVendedores.setText("Mostrar todos");
+        MostrarTodosVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarTodosVendedoresActionPerformed(evt);
+            }
+        });
+
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,8 +107,10 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(IdentificacionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Buscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(MostrarTodosVendedores)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -96,7 +120,8 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(IdentificacionVendedor)
-                    .addComponent(jButton1))
+                    .addComponent(MostrarTodosVendedores)
+                    .addComponent(Buscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -107,10 +132,52 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_IdentificacionVendedorActionPerformed
 
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+            String dniVendedor = IdentificacionVendedor.getText();
+            Vendedor vendedor = vcontroller.buscarVendedor(dniVendedor);
+            
+            if(vendedor == null){
+              JOptionPane.showMessageDialog(null, "No existe vendedor con el DNI introducido");
+            } else {
+                DefaultTableModel model = new DefaultTableModel(new Object[]{"Id", "Nombre", "Direccion", "Coordenadas"}, 0);
+                int id = vendedor.getId();
+                String nombre = vendedor.getNombre();
+                String direccion = vendedor.getDireccion();
+                Coordenada coordenadas = vendedor.getCoordenada();
+                String coordtext = "(" + coordenadas.getLat() + ", " + coordenadas.getLng() + ")";
+                model.addRow(new Object[]{id, nombre, direccion, coordtext});
+                
+                jTable1.setModel(model);
+            }
+            
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void MostrarTodosVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarTodosVendedoresActionPerformed
+        List<Vendedor> LVendedor = vcontroller.mostrarTodosVendedores();
+        
+        if(LVendedor == null) {
+           JOptionPane.showMessageDialog(null, "No existen vendedores cargados en la BD");
+        } else {
+            DefaultTableModel model = new DefaultTableModel(new Object[]{"Id", "Nombre", "Direccion", "Coordenadas"}, 0);
+            
+            for(Vendedor vendedor : LVendedor) {
+                int id = vendedor.getId();
+                String nombre = vendedor.getNombre();
+                String direccion = vendedor.getDireccion();
+                Coordenada coordenadas = vendedor.getCoordenada();
+                String coordtext = "(" + coordenadas.getLat() + ", " + coordenadas.getLng() + ")";
+                model.addRow(new Object[]{id, nombre, direccion, coordtext});
+            }
+            
+            jTable1.setModel(model);
+        }
+    }//GEN-LAST:event_MostrarTodosVendedoresActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Buscar;
     private javax.swing.JTextField IdentificacionVendedor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton MostrarTodosVendedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

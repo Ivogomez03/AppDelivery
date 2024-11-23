@@ -95,11 +95,11 @@ public class SubPanelItemMenuCaracteristicas2 extends javax.swing.JPanel {
     public boolean getAptoVegetariano(){
         return AptoVegetariano.isSelected();
     }
-    public double getCalorias(){
+    public int getCalorias(){
         try{
-            return Double.parseDouble(Calorias.getText());
+            return Integer.parseInt(Calorias.getText());
         } catch (NumberFormatException e){
-            return 0.0;
+            return 0;
         }
     }
     

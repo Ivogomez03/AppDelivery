@@ -106,17 +106,6 @@ public class Vendedor implements Observer{
         }
     }
     
-    /*
-    public void nuevoPlato(ItemMenu nuevoItem){
-        if (this.items == null){
-            items = new ArrayList();
-            //agregar el nuevo item
-        }
-        else {
-            //agregar el nuevo item
-        }
-    }
-    */
     public ArrayList<Pedido> buscarPorEstado(Estado e){
         ArrayList<Pedido> pedidosPorEstado = new ArrayList();
         for(int i=0; i<this.pedidosRecibidos.size();i++){

@@ -28,5 +28,5 @@ public class PlatoDAO {
           e.printStackTrace();
         throw new PersistenceException("Error al agregar el Plato", e);
       }
-    };
+    }
 }
