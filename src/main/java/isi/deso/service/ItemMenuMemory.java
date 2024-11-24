@@ -15,6 +15,7 @@ import isi.deso.model.Plato;
 import isi.deso.model.Vendedor;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 /**
  *
  * @author ivogo
@@ -44,5 +45,9 @@ public class ItemMenuMemory {
     public List<ItemMenu> devolverListaItems(){
         List<ItemMenu> lista = itemDAO.obtenerItems();
         return lista;
+    }
+    
+    public List<Plato> obtenerPlatos(String dniVendedor){
+        return platoDAO.obtenerPlatos(dniVendedor);
     }
 }

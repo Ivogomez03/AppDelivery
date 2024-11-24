@@ -48,7 +48,7 @@
                           </Group>
                           <Component id="Longitud" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="266" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="267" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -83,12 +83,12 @@
                   <Component id="Latitud" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Longitud" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="CrearVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Cerrar" alignment="3" min="-2" max="-2" attributes="0"/>

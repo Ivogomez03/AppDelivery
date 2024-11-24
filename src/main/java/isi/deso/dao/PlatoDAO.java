@@ -6,6 +6,7 @@ package isi.deso.dao;
 
 import isi.deso.model.Plato;
 import jakarta.persistence.PersistenceException;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -28,5 +29,18 @@ public class PlatoDAO {
           e.printStackTrace();
         throw new PersistenceException("Error al agregar el Plato", e);
       }
+    }
+    
+    public List<Plato> obtenerPlatos(String dniVendedor){
+        String hql = "FROM ItemMenu im JOIN Plato p ON im.id = p.id"
+                + " JOIN Vendedor v ON im.vendedor.id = v.id"
+                + " WHERE v.dni = :DNI ";
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            List<Plato> listaPlatos = session.createQuery(hql, Plato.class).setParameter("DNI", dniVendedor).getResultList();
+            return listaPlatos;
+        }catch(Exception e){
+           e.printStackTrace();
+           throw new RuntimeException("Se ha producido un error al obtener los Platos", e);
+       }    
     }
 }

@@ -4,12 +4,23 @@
  */
 package isi.deso.tp.Paneles;
 
+import isi.deso.controller.PedidoController;
+import isi.deso.controller.ValidationController;
+import isi.deso.model.Plato;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Francisco
  */
 public class SubPanelPedidoCrear extends javax.swing.JPanel {
-
+    PedidoController controllerpedido = new PedidoController();
+    ValidationController controllervalidation = new ValidationController();
     /**
      * Creates new form SubPanelVendedor
      */
@@ -26,51 +37,59 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CrearVendedor = new javax.swing.JButton();
-        Cerrar = new javax.swing.JButton();
+        BCrear = new javax.swing.JButton();
+        BCerrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        TextIdVendedor = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        TextoCuit = new javax.swing.JTextField();
+        TextoDni = new javax.swing.JTextField();
+        CatalogoItems = new javax.swing.JTabbedPane();
+        PanelPlatos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaPlatos = new javax.swing.JTable();
+        PanelBebidas = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TablaPlatos1 = new javax.swing.JTable();
+        PanelBebidasSinAlcohol = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        TablaPlatos2 = new javax.swing.JTable();
+        PanlSinTacc = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        TablaPlatos3 = new javax.swing.JTable();
+        BotonGenerarItem = new javax.swing.JButton();
 
-        CrearVendedor.setText("Crear");
+        BCrear.setText("Crear");
 
-        Cerrar.setText("Cerrar");
-        Cerrar.addActionListener(new java.awt.event.ActionListener() {
+        BCerrar.setText("Cerrar");
+        BCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CerrarActionPerformed(evt);
+                BCerrarActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("Id Cliente");
+        jLabel8.setText("Cuit Cliente");
 
-        jLabel9.setText("Id Vendedor");
+        jLabel9.setText("Dni Vendedor");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TextoCuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TextoCuitActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Generar Items");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaPlatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null,  new Boolean(false)}
+
             },
             new String [] {
-                "Tipo", "Nombre", "Descripcion", "Precio", "Seleccionar"
+                "Categoria", "Nombre", "Descripcion", "Precio", "inf"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -81,14 +100,186 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane1.setViewportView(TablaPlatos);
+        if (TablaPlatos.getColumnModel().getColumnCount() > 0) {
+            TablaPlatos.getColumnModel().getColumn(0).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(1).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(2).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(3).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        javax.swing.GroupLayout PanelPlatosLayout = new javax.swing.GroupLayout(PanelPlatos);
+        PanelPlatos.setLayout(PanelPlatosLayout);
+        PanelPlatosLayout.setHorizontalGroup(
+            PanelPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPlatosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelPlatosLayout.setVerticalGroup(
+            PanelPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPlatosLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        CatalogoItems.addTab("PLATOS", PanelPlatos);
+
+        TablaPlatos1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Descripcion", "Precio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(TablaPlatos1);
+        if (TablaPlatos1.getColumnModel().getColumnCount() > 0) {
+            TablaPlatos1.getColumnModel().getColumn(0).setResizable(false);
+            TablaPlatos1.getColumnModel().getColumn(1).setResizable(false);
+            TablaPlatos1.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        javax.swing.GroupLayout PanelBebidasLayout = new javax.swing.GroupLayout(PanelBebidas);
+        PanelBebidas.setLayout(PanelBebidasLayout);
+        PanelBebidasLayout.setHorizontalGroup(
+            PanelBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBebidasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelBebidasLayout.setVerticalGroup(
+            PanelBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBebidasLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
+        );
+
+        CatalogoItems.addTab("BEBIDAS", PanelBebidas);
+
+        TablaPlatos2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Descripcion", "Precio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(TablaPlatos2);
+        if (TablaPlatos2.getColumnModel().getColumnCount() > 0) {
+            TablaPlatos2.getColumnModel().getColumn(0).setResizable(false);
+            TablaPlatos2.getColumnModel().getColumn(1).setResizable(false);
+            TablaPlatos2.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        javax.swing.GroupLayout PanelBebidasSinAlcoholLayout = new javax.swing.GroupLayout(PanelBebidasSinAlcohol);
+        PanelBebidasSinAlcohol.setLayout(PanelBebidasSinAlcoholLayout);
+        PanelBebidasSinAlcoholLayout.setHorizontalGroup(
+            PanelBebidasSinAlcoholLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBebidasSinAlcoholLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelBebidasSinAlcoholLayout.setVerticalGroup(
+            PanelBebidasSinAlcoholLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBebidasSinAlcoholLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
+        );
+
+        CatalogoItems.addTab("BEBIDAS con alcohol", PanelBebidasSinAlcohol);
+
+        TablaPlatos3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Descripcion", "Precio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(TablaPlatos3);
+        if (TablaPlatos3.getColumnModel().getColumnCount() > 0) {
+            TablaPlatos3.getColumnModel().getColumn(0).setResizable(false);
+            TablaPlatos3.getColumnModel().getColumn(1).setResizable(false);
+            TablaPlatos3.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        javax.swing.GroupLayout PanlSinTaccLayout = new javax.swing.GroupLayout(PanlSinTacc);
+        PanlSinTacc.setLayout(PanlSinTaccLayout);
+        PanlSinTaccLayout.setHorizontalGroup(
+            PanlSinTaccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanlSinTaccLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanlSinTaccLayout.setVerticalGroup(
+            PanlSinTaccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanlSinTaccLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
+        );
+
+        CatalogoItems.addTab("SIN TACC", PanlSinTacc);
+
+        BotonGenerarItem.setText("Generar Items");
+        BotonGenerarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonGenerarItemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,76 +289,94 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CatalogoItems, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
+                                .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                    .addComponent(TextIdVendedor)))
-                            .addComponent(jButton1))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(TextoCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(TextoDni, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(138, 138, 138)
+                                .addComponent(BotonGenerarItem, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(562, 562, 562)
-                                .addComponent(jLabel1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(197, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Cerrar)
+                        .addComponent(BCerrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CrearVendedor)
-                        .addGap(17, 17, 17))))
+                        .addComponent(BCrear)))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextoCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextoDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(TextIdVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(152, 152, 152)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addComponent(BotonGenerarItem))
+                .addGap(20, 20, 20)
+                .addComponent(CatalogoItems, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(212, 212, 212)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CrearVendedor)
-                    .addComponent(Cerrar))
+                    .addComponent(BCrear)
+                    .addComponent(BCerrar))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+    private void BCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCerrarActionPerformed
       this.removeAll();
       this.revalidate();
       this.repaint();
-    }//GEN-LAST:event_CerrarActionPerformed
+    }//GEN-LAST:event_BCerrarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void TextoCuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoCuitActionPerformed
 
+    }//GEN-LAST:event_TextoCuitActionPerformed
+
+    private void BotonGenerarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGenerarItemActionPerformed
+        String dni = TextoDni.getText();
+        List<Plato> listaPlatos = controllerpedido.obtenerPlatos(dni);
+        
+        DefaultTableModel modeloPlatos = (DefaultTableModel) TablaPlatos.getModel();
+        modeloPlatos.setRowCount(0);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPlatos);
+        TablaPlatos.setRowSorter(sorter);
+        
+        for(int i = 0; i < listaPlatos.size() ; i++){
+            Plato aux = listaPlatos.get(i);
+            modeloPlatos.addRow(new Object[]{aux.getCategoria().getDesc(),aux.getNombre(),aux.getDescripcion(),aux.getPrecio()});
+        }
+        
+        
+    }//GEN-LAST:event_BotonGenerarItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Cerrar;
-    private javax.swing.JButton CrearVendedor;
-    private javax.swing.JTextField TextIdVendedor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton BCerrar;
+    private javax.swing.JButton BCrear;
+    private javax.swing.JButton BotonGenerarItem;
+    private javax.swing.JTabbedPane CatalogoItems;
+    private javax.swing.JPanel PanelBebidas;
+    private javax.swing.JPanel PanelBebidasSinAlcohol;
+    private javax.swing.JPanel PanelPlatos;
+    private javax.swing.JPanel PanlSinTacc;
+    private javax.swing.JTable TablaPlatos;
+    private javax.swing.JTable TablaPlatos1;
+    private javax.swing.JTable TablaPlatos2;
+    private javax.swing.JTable TablaPlatos3;
+    private javax.swing.JTextField TextoCuit;
+    private javax.swing.JTextField TextoDni;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     // End of variables declaration//GEN-END:variables
 }
