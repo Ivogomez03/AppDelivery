@@ -43,4 +43,17 @@ public class PlatoDAO {
            throw new RuntimeException("Se ha producido un error al obtener los Platos", e);
        }    
     }
+    
+    public Plato obtenerPlato(String nombre){
+        String hql = "FROM ItemMenu im JOIN Plato p ON im.id = p.id"
+                + " WHERE im.nombre = :nombre";
+         try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            Plato Plato = (Plato) session.createQuery(hql, Plato.class).setParameter("nombre",nombre).uniqueResult();
+            return Plato;
+        }catch(Exception e){
+           e.printStackTrace();
+           throw new RuntimeException("Se ha producido un error al obtener el Plato", e);
+       }    
+        
+    }
 }

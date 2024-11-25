@@ -20,4 +20,7 @@ public class PedidoController {
 public List<Plato> obtenerPlatos(String dniVendedor){
         return imemory.obtenerPlatos(dniVendedor);
     }
+public Plato obtenerPlato(String nombre){
+        return imemory.obtenerPlato(nombre);
+    }
 }

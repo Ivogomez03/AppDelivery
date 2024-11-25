@@ -50,4 +50,8 @@ public class ItemMenuMemory {
     public List<Plato> obtenerPlatos(String dniVendedor){
         return platoDAO.obtenerPlatos(dniVendedor);
     }
+    
+    public Plato obtenerPlato(String nombre){
+        return platoDAO.obtenerPlato(nombre);
+    }
 }
