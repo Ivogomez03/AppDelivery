@@ -61,7 +61,7 @@ public class ItemMenuDTO {
     }
 
     public int getTamanioBebida() {
-        return this.tamanioBebida;
+        return is.tamanioBebida;
     }
 
     public boolean getAptoVegetariano() {

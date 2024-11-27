@@ -17,10 +17,19 @@ public class PedidoController {
     PedidoMemory pmemory = new PedidoMemory();
     ItemMenuMemory imemory = new ItemMenuMemory();
     
-public List<Plato> obtenerPlatos(String dniVendedor){
+    public List<Plato> obtenerPlatos(String dniVendedor){
         return imemory.obtenerPlatos(dniVendedor);
     }
-public Plato obtenerPlato(String nombre){
+    public Plato obtenerPlato(String nombre){
         return imemory.obtenerPlato(nombre);
+    }
+    public Bebida obtenerBebida(String nombre){
+        return imemory.obtenerBebida(nombre);
+    }
+    public List<Bebida> obtenerBebidasConAlcohol(String dniVendedor){
+        return imemory.obtenerBebidasConAlcohol(dniVendedor);
+    }
+    public List<Bebida> obtenerBebidasSinAlcohol(String dniVendedor){
+        return imemory.obtenerBebidasSinAlcohol(dniVendedor);
     }
 }

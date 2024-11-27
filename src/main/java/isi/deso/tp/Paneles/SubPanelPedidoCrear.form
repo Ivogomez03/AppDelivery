@@ -161,7 +161,7 @@
                         <Column editable="false" title="Nombre" type="java.lang.String"/>
                         <Column editable="false" title="Descripcion" type="java.lang.String"/>
                         <Column editable="false" title="Precio" type="java.lang.Double"/>
-                        <Column editable="false" title="" type="java.lang.String"/>
+                        <Column editable="false" title="" type="java.lang.Integer"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -243,19 +243,31 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="TablaPlatos1">
+                <Component class="javax.swing.JTable" name="TablaBebidaSinAlcohol">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
+                      <Table columnCount="7" rowCount="0">
                         <Column editable="false" title="Categoria" type="java.lang.String"/>
                         <Column editable="false" title="Nombre" type="java.lang.String"/>
                         <Column editable="false" title="Descripcion" type="java.lang.String"/>
                         <Column editable="false" title="Precio" type="java.lang.Double"/>
-                        <Column editable="false" title="inf" type="java.lang.Object"/>
+                        <Column editable="false" title="GradAlcohol" type="java.lang.Double"/>
+                        <Column editable="false" title="Tamanio (mm)" type="java.lang.Integer"/>
+                        <Column editable="false" title="" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
@@ -292,7 +304,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="PanelBebidasSinAlcohol">
+        <Container class="javax.swing.JPanel" name="PanelBebidasConAlcohol">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="BEBIDAS con alcohol">
@@ -327,7 +339,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="TablaPlatos2">
+                <Component class="javax.swing.JTable" name="TablaBebidaConAlcohol">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="0">
