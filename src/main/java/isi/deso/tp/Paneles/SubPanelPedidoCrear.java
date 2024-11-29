@@ -11,6 +11,7 @@ import isi.deso.model.Bebida;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -22,6 +23,7 @@ import javax.swing.table.TableRowSorter;
 public class SubPanelPedidoCrear extends javax.swing.JPanel {
     PedidoController controllerpedido = new PedidoController();
     ValidationController controllervalidation = new ValidationController();
+    int opcion;
     /**
      * Creates new form SubPanelVendedor
      */
@@ -50,13 +52,13 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         TablaPlatos = new javax.swing.JTable();
         PanelBebidas = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        TablaBebidaSinAlcohol = new javax.swing.JTable();
+        TablaBebida = new javax.swing.JTable();
         PanelBebidasConAlcohol = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        TablaBebidaConAlcohol = new javax.swing.JTable();
+        TablaBebidaAlcoholica = new javax.swing.JTable();
         PanlSinTacc = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        TablaPlatos3 = new javax.swing.JTable();
+        PlatosDeCeliaco = new javax.swing.JTable();
         BotonGenerarItem = new javax.swing.JButton();
 
         BCrear.setText("Crear");
@@ -82,20 +84,25 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         CatalogoItems.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         CatalogoItems.setToolTipText("");
         CatalogoItems.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CatalogoItems.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                CatalogoItemsStateChanged(evt);
+            }
+        });
 
         TablaPlatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Categoria", "Nombre", "Descripcion", "Precio", ""
+                "Categoria", "Nombre", "Descripcion", "Precio", "Calorias", "Vegetariano", "Vegano"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -117,7 +124,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             TablaPlatos.getColumnModel().getColumn(1).setResizable(false);
             TablaPlatos.getColumnModel().getColumn(2).setResizable(false);
             TablaPlatos.getColumnModel().getColumn(3).setResizable(false);
-            TablaPlatos.getColumnModel().getColumn(4).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout PanelPlatosLayout = new javax.swing.GroupLayout(PanelPlatos);
@@ -131,25 +138,25 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         PanelPlatosLayout.setVerticalGroup(
             PanelPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPlatosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         CatalogoItems.addTab("PLATOS", PanelPlatos);
 
-        TablaBebidaSinAlcohol.setModel(new javax.swing.table.DefaultTableModel(
+        TablaBebida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Categoria", "Nombre", "Descripcion", "Precio", "GradAlcohol", "Tamanio (mm)", ""
+                "Categoria", "Nombre", "Descripcion", "Precio", "Tamanio (mm)", "Vegano"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -160,15 +167,14 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(TablaBebidaSinAlcohol);
-        if (TablaBebidaSinAlcohol.getColumnModel().getColumnCount() > 0) {
-            TablaBebidaSinAlcohol.getColumnModel().getColumn(0).setResizable(false);
-            TablaBebidaSinAlcohol.getColumnModel().getColumn(1).setResizable(false);
-            TablaBebidaSinAlcohol.getColumnModel().getColumn(2).setResizable(false);
-            TablaBebidaSinAlcohol.getColumnModel().getColumn(3).setResizable(false);
-            TablaBebidaSinAlcohol.getColumnModel().getColumn(4).setResizable(false);
-            TablaBebidaSinAlcohol.getColumnModel().getColumn(5).setResizable(false);
-            TablaBebidaSinAlcohol.getColumnModel().getColumn(6).setResizable(false);
+        jScrollPane5.setViewportView(TablaBebida);
+        if (TablaBebida.getColumnModel().getColumnCount() > 0) {
+            TablaBebida.getColumnModel().getColumn(0).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(1).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(2).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(3).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(4).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout PanelBebidasLayout = new javax.swing.GroupLayout(PanelBebidas);
@@ -177,7 +183,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             PanelBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBebidasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
         );
         PanelBebidasLayout.setVerticalGroup(
             PanelBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,19 +194,19 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
         CatalogoItems.addTab("BEBIDAS", PanelBebidas);
 
-        TablaBebidaConAlcohol.setModel(new javax.swing.table.DefaultTableModel(
+        TablaBebidaAlcoholica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Categoria", "Nombre", "Descripcion", "Precio", "inf"
+                "Categoria", "Nombre", "Precio", "Info"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -211,13 +217,18 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(TablaBebidaConAlcohol);
-        if (TablaBebidaConAlcohol.getColumnModel().getColumnCount() > 0) {
-            TablaBebidaConAlcohol.getColumnModel().getColumn(0).setResizable(false);
-            TablaBebidaConAlcohol.getColumnModel().getColumn(1).setResizable(false);
-            TablaBebidaConAlcohol.getColumnModel().getColumn(2).setResizable(false);
-            TablaBebidaConAlcohol.getColumnModel().getColumn(3).setResizable(false);
-            TablaBebidaConAlcohol.getColumnModel().getColumn(4).setResizable(false);
+        TablaBebidaAlcoholica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaBebidaAlcoholicaMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(TablaBebidaAlcoholica);
+        if (TablaBebidaAlcoholica.getColumnModel().getColumnCount() > 0) {
+            TablaBebidaAlcoholica.getColumnModel().getColumn(0).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(1).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(2).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(3).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(3).setPreferredWidth(5);
         }
 
         javax.swing.GroupLayout PanelBebidasConAlcoholLayout = new javax.swing.GroupLayout(PanelBebidasConAlcohol);
@@ -226,7 +237,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             PanelBebidasConAlcoholLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBebidasConAlcoholLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
         );
         PanelBebidasConAlcoholLayout.setVerticalGroup(
             PanelBebidasConAlcoholLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,9 +246,9 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        CatalogoItems.addTab("BEBIDAS con alcohol", PanelBebidasConAlcohol);
+        CatalogoItems.addTab("BEBIDAS ALCOHOLICAS", PanelBebidasConAlcohol);
 
-        TablaPlatos3.setModel(new javax.swing.table.DefaultTableModel(
+        PlatosDeCeliaco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -260,13 +271,13 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane7.setViewportView(TablaPlatos3);
-        if (TablaPlatos3.getColumnModel().getColumnCount() > 0) {
-            TablaPlatos3.getColumnModel().getColumn(0).setResizable(false);
-            TablaPlatos3.getColumnModel().getColumn(1).setResizable(false);
-            TablaPlatos3.getColumnModel().getColumn(2).setResizable(false);
-            TablaPlatos3.getColumnModel().getColumn(3).setResizable(false);
-            TablaPlatos3.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane7.setViewportView(PlatosDeCeliaco);
+        if (PlatosDeCeliaco.getColumnModel().getColumnCount() > 0) {
+            PlatosDeCeliaco.getColumnModel().getColumn(0).setResizable(false);
+            PlatosDeCeliaco.getColumnModel().getColumn(1).setResizable(false);
+            PlatosDeCeliaco.getColumnModel().getColumn(2).setResizable(false);
+            PlatosDeCeliaco.getColumnModel().getColumn(3).setResizable(false);
+            PlatosDeCeliaco.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout PanlSinTaccLayout = new javax.swing.GroupLayout(PanlSinTacc);
@@ -275,7 +286,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             PanlSinTaccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanlSinTaccLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
         );
         PanlSinTaccLayout.setVerticalGroup(
             PanlSinTaccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,19 +363,50 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     }//GEN-LAST:event_TextoCuitActionPerformed
 
     private void BotonGenerarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGenerarItemActionPerformed
-        String dni = TextoDni.getText();
-        List<Plato> listaPlatos = controllerpedido.obtenerPlatos(dni);
+        String dniVend = TextoDni.getText();
         
-        DefaultTableModel modeloPlatos = (DefaultTableModel) TablaPlatos.getModel();
-        modeloPlatos.setRowCount(0);
+        switch(opcion){
+            case 0: { // PLATOS
+            List<Plato> listaPlatos = controllerpedido.obtenerPlatos(dniVend);
         
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPlatos);
-        TablaPlatos.setRowSorter(sorter);
+            DefaultTableModel modeloPlatos = (DefaultTableModel) TablaPlatos.getModel();
+            modeloPlatos.setRowCount(0);
         
-        for(int i = 0; i < listaPlatos.size() ; i++){
-            Plato aux = listaPlatos.get(i);
-            modeloPlatos.addRow(new Object[]{aux.getCategoria().getDesc(),aux.getNombre(),aux.getDescripcion(),aux.getPrecio(), "mas informacion"});
-        }
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPlatos);
+            TablaPlatos.setRowSorter(sorter);
+        
+            for(Plato aux : listaPlatos){
+                modeloPlatos.addRow(new Object[]{
+                    aux.getCategoria().getDesc(),
+                    aux.getNombre(),
+                    aux.getDescripcion(),
+                    aux.getPrecio(),
+                    "+"
+                    });
+                }
+            break;
+            }
+            case 1: { // BEBIDAS
+            List<Bebida> listaBebidas = controllerpedido.obtenerBebidasSinAlcohol(dniVend);
+        
+            DefaultTableModel modeloBebidas = (DefaultTableModel) TablaBebida.getModel();
+            modeloBebidas.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloBebidas);
+            TablaBebida.setRowSorter(sorter);
+            
+            for(Bebida aux : listaBebidas){
+                modeloBebidas.addRow(new Object []{
+                    aux.getCategoria().getDesc(),
+                    aux.getNombre(),
+                    aux.getDescripcion(),
+                    aux.getPrecio(),
+                    "+"
+                });
+            }
+            }
+        
+        
         
         
     }//GEN-LAST:event_BotonGenerarItemActionPerformed
@@ -380,6 +422,23 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                    "\n Calorias: "+aux.getCalorias()+"\n Precio: "+aux.getPrecio()+ "\n Descripcion: "+ aux.getDescripcion());
        }
     }//GEN-LAST:event_TablaPlatosMouseClicked
+
+    private void CatalogoItemsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CatalogoItemsStateChanged
+        JTabbedPane sourceTabbedPane = (JTabbedPane) evt.getSource();
+        opcion = sourceTabbedPane.getSelectedIndex();
+    }//GEN-LAST:event_CatalogoItemsStateChanged
+
+    private void TablaBebidaAlcoholicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBebidaAlcoholicaMouseClicked
+            int fila =TablaBebida.rowAtPoint(evt.getPoint());
+       int columna =TablaBebida.columnAtPoint(evt.getPoint());
+       
+       if (columna == 4){
+           System.out.println(fila);
+           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebida.getValueAt(fila, 1));
+           JOptionPane.showMessageDialog(null, "\nCategoria: "+ aux.getCategoria().getDesc() + "Nombre: "+ aux.getNombre() +
+                   "\n Graduacion Alcohol: " + aux.getGradAlcohol() + "\n Precio: "+aux.getPrecio()+ "\n Descripcion: "+ aux.getDescripcion()+ "\n Tamanio: " + aux.getTamanioBebida());
+       }
+    }//GEN-LAST:event_TablaBebidaAlcoholicaMouseClicked
     private void BotonGenerarItemActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         String dni = TextoDni.getText();
         List<Bebida> listaBebidas = controllerpedido.obtenerBebidas(dni);
@@ -396,24 +455,13 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         }
         
         
-    }                                                
+    }                                              
 
-    private void TablaBebidaConAlcoholMouseClicked(java.awt.event.MouseEvent evt) {                                         
-       int fila =TablaBebidaSinAlcohol.rowAtPoint(evt.getPoint());
-       int columna =TablaBebidaSinAlcohol.columnAtPoint(evt.getPoint());
-       
-       if (columna == 4){
-           System.out.println(fila);
-           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebidaSinAlcohol.getValueAt(fila, 1));
-           JOptionPane.showMessageDialog(null, "\nCategoria: "+ aux.getCategoria().getDesc() + "Nombre: "+ aux.getNombre() +
-                   "\n Graduacion Alcohol: " + aux.getGradAlcohol() + "\n Precio: "+aux.getPrecio()+ "\n Descripcion: "+ aux.getDescripcion()+ "\n Tamanio: " + aux.getTamanioBebida());
-       }
-    }   
     private void BotonGenerarItemActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         String dni = TextoDni.getText();
         List<Bebida> listaBebidas = controllerpedido.obtenerBebidas(dni);
         
-        DefaultTableModel modeloBebidas = (DefaultTableModel) TablaBebidaSinAlcohol.getModel();
+        DefaultTableModel modeloBebidas = (DefaultTableModel) TablaBebida.getModel();
         modeloBebidas.setRowCount(0);
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloBebidas);
@@ -428,12 +476,12 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     }                                                
 
     private void TablaBebidaMouseClicked(java.awt.event.MouseEvent evt) {                                         
-       int fila =TablaBebidaSinAlcohol.rowAtPoint(evt.getPoint());
-       int columna =TablaBebidaSinAlcohol.columnAtPoint(evt.getPoint());
+       int fila =TablaBebida.rowAtPoint(evt.getPoint());
+       int columna =TablaBebida.columnAtPoint(evt.getPoint());
        
        if (columna == 4){
            System.out.println(fila);
-           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebidaSinAlcohol.getValueAt(fila, 1));
+           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebida.getValueAt(fila, 1));
            JOptionPane.showMessageDialog(null, "Nombre: "+ aux.getNombre() + "\nCategoria: "+ aux.getCategoria().getDesc() +
                    "\n Graduacion Alcohol: " + aux.getGradAlcohol() + "\n Precio: "+aux.getPrecio()+ "\n Descripcion: "+ aux.getDescripcion()+ "\n Tamanio: " + aux.getTamanioBebida());
        }
@@ -447,10 +495,10 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     private javax.swing.JPanel PanelBebidasConAlcohol;
     private javax.swing.JPanel PanelPlatos;
     private javax.swing.JPanel PanlSinTacc;
-    private javax.swing.JTable TablaBebidaConAlcohol;
-    private javax.swing.JTable TablaBebidaSinAlcohol;
+    private javax.swing.JTable PlatosDeCeliaco;
+    private javax.swing.JTable TablaBebida;
+    private javax.swing.JTable TablaBebidaAlcoholica;
     private javax.swing.JTable TablaPlatos;
-    private javax.swing.JTable TablaPlatos3;
     private javax.swing.JTextField TextoCuit;
     private javax.swing.JTextField TextoDni;
     private javax.swing.JLabel jLabel8;
