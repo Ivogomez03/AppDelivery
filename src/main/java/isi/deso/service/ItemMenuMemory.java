@@ -51,9 +51,14 @@ public class ItemMenuMemory {
         return platoDAO.obtenerPlatos(dniVendedor);
     }
     
+    public List<Plato> obtenerPlatosSinTACC(String dniVendedor){
+        return platoDAO.obtenerPlatosSinTACC(dniVendedor);
+    }
+    
     public Plato obtenerPlato(String nombre){
         return platoDAO.obtenerPlato(nombre);
     }
+    
     public List<Bebida> obtenerBebidasSinAlcohol(String dniVendedor){
         return bebidaDAO.obtenerBebidasSinAlcohol(dniVendedor);
     }

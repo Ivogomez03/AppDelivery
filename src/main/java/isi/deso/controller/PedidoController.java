@@ -21,6 +21,9 @@ public class PedidoController {
     public List<Plato> obtenerPlatos(String dniVendedor){
         return imemory.obtenerPlatos(dniVendedor);
     }
+    public List<Plato> obtenerPlatosSinTACC(String dniVendedor){
+        return imemory.obtenerPlatosSinTACC(dniVendedor);
+    }
     public Plato obtenerPlato(String nombre){
         return imemory.obtenerPlato(nombre);
     }

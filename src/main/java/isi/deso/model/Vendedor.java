@@ -160,7 +160,7 @@ public class Vendedor implements Observer{
         
         for(int i=0; i<this.items.size();i++){
             Plato aux = (Plato)this.items.get(i);
-            if(aux.esComida() & aux.aptoVegano()){
+            if(aux.esComida() & aux.getAptoVegano()){
                 comidas.add(aux);
             }
         }

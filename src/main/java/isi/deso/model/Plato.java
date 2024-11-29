@@ -45,8 +45,13 @@ public class Plato extends ItemMenu {
         return false;
     }
     
-    public boolean aptoVegano(){
+    @Override
+    public boolean getAptoVegano(){
         return this.aptoVegano;
+    }
+    
+    public boolean getAptoVegetariano(){
+        return this.aptoVegetariano;
     }
     
     public int getCalorias(){
