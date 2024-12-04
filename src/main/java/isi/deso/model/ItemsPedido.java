@@ -29,7 +29,7 @@ public class ItemsPedido {
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_item_menu", referencedColumnName = "id_item_menu")
     private ItemMenu itemMenu;
     

@@ -36,7 +36,7 @@ public class PedidoDAO {
             ItemsPedido itemsPedido = new ItemsPedido();
             itemsPedido.setCantidad(dto.getCantidad());
             itemsPedido.setItemMenu(itemMenu);
-            
+            itemsPedido.setPedido(pedido);
             pedido.getDetalle().add(itemsPedido);
         }
         Cliente cliente = session.find(Cliente.class, pedido.cliente.getId());
@@ -47,16 +47,7 @@ public class PedidoDAO {
         
         session.persist(pedido.getPago());
         
-        System.out.println("Cliente ID: " + pedido.getCliente().getId());
-        System.out.println("Coordenada ID: " + pedido.getCliente().getCoordenada().getId());
-        System.out.println("Vendedor ID: " + pedido.getVendedor().getId());
-        System.out.println("Coordenada ID: " + pedido.getVendedor().getCoordenada().getId());
-        for (ItemsPedido item : pedido.getDetalle()) {
-         System.out.println("ItemsPedido ID: " + item.getItemMenu().getId());
-         System.out.println("Categoria: " + item.getItemMenu().getCategoria().getDesc());
-            }
-        
-        session.merge(pedido);
+        session.persist(pedido);
         transaction.commit();
     }catch (PersistenceException e) {
         e.printStackTrace();

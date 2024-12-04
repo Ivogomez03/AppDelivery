@@ -175,7 +175,7 @@ public class SubPanelClienteCrear extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El CUIT debe contener solo digitos");
             return;
         }
-        if(!validation.ValidarCliente(CUIT)){
+        if(validation.ValidarCliente(CUIT)){
             JOptionPane.showMessageDialog(null, "Ya existe un cliente con el cuit: "+ CUIT);
             return;
         }

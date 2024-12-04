@@ -824,7 +824,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             itemsDTO.setCantidad((int) TablaItemSeleccionado.getValueAt(i, 4));
             
             listaItemsPedido.add(itemsDTO);
-            montoPago += ((double) TablaItemSeleccionado.getValueAt(i, 3));
+            montoPago += ((double) TablaItemSeleccionado.getValueAt(i, 3)) * itemsDTO.getCantidad();
         }
         
         if(credenciales.equals("")){

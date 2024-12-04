@@ -1,6 +1,7 @@
 package isi.deso.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -41,6 +42,9 @@ public abstract class ItemMenu {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vendedor", referencedColumnName = "id_vendedor")
     protected Vendedor vendedor;
+    
+    @OneToMany(mappedBy = "itemMenu", fetch = FetchType.LAZY)
+    private List<ItemsPedido> itemsPedidos;
     
     public abstract double peso(double p);
     public abstract boolean esComida();
