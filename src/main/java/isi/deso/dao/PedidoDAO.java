@@ -4,13 +4,64 @@
  */
 package isi.deso.dao;
 
+import isi.deso.dto.ItemsPedidoDTO;
+import isi.deso.model.Cliente;
+import isi.deso.model.ItemMenu;
+import isi.deso.model.ItemsPedido;
+import isi.deso.model.Pedido;
+import isi.deso.model.Vendedor;
+import jakarta.persistence.PersistenceException;
+import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+
 /**
  *
  * @author ivogo
  */
 public class PedidoDAO {
-    public void crearPedido(){
+    ClienteDAO clienteDAO = new ClienteDAO();
+    VendedorDAO vendedorDAO = new VendedorDAO();
+    
+    public PedidoDAO(){};
+    
+    public void crearPedido(Pedido pedido, List<ItemsPedidoDTO> itemsPedidoDTO){
+        Transaction transaction = null;
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        transaction = session.beginTransaction();
         
+        for(ItemsPedidoDTO dto : itemsPedidoDTO) {
+            ItemMenu itemMenu = session.find(ItemMenu.class, dto.getIdItem());
+            ItemsPedido itemsPedido = new ItemsPedido();
+            itemsPedido.setCantidad(dto.getCantidad());
+            itemsPedido.setItemMenu(itemMenu);
+            
+            pedido.getDetalle().add(itemsPedido);
+        }
+        Cliente cliente = session.find(Cliente.class, pedido.cliente.getId());
+        Vendedor vendedor = session.find(Vendedor.class, pedido.vendedor.getId());
+        
+        pedido.setCliente(cliente);
+        pedido.setVendedor(vendedor);
+        
+        session.persist(pedido.getPago());
+        
+        System.out.println("Cliente ID: " + pedido.getCliente().getId());
+        System.out.println("Coordenada ID: " + pedido.getCliente().getCoordenada().getId());
+        System.out.println("Vendedor ID: " + pedido.getVendedor().getId());
+        System.out.println("Coordenada ID: " + pedido.getVendedor().getCoordenada().getId());
+        for (ItemsPedido item : pedido.getDetalle()) {
+         System.out.println("ItemsPedido ID: " + item.getItemMenu().getId());
+         System.out.println("Categoria: " + item.getItemMenu().getCategoria().getDesc());
+            }
+        
+        session.merge(pedido);
+        transaction.commit();
+    }catch (PersistenceException e) {
+        e.printStackTrace();
+        throw new PersistenceException("Error al agregar el Pedido", e);
+        }    
     };
     public void eliminarPedido(){};
     public void actualizarPedido(){};

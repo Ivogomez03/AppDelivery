@@ -5,6 +5,7 @@
 package isi.deso.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,32 +20,28 @@ public class Pedido extends pedidoObservable{
     @Column(name = "id_pedido", nullable = false)
     private int id;
     
-    @OneToMany(mappedBy = "pedido")
-    private ArrayList<ItemsPedido> detalle;
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
+    private List<ItemsPedido> detalle;
     
     @Enumerated(EnumType.STRING)
     private Estado estado;
     
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
+    public Cliente cliente;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pago")
-    private Pago pago;
+    public Pago pago;
     
     @ManyToOne
     @JoinColumn(name = "id_vendedor", referencedColumnName = "id_vendedor")
-    private Vendedor vendedor;
-    
-    @Transient
-    private static int contadorID = 0;
+    public Vendedor vendedor;
     
     
     public Pedido(){
-        this.id = contadorID++;
         this.estado = Estado.PENDIENTE;
-  
+        this.detalle = new ArrayList();
     }
     public Pago getPago(){
         return this.pago;
@@ -55,10 +52,13 @@ public class Pedido extends pedidoObservable{
     public Cliente getCliente(){
         return this.cliente;
     }
+    public Vendedor getVendedor(){
+        return this.vendedor;
+    }
     public int getID(){
         return this.id;
     }
-    public ArrayList<ItemsPedido> getDetalle(){
+    public List<ItemsPedido> getDetalle(){
         return this.detalle;
     }
     
@@ -71,18 +71,19 @@ public class Pedido extends pedidoObservable{
     public void setEstado(Estado estado){
         this.estado = estado;
     }
-    public void setDetalle(ArrayList<ItemsPedido> detalle){
+    public void setDetalle(List<ItemsPedido> detalle){
         this.detalle = detalle;
     }
  
-    public void agregarDetalle(ItemsPedido item){
-        this.detalle.add(item);
-    }
     public void setPago(Pago p){
         this.pago= p;
     }
     
-    public void crearPedido(Vendedor vendedor,Cliente cliente){
+    public void setVendedor(Vendedor vendedor){
+        this.vendedor = vendedor;
+    }
+    
+    /*public void crearPedido(Vendedor vendedor,Cliente cliente){
         vendedor.mostrarMenu();
          
         ArrayList itemsPedidoCliente = new ArrayList<ItemsPedido>();
@@ -158,9 +159,9 @@ public class Pedido extends pedidoObservable{
         cliente.addPedido(this);
         vendedor.addPedido(this);
 
-    }
+    }*/
     @Override
-    public void notificarCliente(Cliente c){
+    public void notificarCliente(Cliente c){}/*
         c.notificarPedido(this.estado);
     }
     public void generarPago(){
@@ -204,7 +205,7 @@ public class Pedido extends pedidoObservable{
             }
     
     }
-    @Override
+    */@Override
     public void siguienteEstado(){
         // cambiar estado
         switch(this.estado){
@@ -225,6 +226,6 @@ public class Pedido extends pedidoObservable{
         }
         // notificamos al cliente de que el estado de su pedido ha cambiado
         notificarCliente(this.cliente);
-        if(this.estado == Estado.ENVIADO) generarPago();
+        if(this.estado == Estado.ENVIADO); //generarPago();
     }
 }

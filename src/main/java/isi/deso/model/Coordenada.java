@@ -41,6 +41,9 @@ public class Coordenada {
     public double getLng(){
         return this.longitud;
     }
+    public long getId(){
+        return this.id;
+    }
     public void setLat(double lat){
         this.latitud = lat;
     }

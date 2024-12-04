@@ -11,14 +11,13 @@ import java.util.ArrayList;
  * @author tobir
  */
 
-public  class Efectivo extends Pago 
+/*public  class Efectivo extends Pago 
 {
 	
 	public Efectivo() {
             super(0, TipoPago.EFECTIVO);
     	}
 	
-        @Override
 	public  void realizarPago(ArrayList < ItemsPedido > l)
 	{
 		double suma = 0.0;
@@ -29,4 +28,4 @@ public  class Efectivo extends Pago
                 this.monto = suma;
 	}
         
-}
+}*/

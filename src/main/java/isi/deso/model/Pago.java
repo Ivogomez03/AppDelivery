@@ -11,11 +11,7 @@ import jakarta.persistence.*;
  */
 
 @Entity
-public abstract class Pago
-{
-        @Transient
-        private static int contadorID = 0;
-        
+public class Pago {        
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id_pago", nullable = false)
@@ -28,13 +24,16 @@ public abstract class Pago
         @Enumerated(EnumType.STRING)
     	protected TipoPago tipoPago;
 
-	public Pago(double monto, TipoPago tipo) {
-            this.id_pago = contadorID++;
+        @Column(name = "cvu/alias")
+        protected String credencial;
+        
+        public Pago(){}
+        
+	public Pago(double monto, TipoPago tipo, String credencial) {
             this.monto = monto;
             this.tipoPago = tipo;
-   	}
-	
-	public abstract void realizarPago( ArrayList < ItemsPedido > l);
+            this.credencial = credencial;
+        }
 	
 }
 

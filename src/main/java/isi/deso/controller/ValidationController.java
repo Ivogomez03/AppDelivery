@@ -17,4 +17,8 @@ public class ValidationController {
     public boolean vendedorExists(String dni){
         return vmemory.vendedorExists(dni);
     }
+    
+    public boolean clienteExiste(String cuitCliente){
+        return vmemory.ValidarCliente(cuitCliente);
+    }
 }

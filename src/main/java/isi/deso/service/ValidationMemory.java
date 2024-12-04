@@ -46,16 +46,14 @@ public class ValidationMemory {
     }
     public boolean ValidarCliente(String CUIT) { 
         
-        String hql = "SELECT CASE WHEN EXISTS (FROM Cliente c WHERE c.cuit = :cuit) THEN true ELSE false END";
-        
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Ejecuta la consulta y busca un registro con el DNI
-            Boolean exists = session.createQuery(hql, Boolean.class)
-                        .setParameter("cuit", CUIT)
-                        .uniqueResult();
+        String hql = "SELECT COUNT(c) FROM Cliente c WHERE c.cuit = :cuit";
 
-            // Retorna true si no se encontró el vendedor (es decir, si `result` es null)
-            return exists == false;
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Long count = session.createQuery(hql, Long.class)
+                            .setParameter("cuit", CUIT)
+                            .uniqueResult();
+
+            return count > 0; // Retorna true si el cliente existe
         }catch (EntityExistsException e) {
             e.printStackTrace();
             throw new RuntimeException("El cliente ya existe", e);

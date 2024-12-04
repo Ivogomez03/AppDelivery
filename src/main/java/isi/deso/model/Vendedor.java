@@ -35,14 +35,14 @@ public class Vendedor implements Observer{
     @Column(name = "DNI")
     private String dni;
     
-    @OneToOne(cascade = CascadeType.PERSIST )
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_coordenadas", referencedColumnName = "id_coordenadas")
     private Coordenada coordenadas;
     
-    @OneToMany(mappedBy = "vendedor")
+    @OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
     private List<ItemMenu> items; // todos los items que vende
     
-    @OneToMany(mappedBy = "vendedor")
+    @OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
     private List<Pedido> pedidosRecibidos; //lista de los pedidos que se le realizaron al vendedor
     
     public Vendedor(){}
@@ -202,6 +202,10 @@ public class Vendedor implements Observer{
         this.items = articulos;
     }
 
+    public void setDNI(String dni){
+        this.dni = dni;
+    }
+    
     public void addItem(ItemMenu item){
         this.items.add(item);
     }

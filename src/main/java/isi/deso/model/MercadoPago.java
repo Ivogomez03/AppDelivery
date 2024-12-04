@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author tobir
  */
-public  class MercadoPago extends Pago
+/*public  class MercadoPago extends Pago
 {
 	private final String alias;
 	
@@ -19,7 +19,6 @@ public  class MercadoPago extends Pago
             this.alias = alias;
    	}
 	
-        @Override
 	public  void realizarPago(ArrayList < ItemsPedido > l)
 	{
 		double suma = 0.0;
@@ -35,4 +34,4 @@ public  class MercadoPago extends Pago
             return this.alias;
         }
 	
-}
+}*/

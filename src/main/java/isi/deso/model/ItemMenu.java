@@ -34,11 +34,11 @@ public abstract class ItemMenu {
     @Column(name = "aptoVegano")
     protected boolean aptoVegano;
     
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     protected Categoria categoria;
     
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vendedor", referencedColumnName = "id_vendedor")
     protected Vendedor vendedor;
     

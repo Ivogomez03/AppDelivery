@@ -6,10 +6,16 @@ package isi.deso.tp.Paneles;
 
 import isi.deso.controller.PedidoController;
 import isi.deso.controller.ValidationController;
+import isi.deso.dto.ItemsPedidoDTO;
+import isi.deso.dto.PedidoDTO;
 import isi.deso.model.Plato;
 import isi.deso.model.Bebida;
+import isi.deso.model.TipoPago;
+import isi.deso.service.ValidationMemory;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,7 +46,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BCrear = new javax.swing.JButton();
+        BCrearPedido = new javax.swing.JButton();
         BCerrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -67,8 +73,16 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaItemSeleccionado = new javax.swing.JTable();
         BotonEliminarSeleccion = new javax.swing.JButton();
+        TipoDePago = new javax.swing.JComboBox<>();
+        Credenciales = new javax.swing.JTextField();
+        lblCredencial = new javax.swing.JLabel();
 
-        BCrear.setText("Crear");
+        BCrearPedido.setText("Crear");
+        BCrearPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCrearPedidoActionPerformed(evt);
+            }
+        });
 
         BCerrar.setText("Cerrar");
         BCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +95,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
         jLabel9.setText("Dni Vendedor");
 
+        TextoCuit.setText("");
         TextoCuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextoCuitActionPerformed(evt);
@@ -102,14 +117,14 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Categoria", "Nombre", "Precio", "Mas Info"
+                "ID", "Categoria", "Nombre", "Precio", "Mas Info"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -128,9 +143,12 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         jScrollPane1.setViewportView(TablaPlatos);
         if (TablaPlatos.getColumnModel().getColumnCount() > 0) {
             TablaPlatos.getColumnModel().getColumn(0).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(0).setPreferredWidth(1);
             TablaPlatos.getColumnModel().getColumn(1).setResizable(false);
             TablaPlatos.getColumnModel().getColumn(2).setResizable(false);
-            TablaPlatos.getColumnModel().getColumn(3).setPreferredWidth(5);
+            TablaPlatos.getColumnModel().getColumn(3).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(4).setResizable(false);
+            TablaPlatos.getColumnModel().getColumn(4).setPreferredWidth(5);
         }
 
         BotonAgregarPlato.setText("Agregar Item Seleccionado");
@@ -165,14 +183,14 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Categoria", "Nombre", "Precio", "Mas Info"
+                "ID", "Categoria", "Nombre", "Precio", "Mas Info"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -191,10 +209,12 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         jScrollPane7.setViewportView(TablaPlatosSinTACC);
         if (TablaPlatosSinTACC.getColumnModel().getColumnCount() > 0) {
             TablaPlatosSinTACC.getColumnModel().getColumn(0).setResizable(false);
+            TablaPlatosSinTACC.getColumnModel().getColumn(0).setPreferredWidth(5);
             TablaPlatosSinTACC.getColumnModel().getColumn(1).setResizable(false);
             TablaPlatosSinTACC.getColumnModel().getColumn(2).setResizable(false);
             TablaPlatosSinTACC.getColumnModel().getColumn(3).setResizable(false);
-            TablaPlatosSinTACC.getColumnModel().getColumn(3).setPreferredWidth(5);
+            TablaPlatosSinTACC.getColumnModel().getColumn(4).setResizable(false);
+            TablaPlatosSinTACC.getColumnModel().getColumn(4).setPreferredWidth(5);
         }
 
         BotonAgregarSinTacc.setText("Agregar Item Seleccionado");
@@ -229,14 +249,14 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Categoria", "Nombre", "Precio", "Tamanio (mm)", "Mas Info"
+                "ID", "Categoria", "Nombre", "Precio", "Tamaño(mm)", "Mas Info"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -255,11 +275,17 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         jScrollPane5.setViewportView(TablaBebida);
         if (TablaBebida.getColumnModel().getColumnCount() > 0) {
             TablaBebida.getColumnModel().getColumn(0).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(0).setPreferredWidth(5);
             TablaBebida.getColumnModel().getColumn(1).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(1).setPreferredWidth(15);
             TablaBebida.getColumnModel().getColumn(2).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(2).setPreferredWidth(10);
             TablaBebida.getColumnModel().getColumn(3).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(3).setPreferredWidth(10);
             TablaBebida.getColumnModel().getColumn(4).setResizable(false);
             TablaBebida.getColumnModel().getColumn(4).setPreferredWidth(5);
+            TablaBebida.getColumnModel().getColumn(5).setResizable(false);
+            TablaBebida.getColumnModel().getColumn(5).setPreferredWidth(5);
         }
 
         BotonAgregarBebida.setText("Agregar Item Seleccionado");
@@ -294,14 +320,14 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Categoria", "Nombre", "Precio", "Tamanio (mm)", "Mas Info"
+                "ID", "Categoria", "Nombre", "Precio", "Tamaño(mm)", "Mas Info"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -320,11 +346,17 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         jScrollPane6.setViewportView(TablaBebidaAlcoholica);
         if (TablaBebidaAlcoholica.getColumnModel().getColumnCount() > 0) {
             TablaBebidaAlcoholica.getColumnModel().getColumn(0).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(0).setPreferredWidth(5);
             TablaBebidaAlcoholica.getColumnModel().getColumn(1).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(1).setPreferredWidth(15);
             TablaBebidaAlcoholica.getColumnModel().getColumn(2).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(2).setPreferredWidth(10);
             TablaBebidaAlcoholica.getColumnModel().getColumn(3).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(3).setPreferredWidth(10);
             TablaBebidaAlcoholica.getColumnModel().getColumn(4).setResizable(false);
-            TablaBebidaAlcoholica.getColumnModel().getColumn(4).setPreferredWidth(5);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(4).setPreferredWidth(10);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(5).setResizable(false);
+            TablaBebidaAlcoholica.getColumnModel().getColumn(5).setPreferredWidth(5);
         }
 
         BotonAgregarBebidaAlcoholicas.setText("Agregar Item Seleccionado");
@@ -366,14 +398,14 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tipo", "Nombre", "Precio", "Cantidad", "DisminuirC", "AumentarC"
+                "Tipo", "ID", "Nombre", "Precio", "Cantidad", "Cant-", "Cant+"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -393,10 +425,14 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         if (TablaItemSeleccionado.getColumnModel().getColumnCount() > 0) {
             TablaItemSeleccionado.getColumnModel().getColumn(0).setResizable(false);
             TablaItemSeleccionado.getColumnModel().getColumn(1).setResizable(false);
+            TablaItemSeleccionado.getColumnModel().getColumn(1).setPreferredWidth(10);
             TablaItemSeleccionado.getColumnModel().getColumn(2).setResizable(false);
             TablaItemSeleccionado.getColumnModel().getColumn(3).setResizable(false);
             TablaItemSeleccionado.getColumnModel().getColumn(4).setResizable(false);
             TablaItemSeleccionado.getColumnModel().getColumn(5).setResizable(false);
+            TablaItemSeleccionado.getColumnModel().getColumn(5).setPreferredWidth(5);
+            TablaItemSeleccionado.getColumnModel().getColumn(6).setResizable(false);
+            TablaItemSeleccionado.getColumnModel().getColumn(6).setPreferredWidth(5);
         }
 
         BotonEliminarSeleccion.setText("Eliminar Seleccion");
@@ -406,6 +442,21 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             }
         });
 
+        TipoDePago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TipoDePago.setVisible(false);
+        TipoDePago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TipoDePagoActionPerformed(evt);
+            }
+        });
+
+        Credenciales.setVisible(false);
+        Credenciales.setEditable(false);
+        Credenciales.setToolTipText("");
+
+        lblCredencial.setText("Credencial");
+        lblCredencial.setVisible(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -413,11 +464,6 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BotonEliminarSeleccion))
-                    .addComponent(CatalogoItems, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel8)
@@ -434,7 +480,19 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BCerrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BCrear)))
+                        .addComponent(BCrearPedido))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TipoDePago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Credenciales)
+                            .addComponent(BotonEliminarSeleccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblCredencial)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(CatalogoItems, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -452,11 +510,18 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonEliminarSeleccion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BotonEliminarSeleccion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TipoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblCredencial)
+                        .addGap(1, 1, 1)
+                        .addComponent(Credenciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BCerrar)
-                    .addComponent(BCrear))
+                    .addComponent(BCrearPedido))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -473,7 +538,9 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
 
     private void BotonGenerarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGenerarItemActionPerformed
         String dniVend = TextoDni.getText();
+        ValidationMemory vdmemory = new ValidationMemory();
         
+        if(vdmemory.vendedorExists(dniVend)){
         switch(opcion){
             case 0 ->  { // PLATOS
             List<Plato> listaPlatos = controllerpedido.obtenerPlatos(dniVend);
@@ -486,6 +553,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         
             for(Plato aux : listaPlatos){
                 modeloPlatos.addRow(new Object[]{
+                    aux.getId(),
                     aux.getCategoria().getDesc(),
                     aux.getNombre(),
                     aux.getPrecio(),
@@ -504,6 +572,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         
             for(Plato aux : listaPlatos){
                 modeloPlatos.addRow(new Object[]{
+                    aux.getId(),
                     aux.getCategoria().getDesc(),
                     aux.getNombre(),
                     aux.getPrecio(),
@@ -522,6 +591,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             
             for(Bebida aux : listaBebidas){
                 modeloBebidas.addRow(new Object []{
+                    aux.getId(),
                     aux.getCategoria().getDesc(),
                     aux.getNombre(),
                     aux.getPrecio(),
@@ -542,6 +612,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             
             for(Bebida aux : listaBebidas){
                 modeloBebidas.addRow(new Object []{
+                    aux.getId(),
                     aux.getCategoria().getDesc(),
                     aux.getNombre(),
                     aux.getPrecio(),
@@ -549,9 +620,13 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                     "+"
                     });
                 }
-            break;    
-            }   
-        } 
+                break;    
+                }   
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No existe el vendedor indicado");
+        }
     }//GEN-LAST:event_BotonGenerarItemActionPerformed
 
     private void TablaPlatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPlatosMouseClicked
@@ -570,7 +645,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
                vegetariano = "Si";
            } else vegetariano = "No";
            
-           JOptionPane.showMessageDialog(null, "Descripcion: "+ aux.getDescripcion() + "\n Calorias: "+aux.getCalorias() + "\n Vegetariano: " + vegetariano + "\n Vegano: " + vegano);
+           JOptionPane.showMessageDialog(null, "Descripcion: "+ aux.getDescripcion() + "\n Calorias: "+aux.getCalorias() + "\n Vegetariano: " + vegetariano + "\n Vegano: " + vegano + "\n ID: " + aux.getId());
        }
     }//GEN-LAST:event_TablaPlatosMouseClicked
 
@@ -638,18 +713,24 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor, marque un plato para agregar");
         }
         else{
-            agregarItemSeleccionado("PLATO",(String)TablaPlatos.getValueAt(selectedRow,1),(double)TablaPlatos.getValueAt(selectedRow,2));
+            agregarItemSeleccionado("PLATO", (int) TablaPlatos.getValueAt(selectedRow, 0), (String)TablaPlatos.getValueAt(selectedRow,2),(double)TablaPlatos.getValueAt(selectedRow,3));
         }
         
     }//GEN-LAST:event_BotonAgregarPlatoActionPerformed
-    private void agregarItemSeleccionado(String Tipo,String nombre,double precio){
+    private void agregarItemSeleccionado(String Tipo, int ID, String nombre,double precio){
         DefaultTableModel modelTablaItemSeleccionado = (DefaultTableModel) TablaItemSeleccionado.getModel();
+        TipoDePago.setModel(new DefaultComboBoxModel<>(Arrays.stream(TipoPago.values())
+                                            .map(Enum::name)  // Mapea los valores del enum a String
+                                            .toArray(String[]::new))); // Convierte en un array de Strings
+        TipoDePago.setVisible(true);
+        
         if(rowExist(modelTablaItemSeleccionado, nombre)){
-            JOptionPane.showMessageDialog(null, "Este plato ya ha sido agregado");
+            JOptionPane.showMessageDialog(null, "Este item ya ha sido agregado");
         }else{
-            modelTablaItemSeleccionado.addRow(new Object[]{Tipo, nombre,precio,1, "-", "+"});
+            modelTablaItemSeleccionado.addRow(new Object[]{Tipo, ID, nombre, precio, 1, "-", "+"});
         }
     }
+    
     private boolean rowExist(DefaultTableModel modelTable, String nombre){
         for(int i = 0; i <modelTable.getRowCount() ;i++){
             if(modelTable.getValueAt(i, 1).equals(nombre)) return true;
@@ -657,7 +738,25 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
         return false;
     }
     private void TablaItemSeleccionadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaItemSeleccionadoMouseClicked
-       
+        int fila = TablaItemSeleccionado.rowAtPoint(evt.getPoint());
+        int columna = TablaItemSeleccionado.columnAtPoint(evt.getPoint());
+        int cantidad;
+        
+        if(columna == 5){
+            cantidad = (int) TablaItemSeleccionado.getValueAt(fila, 4);
+            
+            if(cantidad > 1){
+              TablaItemSeleccionado.setValueAt(cantidad-1, fila, 4);
+            } else {
+                JOptionPane.showMessageDialog(null, "Cantidad mínima alcanzada");
+            }
+        }
+        
+        if(columna == 6){
+            cantidad = (int) TablaItemSeleccionado.getValueAt(fila, 4);
+            
+            TablaItemSeleccionado.setValueAt(cantidad+1, fila, 4);
+        }
     }//GEN-LAST:event_TablaItemSeleccionadoMouseClicked
 
     private void BotonEliminarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarSeleccionActionPerformed
@@ -679,7 +778,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor, marque un plato para agregar");
         }
         else{
-            agregarItemSeleccionado("PLATO",(String)TablaPlatosSinTACC.getValueAt(selectedRow,1),(double)TablaPlatosSinTACC.getValueAt(selectedRow,2));
+            agregarItemSeleccionado("PLATO", (int) TablaPlatosSinTACC.getValueAt(selectedRow,0), (String)TablaPlatosSinTACC.getValueAt(selectedRow,2),(double)TablaPlatosSinTACC.getValueAt(selectedRow,3));
         }
     }//GEN-LAST:event_BotonAgregarSinTaccActionPerformed
 
@@ -690,7 +789,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor, marque un bebida para agregar");
         }
         else{
-            agregarItemSeleccionado("BEBIDA",(String)TablaBebida.getValueAt(selectedRow,1),(double)TablaBebida.getValueAt(selectedRow,2));
+            agregarItemSeleccionado("BEBIDA", (int) TablaBebida.getValueAt(selectedRow, 0), (String)TablaBebida.getValueAt(selectedRow,2),(double)TablaBebida.getValueAt(selectedRow,3));
         }
     }//GEN-LAST:event_BotonAgregarBebidaActionPerformed
 
@@ -701,14 +800,81 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor, marque un bebida para agregar");
         }
         else{
-            agregarItemSeleccionado("BEBIDA",(String)TablaBebidaAlcoholica.getValueAt(selectedRow,1),(double)TablaBebidaAlcoholica.getValueAt(selectedRow,2));
+            agregarItemSeleccionado("BEBIDA", (int) TablaBebidaAlcoholica.getValueAt(selectedRow,0), (String)TablaBebidaAlcoholica.getValueAt(selectedRow,2),(double)TablaBebidaAlcoholica.getValueAt(selectedRow,3));
         }
     }//GEN-LAST:event_BotonAgregarBebidaAlcoholicasActionPerformed
+
+    private void BCrearPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCrearPedidoActionPerformed
+
+        PedidoDTO pedidoDTO = new PedidoDTO();
+        List<ItemsPedidoDTO> listaItemsPedido = new ArrayList();
+        ValidationMemory vmemory = new ValidationMemory();
+        PedidoController pcontroller = new PedidoController();
+        String cuitCliente = TextoCuit.getText();
+        String dniVendedor = TextoDni.getText();
+        String metodoPago = (String) TipoDePago.getSelectedItem();
+        String credenciales = Credenciales.getText();
+        double montoPago = 0;
+        int selectedIndex = TipoDePago.getSelectedIndex();
+        
+        for(int i = 0; i < TablaItemSeleccionado.getRowCount() ;i++){
+            ItemsPedidoDTO itemsDTO = new ItemsPedidoDTO();
+            
+            itemsDTO.setIdItem((int) TablaItemSeleccionado.getValueAt(i, 1));
+            itemsDTO.setCantidad((int) TablaItemSeleccionado.getValueAt(i, 4));
+            
+            listaItemsPedido.add(itemsDTO);
+            montoPago += ((double) TablaItemSeleccionado.getValueAt(i, 3));
+        }
+        
+        if(credenciales.equals("")){
+            if(selectedIndex == 0){}
+            else{
+                JOptionPane.showMessageDialog(null, "Complete el campo segun su cbu/cvu o alias");
+            }
+        }
+        
+        if(vmemory.ValidarCliente(cuitCliente) && !cuitCliente.equals("")){
+            pcontroller.CrearPedido(cuitCliente, dniVendedor, metodoPago, listaItemsPedido, montoPago, credenciales);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No existe cliente con el cuit introducido");
+        }
+        
+        
+    }//GEN-LAST:event_BCrearPedidoActionPerformed
+
+    private void TipoDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TipoDePagoActionPerformed
+        int selectedIndex = TipoDePago.getSelectedIndex();
+        
+        switch(selectedIndex){
+            case 0 -> {
+                Credenciales.setVisible(false);
+                lblCredencial.setText("");
+                lblCredencial.setVisible(false);
+            }
+            
+            case 1 -> {
+                Credenciales.setVisible(true);
+                Credenciales.setEditable(true);
+                lblCredencial.setText("CVU/CBU:");
+                lblCredencial.setVisible(true);
+            }
+                
+            case 2 -> {
+                Credenciales.setVisible(true);
+                Credenciales.setEditable(true);
+                lblCredencial.setText("ALIAS:");
+                lblCredencial.setVisible(true);
+            }
+        }
+        
+    }//GEN-LAST:event_TipoDePagoActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BCerrar;
-    private javax.swing.JButton BCrear;
+    private javax.swing.JButton BCrearPedido;
     private javax.swing.JButton BotonAgregarBebida;
     private javax.swing.JButton BotonAgregarBebidaAlcoholicas;
     private javax.swing.JButton BotonAgregarPlato;
@@ -716,6 +882,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     private javax.swing.JButton BotonEliminarSeleccion;
     private javax.swing.JButton BotonGenerarItem;
     private javax.swing.JTabbedPane CatalogoItems;
+    private javax.swing.JTextField Credenciales;
     private javax.swing.JPanel PanelBebidas;
     private javax.swing.JPanel PanelBebidasConAlcohol;
     private javax.swing.JPanel PanelPlatos;
@@ -727,6 +894,7 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     private javax.swing.JTable TablaPlatosSinTACC;
     private javax.swing.JTextField TextoCuit;
     private javax.swing.JTextField TextoDni;
+    private javax.swing.JComboBox<String> TipoDePago;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -734,5 +902,6 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JLabel lblCredencial;
     // End of variables declaration//GEN-END:variables
 }

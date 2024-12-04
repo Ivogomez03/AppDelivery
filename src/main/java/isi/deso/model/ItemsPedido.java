@@ -14,6 +14,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Items_Pedido")
 public class ItemsPedido {
+    
+    public ItemsPedido(){}
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_items_pedido", nullable = false)
@@ -32,10 +35,9 @@ public class ItemsPedido {
     
    
     
-    public ItemsPedido(int cant,ItemMenu item, int pedido){
+    public ItemsPedido(int cant,ItemMenu item){
         this.itemMenu = item;
         this.cantidad = cant;
-        this.id_items_pedido = pedido;
     }
     
     public ItemMenu getItemMenu(){
@@ -58,8 +60,8 @@ public class ItemsPedido {
     public void setCantidad(int cant){
         this.cantidad = cant;
     }
-    public void setIDPedido(int pedido){
-        this.id_items_pedido = pedido;
+    public void setPedido(Pedido pedido){
+        this.pedido = pedido;
     }
     public double getPrecio(){
         return this.itemMenu.getPrecio()*this.cantidad;

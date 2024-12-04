@@ -10,18 +10,17 @@ import java.util.ArrayList;
  *
  * @author tobir
  */
-public  class Transferencia extends Pago
+/*public  class Transferencia extends Pago
 {
 	private final String cuit;
 	private final String cbu;
 	
 	public Transferencia(String cbu, String cuit) {
-            super(0, TipoPago.TRANSFERENCIA);
+           
             this.cbu = cbu;
             this.cuit = cuit;
     	}
-	
-        @Override
+
 	public  void realizarPago(ArrayList < ItemsPedido > l){
 		double suma = 0.0;
                 for(int i=0 ; i<l.size(); ++i)
@@ -39,4 +38,4 @@ public  class Transferencia extends Pago
         {
             return this.cbu;
         }
-}
+}*/

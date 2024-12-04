@@ -21,7 +21,8 @@
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        
+        <property name="hibernate.use_sql_comments">true</property>
+        <property name="hibernate.type.descriptor.sql.BasicBinder">TRACE</property>
         <!-- Ejecución automática del archivo import.sql -->
         <!-- create-drop, update, validate o create -->
         <property name="hibernate.hbm2ddl.auto">update</property> 
