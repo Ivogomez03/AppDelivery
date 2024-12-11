@@ -38,8 +38,11 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<Pedido>();
     
+    boolean activo;
+    
     public Cliente(){
         this.pedidos = new ArrayList<>();
+        this.activo = true;
     }
     
     public Cliente(String email, String cuit, String direccion, double lat, double lng){
@@ -47,6 +50,7 @@ public class Cliente {
         this.cuit=cuit;
         this.direccion=direccion;
         this.coordenadas = new Coordenada(lat,lng);
+        this.activo = true;
     } 
     
     public int getId(){
@@ -82,6 +86,12 @@ public class Cliente {
     } 
     public void setCoordenada(Coordenada coordenada){
        this.coordenadas = coordenada;
+    }
+    public void setCoordenadaEntidad(Coordenada coordenada){
+        this.coordenadas = coordenada;
+    }
+    public void setActivo(boolean activo){
+        this.activo = activo;
     }
     public void setPedidos(List<Pedido> items){
         this.pedidos = items;

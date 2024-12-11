@@ -8,6 +8,7 @@ import isi.deso.controller.ClienteController;
 import isi.deso.model.Cliente;
 import isi.deso.model.Coordenada;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,6 +40,8 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         MostrarTodosClientes = new javax.swing.JButton();
         BuscarCliente = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
 
         IdentificadorCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +97,20 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
             }
         });
 
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,6 +125,10 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
                         .addComponent(IdentificadorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BuscarCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Editar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Eliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(MostrarTodosClientes)))
                 .addContainerGap())
@@ -120,7 +141,9 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(IdentificadorCliente)
                     .addComponent(MostrarTodosClientes)
-                    .addComponent(BuscarCliente))
+                    .addComponent(BuscarCliente)
+                    .addComponent(Editar)
+                    .addComponent(Eliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -173,9 +196,58 @@ public class SubPanelClienteBuscar extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_MostrarTodosClientesActionPerformed
 
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        int row = jTable1.getSelectedRow();
+       
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un cliente de la tabla");
+        }
+        else {
+            String cuit = (String) jTable1.getValueAt(row, 1);
+            
+            JFrame ventana = new JFrame("Mi Ventana");
+            ventana.setSize(470, 360);
+        
+        // Crear el panel y agregarlo a la ventana
+        SubPanelClienteModificar panel = new SubPanelClienteModificar(cuit);
+        ventana.add(panel);
+        
+        // Hacer visible la ventana
+        ventana.setVisible(true); 
+        }
+    }//GEN-LAST:event_EditarActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        JFrame frame = new JFrame("Confirmar Eliminacion");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        int row = jTable1.getSelectedRow();
+        
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un cliente de la tabla");
+        }
+        else{
+            int id = (int) jTable1.getValueAt(row, 0);
+            int response = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que deseas eliminar al Cliente?",
+                        "Confirmar salida",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (response == JOptionPane.YES_OPTION){
+                    ccontroller.eliminarCliente(id);
+                }
+        }
+    }//GEN-LAST:event_EliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuscarCliente;
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton Eliminar;
     private javax.swing.JTextField IdentificadorCliente;
     private javax.swing.JButton MostrarTodosClientes;
     private javax.swing.JLabel jLabel1;

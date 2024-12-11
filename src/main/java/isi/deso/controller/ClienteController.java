@@ -28,19 +28,6 @@ public class ClienteController {
         this.cmemory = new ClienteMemory();
         }
     
-    public ClienteController(PanelCliente panelCliente, SubPanelClienteBuscar buscarPanel, SubPanelClienteCrear crearPanel){
-        this.panelCliente = panelCliente;
-        this.buscarPanel = buscarPanel;
-        this.crearPanel = crearPanel;
-        this.clienteDTO = new ClienteDTO();
-        
-        initListeners();
-    }
-
-    private void initListeners() {
-        
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
     public void crearCliente(String direccion, String email, double latitud, double longitud, String CUIT){
         
@@ -56,6 +43,21 @@ public class ClienteController {
     
     public Cliente buscarCliente(String CUIT){
         return cmemory.buscarCliente(CUIT);
+    }
+    
+    public void modificarCliente(int id, String email, String CUIT, String direccion, double latitud, double longitud){
+      
+        clienteDTO.setEmail(email);
+        clienteDTO.setCUIT(CUIT);
+        clienteDTO.setDireccion(direccion);
+        clienteDTO.setLatitud(latitud);
+        clienteDTO.setLongitud(longitud);
+        
+        cmemory.modificarCliente(clienteDTO, id);
+    }
+    
+    public void eliminarCliente(int id){
+        cmemory.eliminarCliente(id);
     }
     
     public List<Cliente> mostrarTodosClientes(){

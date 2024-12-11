@@ -49,6 +49,28 @@ public class ClienteMemory{
         
     }
     
+    public void modificarCliente(ClienteDTO clienteDTO, int id){
+        Cliente cliente = new Cliente(clienteDTO.getEmail(), clienteDTO.getCuit(), clienteDTO.getDireccion(),clienteDTO.getLatitud(),clienteDTO.getLongitud());
+        cliente.setid(id);
+        try{
+            clienteDAO.modificarCliente(cliente);
+            System.out.println("Se modificó de forma exitosa");
+        }catch(RuntimeException e){
+            System.out.println("Ocurrio un error al intentar modificar el cliente");
+            e.printStackTrace();
+        }
+    }
+    
+    public void eliminarCliente(int id){
+        try{
+            clienteDAO.eliminarCliente(id);
+            System.out.println("Se eliminó de forma exitosa");
+        }catch(RuntimeException e){
+            System.out.println("Ocurrio un error al intentar eliminar el cliente");
+            e.printStackTrace();
+        }
+    }
+    
     public List<Cliente> buscarTodosClientes(){
         List<Cliente> LCliente = clienteDAO.mostrarTodosClientes();
         

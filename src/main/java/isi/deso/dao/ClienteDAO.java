@@ -5,6 +5,7 @@
 package isi.deso.dao;
 
 import isi.deso.model.Cliente;
+import isi.deso.model.Coordenada;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import java.util.ArrayList;
@@ -32,13 +33,46 @@ public class ClienteDAO {
         throw new PersistenceException("Error al agregar el Cliente", e);
         }    
 }
-    public void eliminarCliente(){}
-    public void actualizarCliente(){}
+    public void eliminarCliente(int id){
+        Transaction transaction = null;
+      try(Session session = HibernateUtil.getSessionFactory().openSession()){
+          transaction = session.beginTransaction();
+          Cliente cliente = session.find(Cliente.class, id);
+          cliente.setActivo(false);
+          session.merge(cliente);
+          transaction.commit();
+      }catch(PersistenceException e){
+          if(transaction != null){
+              transaction.rollback();
+          }
+          e.printStackTrace();
+        throw new PersistenceException("Error al editar el Vendedor", e);
+      }
+    }
+    public void modificarCliente(Cliente cliente){
+        Transaction transaction = null;
+      try(Session session = HibernateUtil.getSessionFactory().openSession()){
+          transaction = session.beginTransaction();
+          Cliente clienteMock = session.find(Cliente.class, cliente.getId());
+          Coordenada coordenada = clienteMock.getCoordenada();
+          coordenada.setLat(cliente.getCoordenada().getLat());
+          coordenada.setLng(cliente.getCoordenada().getLng());
+          cliente.setCoordenadaEntidad(coordenada);
+          session.merge(cliente);
+          transaction.commit();
+      }catch(PersistenceException e){
+          if(transaction != null){
+              transaction.rollback();
+          }
+          e.printStackTrace();
+        throw new PersistenceException("Error al editar el Vendedor", e);
+      }
+    }
     
     public Cliente buscarCliente(String cuit){
     
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-        String jpql = "FROM Cliente c WHERE c.cuit = :cuit";
+        String jpql = "FROM Cliente c WHERE c.cuit = :cuit and c.activo = true";
         Query<Cliente> query = session.createQuery(jpql, Cliente.class);
         query.setParameter("cuit", cuit);
         return query.uniqueResult();
@@ -52,7 +86,7 @@ public class ClienteDAO {
     public List<Cliente> mostrarTodosClientes(){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Realiza la consulta HQL para obtener todos los vendedores
-            String hql = "FROM Cliente";
+            String hql = "FROM Cliente c WHERE c.activo = true";
             Query<Cliente> query = session.createQuery(hql, Cliente.class);
 
             return query.list();

@@ -45,7 +45,11 @@ public class Vendedor implements Observer{
     @OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
     private List<Pedido> pedidosRecibidos; //lista de los pedidos que se le realizaron al vendedor
     
-    public Vendedor(){}
+    boolean activo;
+    
+    public Vendedor(){
+        this.activo = true;
+    }
     
     public Vendedor(String nombre, String apellido, String direccion,String dni, double lat, double lng, List items){
 
@@ -55,6 +59,7 @@ public class Vendedor implements Observer{
         this.dni = dni;
         this.coordenadas = new Coordenada(lat,lng);
         this.items = items;
+        this.activo = true;
     } 
 
     @Override
@@ -172,6 +177,9 @@ public class Vendedor implements Observer{
     public  String getNombre(){
         return this.nombre;
     }    
+    public String getApellido(){
+        return this.apellido;
+    }
     public  String getDireccion(){
         return this.direccion;
     }
@@ -198,12 +206,19 @@ public class Vendedor implements Observer{
        this.coordenadas.setLat(lat);
        this.coordenadas.setLng(lng);
     }
+    public void setCoordenadaEntidad(Coordenada coordenada){
+        this.coordenadas = coordenada;
+    }
     public void setListaArticulos(List articulos){
         this.items = articulos;
     }
 
     public void setDNI(String dni){
         this.dni = dni;
+    }
+    
+    public void setActivo(boolean activo){
+        this.activo = activo;
     }
     
     public void addItem(ItemMenu item){

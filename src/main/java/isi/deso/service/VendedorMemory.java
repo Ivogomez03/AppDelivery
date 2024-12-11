@@ -22,19 +22,37 @@ public class VendedorMemory {
     }
     
     public void agregarVendedor(VendedorDTO vendedorDTO){
-        Vendedor vendedorNew = new Vendedor(vendedorDTO.getNombre(),vendedorDTO.getApellido(), vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(),vendedorDTO.getItems());
+        Vendedor vendedorNew = new Vendedor(vendedorDTO.getNombre(),vendedorDTO.getApellido(), vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(), vendedorDTO.getItems());
         
         try{
             vendedorDAO.crearVendedor(vendedorNew);
             System.out.println("Se agrego de forma exitosa");
         }catch(RuntimeException e){
-            System.out.println("Ocurrio un error al intentar agregar el vededor");
+            System.out.println("Ocurrio un error al intentar agregar el vendedor");
             e.printStackTrace();
         }
     };
     public void listarVendedor(){};
-    public void eliminarVendedor(){};
-    public void actualizarVendedor(){};
+    public void eliminarVendedor(int id){
+        try{
+            vendedorDAO.eliminarVendedor(id);
+            System.out.println("Se eliminó de forma exitosa");
+        }catch(RuntimeException e){
+            System.out.println("Ocurrio un error al intentar eliminar el vendedor");
+            e.printStackTrace();
+        }
+    };
+    public void actualizarVendedor(VendedorDTO vendedorDTO, int id){
+        Vendedor vendedor = new Vendedor(vendedorDTO.getNombre(),vendedorDTO.getApellido(), vendedorDTO.getDireccion(),vendedorDTO.getDni(),vendedorDTO.getLatitud(),vendedorDTO.getLongitud(), vendedorDTO.getItems());
+        vendedor.setid(id);
+        try{
+            vendedorDAO.actualizarVendedor(vendedor);
+            System.out.println("Se modificó de forma exitosa");
+        }catch(RuntimeException e){
+            System.out.println("Ocurrio un error al intentar modificar el vendedor");
+            e.printStackTrace();
+        }
+    };
     
     public Vendedor buscarVendedor(String dni){
         Vendedor vendedor = vendedorDAO.buscarVendedor(dni);

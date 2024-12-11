@@ -8,6 +8,7 @@ import isi.deso.controller.VendedorController;
 import isi.deso.model.Coordenada;
 import isi.deso.model.Vendedor;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +42,8 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         MostrarTodosVendedores = new javax.swing.JButton();
         Buscar = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
 
         IdentificacionVendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,14 +58,14 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Identificacion", "Nombre", "Direccion", "Cooredenadas"
+                "Identificacion", "DNI", "Nombre", "Direccion", "Cooredenadas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -79,6 +82,7 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
         }
 
         MostrarTodosVendedores.setText("Mostrar todos");
@@ -92,6 +96,20 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
         Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarActionPerformed(evt);
+            }
+        });
+
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
             }
         });
 
@@ -109,6 +127,10 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
                         .addComponent(IdentificacionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Buscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Editar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Eliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(MostrarTodosVendedores)))
                 .addContainerGap())
@@ -121,7 +143,9 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(IdentificacionVendedor)
                     .addComponent(MostrarTodosVendedores)
-                    .addComponent(Buscar))
+                    .addComponent(Buscar)
+                    .addComponent(Editar)
+                    .addComponent(Eliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -141,11 +165,12 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
             } else {
                 DefaultTableModel model = new DefaultTableModel(new Object[]{"Id", "Nombre", "Direccion", "Coordenadas"}, 0);
                 int id = vendedor.getId();
+                String dni = vendedor.getDni();
                 String nombre = vendedor.getNombre();
                 String direccion = vendedor.getDireccion();
                 Coordenada coordenadas = vendedor.getCoordenada();
                 String coordtext = "(" + coordenadas.getLat() + ", " + coordenadas.getLng() + ")";
-                model.addRow(new Object[]{id, nombre, direccion, coordtext});
+                model.addRow(new Object[]{id, dni, nombre, direccion, coordtext});
                 
                 jTable1.setModel(model);
             }
@@ -162,20 +187,74 @@ public class SubPanelVendedorBuscar extends javax.swing.JPanel {
             
             for(Vendedor vendedor : LVendedor) {
                 int id = vendedor.getId();
+                String dni = vendedor.getDni();
                 String nombre = vendedor.getNombre();
                 String direccion = vendedor.getDireccion();
                 Coordenada coordenadas = vendedor.getCoordenada();
                 String coordtext = "(" + coordenadas.getLat() + ", " + coordenadas.getLng() + ")";
-                model.addRow(new Object[]{id, nombre, direccion, coordtext});
+                model.addRow(new Object[]{id, dni, nombre, direccion, coordtext});
             }
             
             jTable1.setModel(model);
         }
     }//GEN-LAST:event_MostrarTodosVendedoresActionPerformed
 
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        int row = jTable1.getSelectedRow();
+       
+        
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un vendedor de la tabla");
+        }
+        else {
+            String dni = (String) jTable1.getValueAt(row, 1);
+            
+            JFrame ventana = new JFrame("Mi Ventana");
+            ventana.setSize(470, 360);
+        
+        // Crear el panel y agregarlo a la ventana
+        SubPanelVendedorModificar panel = new SubPanelVendedorModificar(dni);
+        ventana.add(panel);
+        
+        // Hacer visible la ventana
+        ventana.setVisible(true); 
+        }
+    }//GEN-LAST:event_EditarActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        JFrame frame = new JFrame("Confirmar Eliminacion");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        int row = jTable1.getSelectedRow();
+        
+        
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un vendedor de la tabla");
+        }
+        else{
+            int id = (int) jTable1.getValueAt(row, 0);
+            int response = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que deseas eliminar al Vendedor?",
+                        "Confirmar salida",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (response == JOptionPane.YES_OPTION){
+                    vcontroller.eliminarVendedor(id);
+                }
+        }
+        
+        
+    }//GEN-LAST:event_EliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton Eliminar;
     private javax.swing.JTextField IdentificacionVendedor;
     private javax.swing.JButton MostrarTodosVendedores;
     private javax.swing.JLabel jLabel1;

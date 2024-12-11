@@ -26,7 +26,7 @@ public class ValidationMemory {
     }
     
     public boolean uniquenessValidationVendedor(String dni) { 
-        String hql = "SELECT CASE WHEN EXISTS (FROM Vendedor v WHERE v.dni = :dni) THEN true ELSE false END";
+        String hql = "SELECT CASE WHEN EXISTS (FROM Vendedor v WHERE v.dni = :dni and v.activo = true) THEN true ELSE false END";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Ejecuta la consulta y busca un registro con el DNI
@@ -46,7 +46,7 @@ public class ValidationMemory {
     }
     public boolean ValidarCliente(String CUIT) { 
         
-        String hql = "SELECT COUNT(c) FROM Cliente c WHERE c.cuit = :cuit";
+        String hql = "SELECT COUNT(c) FROM Cliente c WHERE c.cuit = :cuit and c.valido = true";
 
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Long count = session.createQuery(hql, Long.class)

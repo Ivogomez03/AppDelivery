@@ -5,6 +5,7 @@ package isi.deso.dao;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 
+import isi.deso.model.Coordenada;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
 import util.HibernateUtil;
@@ -34,12 +35,45 @@ public class VendedorDAO {
         throw new PersistenceException("Error al agregar el Vendedor", e);
       }
     };
-    public  void eliminarVendedor(){};
-    public  void actualizarVendedor(){};
+    public void eliminarVendedor(int id){
+        Transaction transaction = null;
+      try(Session session = HibernateUtil.getSessionFactory().openSession()){
+          transaction = session.beginTransaction();
+          Vendedor vendedor = session.find(Vendedor.class, id);
+          vendedor.setActivo(false);
+          session.merge(vendedor);
+          transaction.commit();
+      }catch(PersistenceException e){
+          if(transaction != null){
+              transaction.rollback();
+          }
+          e.printStackTrace();
+        throw new PersistenceException("Error al editar el Vendedor", e);
+      }
+    };
+    public  void actualizarVendedor(Vendedor vendedor){
+        Transaction transaction = null;
+      try(Session session = HibernateUtil.getSessionFactory().openSession()){
+          transaction = session.beginTransaction();
+          Vendedor vendedorMock = session.find(Vendedor.class, vendedor.getId());
+          Coordenada coordenada = vendedorMock.getCoordenada();
+          coordenada.setLat(vendedor.getCoordenada().getLat());
+          coordenada.setLng(vendedor.getCoordenada().getLng());
+          vendedor.setCoordenadaEntidad(coordenada);
+          session.merge(vendedor);
+          transaction.commit();
+      }catch(PersistenceException e){
+          if(transaction != null){
+              transaction.rollback();
+          }
+          e.printStackTrace();
+        throw new PersistenceException("Error al editar el Vendedor", e);
+      }
+    };
     
     public  Vendedor buscarVendedor(String dni){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String jpql = "FROM Vendedor v WHERE v.dni = :dni";
+            String jpql = "FROM Vendedor v JOIN FETCH v.coordenadas WHERE v.dni = :dni and v.activo = true";
             Query<Vendedor> query = session.createQuery(jpql, Vendedor.class);
             query.setParameter("dni", dni);
             return query.uniqueResult();
@@ -53,7 +87,7 @@ public class VendedorDAO {
     public List<Vendedor> mostrarTodosVendedores(){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Realiza la consulta HQL para obtener todos los vendedores
-            String hql = "FROM Vendedor";
+            String hql = "FROM Vendedor v WHERE v.activo = true";
             Query<Vendedor> query = session.createQuery(hql, Vendedor.class);
 
             return query.list();

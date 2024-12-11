@@ -42,8 +42,23 @@ public class VendedorController {
         vmemory.agregarVendedor(vendedorDTO);
     }
     
+    public void modificarVendedor(int id, String nombre, String apellido, String dni, String direccion, double latitud, double longitud){
+        vendedorDTO.setNombre(nombre);
+        vendedorDTO.setApellido(apellido);
+        vendedorDTO.setDni(dni);
+        vendedorDTO.setDireccion(direccion);
+        vendedorDTO.setLatitud(latitud);
+        vendedorDTO.setLongitud(longitud);
+        
+        vmemory.actualizarVendedor(vendedorDTO, id);
+    }
+    
     public Vendedor buscarVendedor(String dni){
         return vmemory.buscarVendedor(dni);
+    }
+    
+    public void eliminarVendedor(int id){
+        vmemory.eliminarVendedor(id);
     }
     
     public List<Vendedor> mostrarTodosVendedores(){
