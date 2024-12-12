@@ -4,12 +4,24 @@
  */
 package isi.deso.tp.Paneles;
 
+import isi.deso.controller.ItemMenuController;
+import isi.deso.model.Bebida;
+import isi.deso.model.Plato;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Francisco
  */
 public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
-
+    ItemMenuController icontroller = new ItemMenuController();
+    int opcion;
     /**
      * Creates new form SubPanelVendedor
      */
@@ -26,95 +38,427 @@ public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        IdentificacionVendedor = new javax.swing.JTextField();
+        nombreItem = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        buscarTodos = new javax.swing.JButton();
+        ItemPane = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        TablaPlatos = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaBebida = new javax.swing.JTable();
+        buscarItem = new javax.swing.JButton();
+        DeshabilitarItem = new javax.swing.JButton();
+        HabilitarItem = new javax.swing.JButton();
 
-        IdentificacionVendedor.addActionListener(new java.awt.event.ActionListener() {
+        nombreItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdentificacionVendedorActionPerformed(evt);
+                nombreItemActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Identificacion Item");
+        jLabel1.setText("Nombre Item");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        buscarTodos.setText("Mostrar todos");
+        buscarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarTodosActionPerformed(evt);
+            }
+        });
+
+        ItemPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ItemPaneStateChanged(evt);
+            }
+        });
+
+        TablaPlatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Identificacion", "Tipo", "Nombre", "Calorias", "Precio", "Descripcion"
+                "ID", "Categoria", "Nombre", "Descripcion", "Precio", "Disponible"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(TablaPlatos);
+        if (TablaPlatos.getColumnModel().getColumnCount() > 0) {
+            TablaPlatos.getColumnModel().getColumn(0).setPreferredWidth(5);
+            TablaPlatos.getColumnModel().getColumn(4).setPreferredWidth(5);
+            TablaPlatos.getColumnModel().getColumn(5).setPreferredWidth(5);
         }
 
-        jButton1.setText("Mostrar todos");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        ItemPane.addTab("PLATO", jPanel1);
+
+        TablaBebida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Categoria", "Nombre", "Descripcion", "Precio", "Disponible"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TablaBebida);
+        if (TablaBebida.getColumnModel().getColumnCount() > 0) {
+            TablaBebida.getColumnModel().getColumn(0).setPreferredWidth(5);
+            TablaBebida.getColumnModel().getColumn(4).setPreferredWidth(5);
+            TablaBebida.getColumnModel().getColumn(5).setPreferredWidth(5);
+        }
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        ItemPane.addTab("BEBIDA", jPanel2);
+
+        buscarItem.setText("Buscar Item");
+        buscarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarItemActionPerformed(evt);
+            }
+        });
+
+        DeshabilitarItem.setText("Deshabilitar");
+        DeshabilitarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeshabilitarItemActionPerformed(evt);
+            }
+        });
+
+        HabilitarItem.setText("Habilitar");
+        HabilitarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HabilitarItemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+                    .addComponent(ItemPane, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IdentificacionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addComponent(nombreItem, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscarItem)
+                        .addGap(105, 105, 105)
+                        .addComponent(HabilitarItem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DeshabilitarItem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buscarTodos)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(IdentificacionVendedor)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(nombreItem)
+                    .addComponent(buscarTodos)
+                    .addComponent(buscarItem)
+                    .addComponent(DeshabilitarItem)
+                    .addComponent(HabilitarItem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ItemPane, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IdentificacionVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdentificacionVendedorActionPerformed
+    private void nombreItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IdentificacionVendedorActionPerformed
+    }//GEN-LAST:event_nombreItemActionPerformed
+
+    private void buscarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTodosActionPerformed
+        switch(opcion){
+            case 0 ->  { // PLATOS
+            List<Plato> listaPlatos = icontroller.obtenerTodosPlatos();
+        
+            DefaultTableModel modeloPlatos = (DefaultTableModel) TablaPlatos.getModel();
+            modeloPlatos.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPlatos);
+            TablaPlatos.setRowSorter(sorter);
+        
+            for(Plato aux : listaPlatos){
+
+                boolean disponible = aux.getDisponible();
+                String disponibilidad;
+                if(disponible){
+                    disponibilidad = "Si";
+                } else disponibilidad = "No";
+                
+                modeloPlatos.addRow(new Object[]{
+                    aux.getId(),
+                    aux.getCategoria().getDesc(),
+                    aux.getNombre(),
+                    aux.getDescripcion(),
+                    aux.getPrecio(),
+                    disponibilidad
+                    });
+                }
+                break;
+            }
+            case 1 -> { // BEBIDAS
+            List<Bebida> listaBebidas = icontroller.obtenerTodasBebidas();
+        
+            DefaultTableModel modeloBebidas = (DefaultTableModel) TablaBebida.getModel();
+            modeloBebidas.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloBebidas);
+            TablaBebida.setRowSorter(sorter);
+            
+            for(Bebida aux : listaBebidas){
+                
+                boolean disponible = aux.getDisponible();
+                String disponibilidad;
+                if(disponible){
+                    disponibilidad = "Si";
+                } else disponibilidad = "No";
+                
+                modeloBebidas.addRow(new Object []{
+                    aux.getId(),
+                    aux.getCategoria().getDesc(),
+                    aux.getNombre(),
+                    aux.getDescripcion(),
+                    aux.getPrecio(),
+                    disponibilidad
+                    });
+                }
+            break;
+            }
+        }
+    }//GEN-LAST:event_buscarTodosActionPerformed
+
+    private void ItemPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ItemPaneStateChanged
+        JTabbedPane sourceTabbedPane = (JTabbedPane) evt.getSource();
+        opcion = sourceTabbedPane.getSelectedIndex();
+    }//GEN-LAST:event_ItemPaneStateChanged
+
+    private void buscarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarItemActionPerformed
+        String nombre = nombreItem.getText();
+        
+        switch(opcion){
+            case 0 ->  { // PLATOS
+            List<Plato> listaPlatos = icontroller.obtenerPlatoPorNombre(nombre);
+        
+            DefaultTableModel modeloPlatos = (DefaultTableModel) TablaPlatos.getModel();
+            modeloPlatos.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPlatos);
+            TablaPlatos.setRowSorter(sorter);
+        
+            for(Plato aux : listaPlatos){
+
+                boolean disponible = aux.getDisponible();
+                String disponibilidad;
+                if(disponible){
+                    disponibilidad = "Si";
+                } else disponibilidad = "No";
+                
+                modeloPlatos.addRow(new Object[]{
+                    aux.getId(),
+                    aux.getCategoria().getDesc(),
+                    aux.getNombre(),
+                    aux.getDescripcion(),
+                    aux.getPrecio(),
+                    disponibilidad
+                    });
+                }
+                break;
+            }
+            case 1 -> { // BEBIDAS
+            List<Bebida> listaBebidas = icontroller.obtenerBebidaPorNombre(nombre);
+        
+            DefaultTableModel modeloBebidas = (DefaultTableModel) TablaBebida.getModel();
+            modeloBebidas.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloBebidas);
+            TablaBebida.setRowSorter(sorter);
+            
+            for(Bebida aux : listaBebidas){
+                
+                boolean disponible = aux.getDisponible();
+                String disponibilidad;
+                if(disponible){
+                    disponibilidad = "Si";
+                } else disponibilidad = "No";
+                
+                modeloBebidas.addRow(new Object []{
+                    aux.getId(),
+                    aux.getCategoria().getDesc(),
+                    aux.getNombre(),
+                    aux.getDescripcion(),
+                    aux.getPrecio(),
+                    disponibilidad
+                    });
+                }
+            break;
+            }
+        }
+    }//GEN-LAST:event_buscarItemActionPerformed
+
+    private void HabilitarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HabilitarItemActionPerformed
+        JFrame frame = new JFrame("Confirmar Habilitar");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        switch (opcion){
+            case 0 -> { //PLATO
+            int row = TablaPlatos.getSelectedRow();  
+            
+            if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un plato de la tabla");
+            }
+            else{
+                int id = (int) TablaPlatos.getValueAt(row, 0);
+                int response = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que desea habilitar este Item?",
+                        "Confirmar accion",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    if (response == JOptionPane.YES_OPTION){
+                        icontroller.habilitarItem(id, "Plato");
+                    }
+                }
+            }
+            case 1 -> { //BEBIDA
+                int row = TablaBebida.getSelectedRow();  
+            
+            if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una bebida de la tabla");
+            }
+            else{
+                int id = (int) TablaBebida.getValueAt(row, 0);
+                int response = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que desea habilitar este Item?",
+                        "Confirmar accion",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    if (response == JOptionPane.YES_OPTION){
+                        icontroller.habilitarItem(id, "Bebida");
+                    }
+                }
+            }   
+        }
+        
+    }//GEN-LAST:event_HabilitarItemActionPerformed
+
+    private void DeshabilitarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeshabilitarItemActionPerformed
+        JFrame frame = new JFrame("Confirmar Deshabilitar");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        switch (opcion){
+            case 0 -> { //PLATO
+            int row = TablaPlatos.getSelectedRow();  
+            
+            if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un plato de la tabla");
+            }
+            else{
+                int id = (int) TablaPlatos.getValueAt(row, 0);
+                int response = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que desea deshabilitar este Item?",
+                        "Confirmar accion",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    if (response == JOptionPane.YES_OPTION){
+                        icontroller.deshabilitarItem(id, "Plato");
+                    }
+                }
+            }
+            case 1 -> { //BEBIDA
+                int row = TablaBebida.getSelectedRow();  
+            
+            if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una bebida de la tabla");
+            }
+            else{
+                int id = (int) TablaBebida.getValueAt(row, 0);
+                int response = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que desea deshabilitar este Item?",
+                        "Confirmar accion",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    if (response == JOptionPane.YES_OPTION){
+                        icontroller.deshabilitarItem(id, "Bebida");
+                    }
+                }
+            }   
+        }
+    }//GEN-LAST:event_DeshabilitarItemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField IdentificacionVendedor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton DeshabilitarItem;
+    private javax.swing.JButton HabilitarItem;
+    private javax.swing.JTabbedPane ItemPane;
+    private javax.swing.JTable TablaBebida;
+    private javax.swing.JTable TablaPlatos;
+    private javax.swing.JButton buscarItem;
+    private javax.swing.JButton buscarTodos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField nombreItem;
     // End of variables declaration//GEN-END:variables
 }

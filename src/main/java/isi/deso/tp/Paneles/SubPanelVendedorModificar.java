@@ -7,9 +7,11 @@ package isi.deso.tp.Paneles;
 import isi.deso.controller.VendedorController;
 import isi.deso.model.Vendedor;
 import isi.deso.service.VendedorMemory;
+import java.awt.BorderLayout;
 import java.awt.Window;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -106,6 +108,11 @@ public class SubPanelVendedorModificar extends javax.swing.JPanel {
         });
 
         AgregarItem.setText("AgregarItem");
+        AgregarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarItemActionPerformed(evt);
+            }
+        });
 
         labelDNI.setText("Editando:");
 
@@ -211,10 +218,34 @@ public class SubPanelVendedorModificar extends javax.swing.JPanel {
                 }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void AgregarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarItemActionPerformed
+        String dni = this.getDniVendedor();
+            
+        JFrame ventana = new JFrame("Mi Ventana");
+        ventana.setSize(765,527);
+        
+        // Crear el panel y agregarlo a la ventana
+        SubPanelItemMenuCrear panel = new SubPanelItemMenuCrear(dni);
+        ventana.add(panel);
+        
+        // Hacer visible la ventana
+        ventana.setVisible(true); 
+    }//GEN-LAST:event_AgregarItemActionPerformed
+
 public String getDniVendedor(){
     return this.dniVendedor;
 }
     
+private void MostrarPanel(JPanel p){
+        p.setSize(765,527);
+        p.setLocation(0,0);
+        
+        this.removeAll();
+        this.add(p, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarItem;
     private javax.swing.JTextField Apellido;

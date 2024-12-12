@@ -46,12 +46,14 @@ public abstract class ItemMenu {
     @OneToMany(mappedBy = "itemMenu", fetch = FetchType.LAZY)
     private List<ItemsPedido> itemsPedidos;
     
+    private boolean disponible;
+    
     public abstract double peso(double p);
     public abstract boolean esComida();
     public abstract boolean esBebida();
    
     public ItemMenu(){
-        
+        disponible = true;
     }
     
     public ItemMenu(String nombre, String descripcion, Categoria categoria, double precio, boolean aptoVegano,Vendedor vendedor){
@@ -61,6 +63,7 @@ public abstract class ItemMenu {
         this.precio = precio;
         this.aptoVegano = aptoVegano;
         this.vendedor = vendedor;
+        this.disponible = true;
     }
 
     @Override
@@ -92,6 +95,9 @@ public abstract class ItemMenu {
     public Vendedor getVendedor(){
         return this.vendedor;
     }
+    public boolean getDisponible(){
+        return this.disponible;
+    }
     public void setId(int id){
         this.id = id;
     }
@@ -108,6 +114,10 @@ public abstract class ItemMenu {
     
     public void setAptoVegano(boolean apto){
         this.aptoVegano = apto;
+    }
+    
+    public void setDisponible(boolean disponible){
+        this.disponible = disponible;
     }
     public void setVendedor(Vendedor vendedor){
         this.vendedor = vendedor;

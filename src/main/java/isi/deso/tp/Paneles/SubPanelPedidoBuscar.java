@@ -3,13 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package isi.deso.tp.Paneles;
-
+import isi.deso.controller.PedidoController;
+import isi.deso.model.Pedido;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Francisco
  */
 public class SubPanelPedidoBuscar extends javax.swing.JPanel {
-
+    PedidoController pcontroller = new PedidoController();
     /**
      * Creates new form SubPanelVendedor
      */
@@ -26,33 +33,38 @@ public class SubPanelPedidoBuscar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        IdentificacionVendedor = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        Identificacion = new javax.swing.JTextField();
+        tipoParametro = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tablaPedido = new javax.swing.JTable();
+        mostrarPedidos = new javax.swing.JButton();
+        botonCliente = new javax.swing.JRadioButton();
+        botonVendedor = new javax.swing.JRadioButton();
+        botonBuscar = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
 
-        IdentificacionVendedor.addActionListener(new java.awt.event.ActionListener() {
+        Identificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdentificacionVendedorActionPerformed(evt);
+                IdentificacionActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Id Pedido");
+        tipoParametro.setText("Tipo de Dato");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "IdPedido", "Estado", "IdCliente", "TipoPago", "Monto"
+                "IdPedido", "Estado", "Cuit Cliente", "DNI Vendedor", "TipoPago", "Monto"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -63,16 +75,52 @@ public class SubPanelPedidoBuscar extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane1.setViewportView(tablaPedido);
+        if (tablaPedido.getColumnModel().getColumnCount() > 0) {
+            tablaPedido.getColumnModel().getColumn(0).setResizable(false);
+            tablaPedido.getColumnModel().getColumn(1).setResizable(false);
+            tablaPedido.getColumnModel().getColumn(2).setResizable(false);
+            tablaPedido.getColumnModel().getColumn(3).setResizable(false);
+            tablaPedido.getColumnModel().getColumn(4).setResizable(false);
+            tablaPedido.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jButton1.setText("Mostrar todos");
+        mostrarPedidos.setText("Mostrar todos");
+        mostrarPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarPedidosActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(botonCliente);
+        botonCliente.setText("Cliente");
+        botonCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonClienteActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(botonVendedor);
+        botonVendedor.setText("Vendedor");
+        botonVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVendedorActionPerformed(evt);
+            }
+        });
+
+        botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        botonCancelar.setText("Cancelar Pedido");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -81,39 +129,167 @@ public class SubPanelPedidoBuscar extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tipoParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IdentificacionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonVendedor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonBuscar)
+                        .addGap(33, 33, 33)
+                        .addComponent(botonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addComponent(mostrarPedidos)
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(IdentificacionVendedor)
-                    .addComponent(jButton1))
+                    .addComponent(tipoParametro)
+                    .addComponent(Identificacion)
+                    .addComponent(mostrarPedidos)
+                    .addComponent(botonCliente)
+                    .addComponent(botonVendedor)
+                    .addComponent(botonBuscar)
+                    .addComponent(botonCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(63, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IdentificacionVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdentificacionVendedorActionPerformed
+    private void IdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdentificacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IdentificacionVendedorActionPerformed
+    }//GEN-LAST:event_IdentificacionActionPerformed
+
+    private void mostrarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarPedidosActionPerformed
+            List<Pedido> pedidos = pcontroller.buscarTodosPedidos();
+            
+            DefaultTableModel modeloPedidos = (DefaultTableModel) tablaPedido.getModel();
+            modeloPedidos.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPedidos);
+            tablaPedido.setRowSorter(sorter);
+        
+            for(Pedido aux : pedidos){
+                
+                modeloPedidos.addRow(new Object[]{
+                    aux.getID(),
+                    aux.getEstado().toString(),
+                    aux.getCliente().getCuit(),
+                    aux.getVendedor().getDni(),
+                    aux.getPago().getTipoPago().toString(),
+                    aux.getPago().getMonto()
+                });
+                
+            }
+    }//GEN-LAST:event_mostrarPedidosActionPerformed
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        String identificacion = Identificacion.getText();
+        
+        if(botonCliente.isSelected()){
+            List<Pedido> pedidos = pcontroller.buscarPedidoPorCliente(identificacion);
+            
+            DefaultTableModel modeloPedidos = (DefaultTableModel) tablaPedido.getModel();
+            modeloPedidos.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPedidos);
+            tablaPedido.setRowSorter(sorter);
+        
+            for(Pedido aux : pedidos){
+                
+                modeloPedidos.addRow(new Object[]{
+                    aux.getID(),
+                    aux.getEstado().toString(),
+                    aux.getCliente().getCuit(),
+                    aux.getVendedor().getDni(),
+                    aux.getPago().getTipoPago().toString(),
+                    aux.getPago().getMonto()
+                });
+                
+            }
+        }
+        if(botonVendedor.isSelected()){
+            List<Pedido> pedidos = pcontroller.buscarPedidoPorVendedor(identificacion);
+            
+            DefaultTableModel modeloPedidos = (DefaultTableModel) tablaPedido.getModel();
+            modeloPedidos.setRowCount(0);
+        
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(modeloPedidos);
+            tablaPedido.setRowSorter(sorter);
+        
+            for(Pedido aux : pedidos){
+                
+                modeloPedidos.addRow(new Object[]{
+                    aux.getID(),
+                    aux.getEstado().toString(),
+                    aux.getCliente().getCuit(),
+                    aux.getVendedor().getDni(),
+                    aux.getPago().getTipoPago().toString(),
+                    aux.getPago().getMonto()
+                });
+                
+            }
+        }
+        else if(!botonCliente.isSelected() && !botonVendedor.isSelected()){
+            JOptionPane.showMessageDialog(null, "No se puede filtrar por criterio sin seleccionar un botón");
+        }
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
+        tipoParametro.setText("Cuit: ");
+    }//GEN-LAST:event_botonClienteActionPerformed
+
+    private void botonVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVendedorActionPerformed
+        tipoParametro.setText("DNI: ");
+    }//GEN-LAST:event_botonVendedorActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        JFrame frame = new JFrame("Confirmar Cancelación");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        int row = tablaPedido.getSelectedRow();  
+            
+        if(row == -1){
+        JOptionPane.showMessageDialog(null, "Por favor, seleccione un pedido de la tabla");
+        }
+        else{
+            int idPedido = (int) tablaPedido.getValueAt(row, 0);
+            int response = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que desea cancelar este pedido?",
+                        "Confirmar accion",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    if (response == JOptionPane.YES_OPTION){
+                        pcontroller.cambiarEstado(idPedido,"CANCELADO");
+                    }
+                }
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField IdentificacionVendedor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField Identificacion;
+    private javax.swing.JButton botonBuscar;
+    private javax.swing.JButton botonCancelar;
+    private javax.swing.JRadioButton botonCliente;
+    private javax.swing.JRadioButton botonVendedor;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton mostrarPedidos;
+    private javax.swing.JTable tablaPedido;
+    private javax.swing.JLabel tipoParametro;
     // End of variables declaration//GEN-END:variables
 }

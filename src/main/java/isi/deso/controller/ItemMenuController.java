@@ -5,8 +5,10 @@
 package isi.deso.controller;
 
 import isi.deso.dto.ItemMenuDTO;
+import isi.deso.model.Bebida;
 import isi.deso.model.Categoria;
 import isi.deso.model.ItemMenu;
+import isi.deso.model.Plato;
 import isi.deso.service.CategoriaMemory;
 import isi.deso.service.ItemMenuMemory;
 import isi.deso.service.VendedorMemory;
@@ -49,5 +51,29 @@ public class ItemMenuController {
         List<ItemMenu> lista = imemory.devolverListaItems();
         return lista;
         
+    }
+    
+    public List<Plato> obtenerPlatoPorNombre(String nombre){
+        return imemory.obtenerPlatoPorNombre(nombre);
+    }
+    
+    public List<Bebida> obtenerBebidaPorNombre(String nombre){
+        return imemory.obtenerBebidaPorNombre(nombre);
+    }
+    
+    public List<Plato> obtenerTodosPlatos(){
+        return imemory.obtenerTodosPlatos();
+    }
+    
+    public List<Bebida> obtenerTodasBebidas(){
+        return imemory.obtenerTodasBebidas();
+    }
+    
+    public void habilitarItem(int id, String tipo){
+        imemory.habilitarItem(id, tipo);
+    }
+    
+    public void deshabilitarItem(int id, String tipo){
+        imemory.deshabilitarItem(id, tipo);
     }
 }

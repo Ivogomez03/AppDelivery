@@ -7,6 +7,7 @@ package isi.deso.controller;
 import isi.deso.dto.ItemsPedidoDTO;
 import isi.deso.dto.PedidoDTO;
 import isi.deso.model.Bebida;
+import isi.deso.model.Pedido;
 import isi.deso.model.Plato;
 import isi.deso.service.ItemMenuMemory;
 import isi.deso.service.PedidoMemory;
@@ -49,5 +50,21 @@ public class PedidoController {
         pedidoDTO.setCredenciales(credenciales);
         
         pmemory.crearPedido(pedidoDTO);
+    }
+    
+    public List<Pedido> buscarPedidoPorVendedor(String dni){
+        return pmemory.buscarPedidoPorVendedor(dni);
+    }
+    
+    public List<Pedido> buscarPedidoPorCliente(String cuit){
+        return pmemory.buscarPedidoPorCliente(cuit);
+    }
+    
+    public List<Pedido> buscarTodosPedidos(){
+        return pmemory.buscarTodosPedidos();
+    }
+    
+    public void cambiarEstado(int id, String estado){
+        pmemory.cambiarEstado(id, estado);
     }
 }

@@ -46,7 +46,7 @@ public class ValidationMemory {
     }
     public boolean ValidarCliente(String CUIT) { 
         
-        String hql = "SELECT COUNT(c) FROM Cliente c WHERE c.cuit = :cuit and c.valido = true";
+        String hql = "SELECT COUNT(c) FROM Cliente c WHERE c.cuit = :cuit and c.activo = true";
 
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Long count = session.createQuery(hql, Long.class)

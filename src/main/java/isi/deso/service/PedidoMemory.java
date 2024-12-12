@@ -39,7 +39,22 @@ public class PedidoMemory {
         pedido.setCliente(cliente);
         pedido.setVendedor(vendedor);
         
-        pedidoDAO.crearPedido(pedido, pedidoDTO.getDetalle());
-        
+        pedidoDAO.crearPedido(pedido, pedidoDTO.getDetalle());    
+    }
+    
+    public List<Pedido> buscarPedidoPorVendedor(String dni){
+        return pedidoDAO.buscarPedidoPorVendedor(dni);
+    }
+    
+    public List<Pedido> buscarPedidoPorCliente(String cuit){
+        return pedidoDAO.buscarPedidoPorCliente(cuit);
+    }
+    
+    public List<Pedido> buscarTodosPedidos(){
+        return pedidoDAO.buscarTodosPedidos();
+    }
+    
+    public void cambiarEstado(int id, String estado){
+        pedidoDAO.cambiarEstado(id, estado);
     }
 }

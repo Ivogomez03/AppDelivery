@@ -34,6 +34,14 @@ public class Pago {
             this.tipoPago = tipo;
             this.credencial = credencial;
         }
+        
+        public TipoPago getTipoPago(){
+            return this.tipoPago;
+        }
+        
+        public double getMonto(){
+            return this.monto;
+        }
 	
 }
 

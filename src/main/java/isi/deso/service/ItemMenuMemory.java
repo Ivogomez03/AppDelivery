@@ -24,6 +24,7 @@ public class ItemMenuMemory {
     private final ItemMenuDAO itemDAO;
     private final PlatoDAO platoDAO;
     private final BebidaDAO bebidaDAO;
+    
     public ItemMenuMemory(){
         this.itemDAO = new ItemMenuDAO();
         this.platoDAO = new PlatoDAO();
@@ -59,6 +60,10 @@ public class ItemMenuMemory {
         return platoDAO.obtenerPlato(nombre);
     }
     
+    public List<Plato> obtenerPlatoPorNombre(String nombre){
+        return platoDAO.obtenerPorNombre(nombre);
+    }
+    
     public List<Bebida> obtenerBebidasSinAlcohol(String dniVendedor){
         return bebidaDAO.obtenerBebidasSinAlcohol(dniVendedor);
     }
@@ -69,4 +74,36 @@ public class ItemMenuMemory {
     public Bebida obtenerBebida(String nombre){
         return bebidaDAO.obtenerBebida(nombre);
     }
+    
+    public List<Bebida> obtenerBebidaPorNombre(String nombre){
+        return bebidaDAO.obtenerBebidaPorNombre(nombre);
+    }
+    
+    public List<Plato> obtenerTodosPlatos(){
+        return platoDAO.obtenerTodos();
+    }
+    
+    public List<Bebida> obtenerTodasBebidas(){
+        return bebidaDAO.obtenerTodos();
+    }
+    
+    public void habilitarItem(int id, String tipo){
+    
+        if(tipo.equals("Plato")){
+            platoDAO.habilitarPlato(id);
+        }
+        else{
+            bebidaDAO.habilitarBebida(id);
+        }
+    }
+    
+    public void deshabilitarItem(int id, String tipo){
+        if(tipo.equals("Plato")){
+            platoDAO.deshabilitarPlato(id);
+        }
+        else{
+            bebidaDAO.deshabilitarBebida(id);
+        }
+    }
+    
 }

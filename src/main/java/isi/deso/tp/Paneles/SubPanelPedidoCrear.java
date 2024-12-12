@@ -635,9 +635,9 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
        String vegano;
        String vegetariano;
        
-       if (columna == 3){
+       if (columna == 4){
            System.out.println(fila);
-           Plato aux = controllerpedido.obtenerPlato((String) TablaPlatos.getValueAt(fila, 1));
+           Plato aux = controllerpedido.obtenerPlato((String) TablaPlatos.getValueAt(fila, 2));
            if(aux.getAptoVegano()){
                vegano = "Si";
            } else vegano = "No";
@@ -659,9 +659,9 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
        int columna = TablaBebidaAlcoholica.columnAtPoint(evt.getPoint());
        String vegano;
        
-       if (columna == 4){
+       if (columna == 5){
            System.out.println(fila);
-           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebidaAlcoholica.getValueAt(fila, 1));
+           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebidaAlcoholica.getValueAt(fila, 2));
            if(aux.aptoVegano()){
                vegano = "Si";
            } else vegano = "No";
@@ -676,9 +676,9 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
        String vegano;
        String vegetariano;
        
-       if (columna == 3){
+       if (columna == 4){
            System.out.println(fila);
-           Plato aux = controllerpedido.obtenerPlato((String) TablaPlatosSinTACC.getValueAt(fila, 1));
+           Plato aux = controllerpedido.obtenerPlato((String) TablaPlatosSinTACC.getValueAt(fila, 2));
            if(aux.getAptoVegano()){
                vegano = "Si";
            } else vegano = "No";
@@ -695,9 +695,9 @@ public class SubPanelPedidoCrear extends javax.swing.JPanel {
        int columna = TablaBebida.columnAtPoint(evt.getPoint());
        String vegano;
        
-       if (columna == 4){
+       if (columna == 5){
            System.out.println(fila);
-           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebida.getValueAt(fila, 1));
+           Bebida aux = controllerpedido.obtenerBebida((String) TablaBebida.getValueAt(fila, 2));
            if(aux.aptoVegano()){
                vegano = "Si";
            } else vegano = "No";
