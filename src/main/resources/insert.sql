@@ -8,7 +8,8 @@ INSERT INTO Vendedor (id_vendedor, id_coordenadas, DNI, apellido, nombre, direcc
 
 INSERT INTO Categoria (id_categoria, descripcion, tipo) VALUES (1, 'Carne', 'PLATO'), (2, 'Vino', 'BEBIDA');
 
-INSERT INTO Item_menu (id_item_menu, id_categoria, nombre, precio, descripcion, id_vendedor, aptoVegano, disponible) VALUES (1, 1, 'Filete', 200, 'Fileton', 1, false, true), (2, 2, 'Vino Blanco', 1000, 'PARA PONERSE EN PEDO', 1, true, true);
+INSERT INTO Item_menu (id_item_menu, id_categoria, nombre, precio, descripcion, id_vendedor, aptoVegano, disponible) VALUES (1, 1, 'Filete', 200, 'Fileton', 1, false, true)
+INSERT INTO Item_menu (id_item_menu, id_categoria, nombre, precio, descripcion, id_vendedor, aptoVegano, disponible) VALUES (2, 2, 'Vino Blanco', 1000, 'PARA PONERSE EN PEDO', 1, true, true);
 
 INSERT INTO Bebida (id_item_menu, tamaño, graduacionAlcohol) VALUES (2, 2000, 0.5);
 

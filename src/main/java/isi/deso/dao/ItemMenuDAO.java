@@ -7,12 +7,14 @@ package isi.deso.dao;
 import isi.deso.model.Bebida;
 import isi.deso.model.ItemMenu;
 import isi.deso.model.Plato;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -31,8 +33,31 @@ public class ItemMenuDAO {
         }    
     };
     public void eliminarItemMenu(){};
-    public void actualizarItemMenu(){};
-    public void buscarItemMenu(){};
+    public void actualizarItemMenu(String nombre, String descripcion, double precio, int id){
+        Transaction transaction = null;
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            ItemMenu item = session.find(ItemMenu.class, id);
+            item.setNombre(nombre);
+            item.setPrecio(precio);
+            item.setDescripcion(descripcion);
+            session.merge(item);
+            transaction.commit();
+           
+        } catch (NoResultException e) {
+            System.out.println("No se encontró el item a modificar");
+            }
+    };
+    public ItemMenu buscarItemMenu(int id){
+    
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            ItemMenu item = session.find(ItemMenu.class, id);
+            return item;
+        } catch (NoResultException e) {
+            System.out.println("No se encontró el item");
+            return null; // Devuelve null si no se encuentra el vendedor
+            }
+    };
     
     public List<ItemMenu> obtenerItems(){
        List<ItemMenu> lista = new ArrayList<>();

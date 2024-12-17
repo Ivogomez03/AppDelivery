@@ -76,4 +76,12 @@ public class ItemMenuController {
     public void deshabilitarItem(int id, String tipo){
         imemory.deshabilitarItem(id, tipo);
     }
+    
+    public ItemMenu findbyId(int id){
+        return imemory.findById(id);
+    }
+    
+    public void updateItem(String nombre, String descripcion, double precio, int id){
+        imemory.updateItem(nombre, descripcion, precio, id);
+    }
 }

@@ -194,6 +194,7 @@ public class SubPanelVendedorModificar extends javax.swing.JPanel {
         double leng = Double.parseDouble(longitud);
         
         vcontroller.modificarVendedor(vendedor.getId(), nombre, apellido, dni, direccion, lat, leng);
+        JOptionPane.showMessageDialog(null, "El vendedor se actualizó correctamente");
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

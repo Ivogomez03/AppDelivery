@@ -51,6 +51,7 @@ public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
         buscarItem = new javax.swing.JButton();
         DeshabilitarItem = new javax.swing.JButton();
         HabilitarItem = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
 
         nombreItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +171,13 @@ public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
             }
         });
 
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,7 +192,9 @@ public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
                         .addComponent(nombreItem, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buscarItem)
-                        .addGap(105, 105, 105)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificar)
+                        .addGap(12, 12, 12)
                         .addComponent(HabilitarItem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(DeshabilitarItem)
@@ -202,7 +212,8 @@ public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
                     .addComponent(buscarTodos)
                     .addComponent(buscarItem)
                     .addComponent(DeshabilitarItem)
-                    .addComponent(HabilitarItem))
+                    .addComponent(HabilitarItem)
+                    .addComponent(btnModificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ItemPane, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
@@ -445,6 +456,45 @@ public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_DeshabilitarItemActionPerformed
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int id = -1;
+       
+        switch(opcion){
+            case 0 -> { //PLATO
+            int row = TablaPlatos.getSelectedRow();  
+            
+            if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un plato de la tabla");
+            }
+            else{
+                id = (int) TablaPlatos.getValueAt(row, 0);
+            }
+            break;
+        }
+            case 1 -> {
+                int row = TablaBebida.getSelectedRow();  
+            
+            if(row == -1){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una bebida de la tabla");
+            }
+            else{
+                id = (int) TablaBebida.getValueAt(row, 0);
+                }
+            break;
+            }
+        }
+            
+        JFrame ventana = new JFrame("Mi Ventana");
+        ventana.setSize(400, 300);
+        
+        // Crear el panel y agregarlo a la ventana
+        SubPanelItemMenuModificar panel = new SubPanelItemMenuModificar(id);
+        ventana.add(panel);
+        
+        // Hacer visible la ventana
+        ventana.setVisible(true); 
+    }//GEN-LAST:event_btnModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeshabilitarItem;
@@ -452,6 +502,7 @@ public class SubPanelItemMenuBuscar extends javax.swing.JPanel {
     private javax.swing.JTabbedPane ItemPane;
     private javax.swing.JTable TablaBebida;
     private javax.swing.JTable TablaPlatos;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton buscarItem;
     private javax.swing.JButton buscarTodos;
     private javax.swing.JLabel jLabel1;

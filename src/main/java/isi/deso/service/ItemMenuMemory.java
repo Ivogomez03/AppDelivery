@@ -106,4 +106,11 @@ public class ItemMenuMemory {
         }
     }
     
+    public ItemMenu findById(int id){
+        return itemDAO.buscarItemMenu(id);
+    }
+    
+    public void updateItem(String nombre, String descripcion, double precio, int id){
+        itemDAO.actualizarItemMenu(nombre, descripcion, precio, id);
+    }
 }
